@@ -39,15 +39,13 @@ func _physics_process(delta):
 
 
 func _on_DirtTimer_timeout():
+	var canPlace = true
 	for x in range(1,Vars.dirtCount + 1):
 		var i = Vars.dirts[x] 
-		if i.is_in_group("Dirt") && i.position.distance_to(position) < 32:
+		if i.position.distance_to(position) < 32:
+			canPlace = false
 			if i.realColor != modulate:
 				get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",i.id,modulate)
-				break
-	for x in range(1,Vars.dirtCount + 1):
-		var i = Vars.dirts[x] 
-		if i.is_in_group("Dirt") && i.position.distance_to(position) < 32:
-			if i.realColor == modulate:
 				return
-	get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",position,modulate)
+	if canPlace:
+		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",position,modulate)

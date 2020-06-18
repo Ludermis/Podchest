@@ -58,5 +58,9 @@ right={
 
 [rendering]
 
+quality/intended_usage/framebuffer_allocation=1
+quality/intended_usage/framebuffer_allocation.mobile=1
+threads/thread_model=0
+quality/filters/anisotropic_filter_level=1
 environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"

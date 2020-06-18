@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/Scenes/GameScene.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 67
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 43
 use_filter = true
 font_data = ExtResource( 2 )
 
@@ -24,6 +29,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FPS" type="Label" parent="CanvasLayer"]
+margin_right = 128.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 2 )
+text = "-100"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Score2" type="Label" parent="CanvasLayer"]
 margin_left = 640.0
 margin_right = 1280.0
@@ -35,3 +51,8 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="FPSTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+[connection signal="timeout" from="FPSTimer" to="." method="_on_FPSTimer_timeout"]

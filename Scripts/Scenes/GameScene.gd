@@ -33,7 +33,7 @@ remote func playerDisconnected (who):
 remote func dirtCreated (d):
 	Vars.dirtCount += 1
 	var node = preload("res://Prefabs/Effects/Dirt.tscn").instance()
-	print("Dirt created " + str(Vars.dirtCount))
+	#print("Dirt created " + str(Vars.dirtCount))
 	node.id = d["id"]
 	Vars.dirts[node.id] = node
 	node.position = d["position"]
@@ -51,6 +51,7 @@ remote func dirtChanged (d):
 	Vars.scores[Vars.teamsByColors[Vars.dirts[d["id"]].realColor]] += 1
 	if Vars.teamsByColors[Vars.dirts[d["id"]].realColor] != Vars.myTeam:
 		Vars.dirts[d["id"]].z_index = -1
+	Vars.dirts[d["id"]].set_process(true)
 	$"CanvasLayer/Score1".text = str(Vars.scores[1])
 	$"CanvasLayer/Score2".text = str(Vars.scores[2])
 
@@ -60,3 +61,7 @@ remote func updateTeams (d):
 		Vars.teamsByColors[Vars.teams[i]["color"]] = i
 	$"CanvasLayer/Score1".modulate = Vars.teams[1]["color"]
 	$"CanvasLayer/Score2".modulate = Vars.teams[2]["color"]
+
+
+func _on_FPSTimer_timeout():
+	$"CanvasLayer/FPS".set_text(str(Engine.get_frames_per_second()))
