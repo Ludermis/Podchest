@@ -1,0 +1,81 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Sprites/Effects/dirtsprite.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Effects/Dirt.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Misc/circle.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 512, 0, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1024, 0, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 512, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 512, 512, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1024, 512, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1024, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 512, 1024, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1024, 1024, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 986, 986 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 11 ) ],
+"loop": false,
+"name": "circle",
+"speed": 5.0
+} ]
+
+[node name="Dirt" type="AnimatedSprite" groups=[
+"Dirt",
+"Effect",
+]]
+self_modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
+position = Vector2( -240.451, -216.144 )
+scale = Vector2( 0.1, 0.1 )
+z_index = -2
+frames = SubResource( 10 )
+animation = "circle"
+playing = true
+script = ExtResource( 2 )

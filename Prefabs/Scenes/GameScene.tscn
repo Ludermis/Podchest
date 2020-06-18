@@ -1,6 +1,37 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/Scenes/GameScene.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 67
+use_filter = true
+font_data = ExtResource( 2 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Score1" type="Label" parent="CanvasLayer"]
+margin_right = 640.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score2" type="Label" parent="CanvasLayer"]
+margin_left = 640.0
+margin_right = 1280.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
