@@ -3,14 +3,12 @@ extends Node2D
 var connectedFully = false
 
 func _ready():
-	pass
+	print(str("PeerID : ", Client.selfPeerID))
+	rpc_id(1,"playerJoined",Client.selfPeerID,"quickgame")
+	connectedFully = true
 
 func _process(delta):
-	if (Client.client.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED && connectedFully == false):
-		Client.selfPeerID = get_tree().get_network_unique_id()
-		print(str("PeerID : ", Client.selfPeerID))
-		rpc_id(1,"playerJoined",Client.selfPeerID)
-		connectedFully = true
+	pass
 
 remote func positionUpdated (who, newPosition):
 	if Vars.players.has(who):
@@ -39,8 +37,6 @@ remote func dirtCreated (d):
 	node.realColor = d["color"]
 	Vars.scores[Vars.teamsByColors[node.realColor]] += 1
 	get_tree().root.get_node("Main").add_child(node)
-	if Vars.teamsByColors[Vars.dirts[d["position"]].realColor] != Vars.myTeam:
-		Vars.dirts[d["position"]].z_index = -1
 	$"CanvasLayer/Score1".text = str(Vars.scores[1])
 	$"CanvasLayer/Score2".text = str(Vars.scores[2])
 
@@ -48,8 +44,6 @@ remote func dirtChanged (d):
 	Vars.scores[Vars.teamsByColors[Vars.dirts[d["position"]].realColor]] -= 1
 	Vars.dirts[d["position"]].realColor = d["color"]
 	Vars.scores[Vars.teamsByColors[Vars.dirts[d["position"]].realColor]] += 1
-	if Vars.teamsByColors[Vars.dirts[d["position"]].realColor] != Vars.myTeam:
-		Vars.dirts[d["position"]].z_index = -1
 	Vars.dirts[d["position"]].set_process(true)
 	$"CanvasLayer/Score1".text = str(Vars.scores[1])
 	$"CanvasLayer/Score2".text = str(Vars.scores[2])

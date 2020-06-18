@@ -8,7 +8,9 @@ var peerID
 var team = -1
 
 func _ready():
-	$DirtTimer.start()
+	if peerID == Client.selfPeerID:
+		print("Timer started")
+		$DirtTimer.start()
 
 func setup (id, pos, color, t):
 	peerID = id
@@ -41,6 +43,6 @@ func _physics_process(delta):
 func _on_DirtTimer_timeout():
 	var vec = Vars.optimizeVector(position + Vector2(32,32),64)
 	if !Vars.dirts.has(vec):
-		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",vec,modulate)
+		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,vec,modulate)
 	elif Vars.dirts[vec].realColor != modulate:
-		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",vec,modulate)
+		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,vec,modulate)

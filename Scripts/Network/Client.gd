@@ -2,7 +2,12 @@ extends Node
 
 var client
 var url
-var selfPeerID
+var selfPeerID = 0
+var maxTries = 20
+var tries = 0
+
+signal connection_ok
+signal connection_failed
 
 func _ready():
 	pass
@@ -19,3 +24,10 @@ func _process(delta):
 		return
 	if (client.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED || client.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTING):
 		client.poll();
+		if selfPeerID == 0:
+			selfPeerID = get_tree().get_network_unique_id()
+			if selfPeerID != 0:
+				emit_signal("connection_ok")
+			tries += 1
+			if tries == maxTries:
+				emit_signal("connection_failed")
