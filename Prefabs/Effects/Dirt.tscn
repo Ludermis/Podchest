@@ -1,14 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://Sprites/Misc/box.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Effects/Dirt.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Misc/circle.png" type="Texture" id=3]
 
 [node name="Dirt" type="Sprite" groups=[
 "Dirt",
 "Effect",
 ]]
 self_modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
-scale = Vector2( 0.1, 0.1 )
 z_index = -2
-texture = ExtResource( 3 )
+texture = ExtResource( 1 )
 script = ExtResource( 2 )

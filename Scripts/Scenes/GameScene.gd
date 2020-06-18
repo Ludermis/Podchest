@@ -34,24 +34,23 @@ remote func dirtCreated (d):
 	Vars.dirtCount += 1
 	var node = preload("res://Prefabs/Effects/Dirt.tscn").instance()
 	#print("Dirt created " + str(Vars.dirtCount))
-	node.id = d["id"]
-	Vars.dirts[node.id] = node
 	node.position = d["position"]
+	Vars.dirts[node.position] = node
 	node.realColor = d["color"]
 	Vars.scores[Vars.teamsByColors[node.realColor]] += 1
 	get_tree().root.get_node("Main").add_child(node)
-	if Vars.teamsByColors[Vars.dirts[d["id"]].realColor] != Vars.myTeam:
-		Vars.dirts[d["id"]].z_index = -1
+	if Vars.teamsByColors[Vars.dirts[d["position"]].realColor] != Vars.myTeam:
+		Vars.dirts[d["position"]].z_index = -1
 	$"CanvasLayer/Score1".text = str(Vars.scores[1])
 	$"CanvasLayer/Score2".text = str(Vars.scores[2])
 
 remote func dirtChanged (d):
-	Vars.scores[Vars.teamsByColors[Vars.dirts[d["id"]].realColor]] -= 1
-	Vars.dirts[d["id"]].realColor = d["color"]
-	Vars.scores[Vars.teamsByColors[Vars.dirts[d["id"]].realColor]] += 1
-	if Vars.teamsByColors[Vars.dirts[d["id"]].realColor] != Vars.myTeam:
-		Vars.dirts[d["id"]].z_index = -1
-	Vars.dirts[d["id"]].set_process(true)
+	Vars.scores[Vars.teamsByColors[Vars.dirts[d["position"]].realColor]] -= 1
+	Vars.dirts[d["position"]].realColor = d["color"]
+	Vars.scores[Vars.teamsByColors[Vars.dirts[d["position"]].realColor]] += 1
+	if Vars.teamsByColors[Vars.dirts[d["position"]].realColor] != Vars.myTeam:
+		Vars.dirts[d["position"]].z_index = -1
+	Vars.dirts[d["position"]].set_process(true)
 	$"CanvasLayer/Score1".text = str(Vars.scores[1])
 	$"CanvasLayer/Score2".text = str(Vars.scores[2])
 

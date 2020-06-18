@@ -39,13 +39,8 @@ func _physics_process(delta):
 
 
 func _on_DirtTimer_timeout():
-	var canPlace = true
-	for x in range(1,Vars.dirtCount + 1):
-		var i = Vars.dirts[x] 
-		if i.position.distance_to(position) < 32:
-			canPlace = false
-			if i.realColor != modulate:
-				get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",i.id,modulate)
-				return
-	if canPlace:
-		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",position,modulate)
+	var vec = Vars.optimizeVector(position + Vector2(32,32),64)
+	if !Vars.dirts.has(vec):
+		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",vec,modulate)
+	elif Vars.dirts[vec].realColor != modulate:
+		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",vec,modulate)

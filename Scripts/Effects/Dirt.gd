@@ -1,13 +1,12 @@
 extends Sprite
 
-var id : int
 var maxSize
 var realColor
 
 func _ready():
 	maxSize = scale.x
-	scale.x = 0
-	scale.y = 0
+	scale.x = 0.4
+	scale.y = 0.4
 
 func _process(delta):
 	if modulate == realColor && scale.x == maxSize && scale.y == maxSize:
@@ -20,5 +19,5 @@ func _process(delta):
 			modulate = realColor
 	if scale.x == maxSize:
 		return
-	scale.x = min(scale.x + delta / 2, maxSize)
-	scale.y = min(scale.y + delta / 2, maxSize)
+	scale.x = min(scale.x + delta * 2, maxSize)
+	scale.y = min(scale.y + delta * 2, maxSize)

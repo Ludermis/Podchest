@@ -13,3 +13,15 @@ var scores = {1: 0, 2: 0}
 
 func _ready():
 	pass
+
+func optimizeVector(pos, opt):
+	var newv = Vector2.ZERO;
+	var nx = fmod(pos.x,opt);
+	var ny = fmod(pos.y,opt);
+	if (nx < 0):
+		nx += opt;
+	if (ny < 0):
+		ny += opt;
+	newv.x = pos.x - nx
+	newv.y = pos.y - ny;
+	return newv;
