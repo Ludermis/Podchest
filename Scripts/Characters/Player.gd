@@ -44,5 +44,5 @@ func _on_DirtTimer_timeout():
 	var vec = Vars.optimizeVector(position + Vector2(32,32),64)
 	if !Vars.dirts.has(vec):
 		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,vec,modulate)
-	elif Vars.dirts[vec].realColor != modulate:
+	elif Vars.dirts[vec].team != Vars.myTeam:
 		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,vec,modulate)

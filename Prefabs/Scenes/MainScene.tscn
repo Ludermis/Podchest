@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=2]
 
@@ -7,70 +7,105 @@ script/source = "extends Node2D
 
 
 func _ready():
-	pass
+	if Client.selfPeerID == 0:
+		Client.connectToServer()
+		Client.connect(\"connection_ok\",self,\"connection_ok\")
+		Client.connect(\"connection_failed\",self,\"connection_failed\")
+	else:
+		rpc_id(1,\"demandOnline\",Client.selfPeerID)
 
 func _process (delta):
 	pass
 
+func connection_ok ():
+	print(str(\"PeerID : \", Client.selfPeerID))
+	rpc_id(1,\"demandOnline\",Client.selfPeerID)
+
+func connection_failed ():
+	get_tree().change_scene_to(preload(\"res://Prefabs/Scenes/ConnectionFailedScene.tscn\"))
+
+remote func updateStats (d):
+	$LabelRooms.text = \"Rooms : \" + str(d[\"rooms\"])
+	$LabelOnline.text = \"Online : \" + str(d[\"playerCount\"])
 "
 
-[sub_resource type="DynamicFontData" id=6]
+[sub_resource type="DynamicFontData" id=2]
 font_path = "res://Fonts/orange juice 2.0.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 84
-font_data = SubResource( 6 )
+font_data = SubResource( 2 )
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=4]
 script/source = "extends Button
 
 
 func _ready():
 	pass
 
-
-func _on_Button_pressed():
-	Client.connectToServer()
-	Client.connect(\"connection_ok\",self,\"connection_ok\")
-	Client.connect(\"connection_failed\",self,\"connection_failed\")
-
-func connection_ok ():
-	get_tree().change_scene_to(preload(\"res://Prefabs/Scenes/GameScene.tscn\"))
-
-func connection_failed ():
-	get_tree().change_scene_to(preload(\"res://Prefabs/Scenes/ConnectionFailedScene.tscn\"))
+func _on_Quick1v1Button_pressed():
+	get_tree().change_scene_to(preload(\"res://Prefabs/Scenes/WaitingScene.tscn\"))
+	get_tree().root.get_node(\"Main\").rpc_id(1,\"playerJoined\",Client.selfPeerID,\"quick1v1\")
 "
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="GDScript" id=7]
+script/source = "extends Button
+
+
+func _ready():
+	pass
+
+func _on_Quick2v2Button_pressed():
+	get_tree().change_scene_to(preload(\"res://Prefabs/Scenes/WaitingScene.tscn\"))
+	get_tree().root.get_node(\"Main\").rpc_id(1,\"playerJoined\",Client.selfPeerID,\"quick2v2\")
+"
+
+[sub_resource type="DynamicFont" id=5]
 size = 172
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 48
 font_data = ExtResource( 2 )
 
 [node name="Main" type="Node2D"]
 script = SubResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
 
-[node name="Button" type="Button" parent="."]
+[node name="Quick1v1Button" type="Button" parent="."]
 margin_left = 384.0
-margin_top = 320.0
+margin_top = 256.0
 margin_right = 896.0
-margin_bottom = 448.0
-custom_fonts/font = SubResource( 2 )
-text = "Quick Game"
+margin_bottom = 384.0
+custom_fonts/font = SubResource( 3 )
+text = "Quick 1v1"
 flat = true
-script = SubResource( 3 )
+script = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quick2v2Button" type="Button" parent="."]
+margin_left = 384.0
+margin_top = 384.0
+margin_right = 896.0
+margin_bottom = 512.0
+custom_fonts/font = SubResource( 3 )
+text = "Quick 2v2"
+flat = true
+script = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Player" type="Node2D" parent="."]
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 margin_right = 1280.0
 margin_bottom = 192.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "PODCHEST!"
 align = 1
 valign = 1
@@ -78,12 +113,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="."]
+[node name="LabelCredits" type="Label" parent="."]
 margin_left = 1088.0
 margin_top = 568.0
 margin_right = 1280.0
 margin_bottom = 718.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Lynext
 Regnatif
 IckuT"
@@ -93,12 +128,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="."]
+[node name="LabelLudermis" type="Label" parent="."]
 margin_left = 1088.0
 margin_top = 416.0
 margin_right = 1280.0
 margin_bottom = 515.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Ludermis
 Studios"
 align = 1
@@ -106,4 +141,29 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="Button" to="Button" method="_on_Button_pressed"]
+
+[node name="LabelRooms" type="Label" parent="."]
+margin_top = 624.0
+margin_right = 192.0
+margin_bottom = 720.0
+custom_fonts/font = SubResource( 6 )
+text = "Rooms : 0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelOnline" type="Label" parent="."]
+margin_top = 520.0
+margin_right = 192.0
+margin_bottom = 616.0
+custom_fonts/font = SubResource( 6 )
+text = "Online : 0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Quick1v1Button" to="Quick1v1Button" method="_on_Quick1v1Button_pressed"]
+[connection signal="pressed" from="Quick2v2Button" to="Quick2v2Button" method="_on_Quick2v2Button_pressed"]

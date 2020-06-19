@@ -1,11 +1,7 @@
 extends Node2D
 
-var connectedFully = false
-
 func _ready():
-	print(str("PeerID : ", Client.selfPeerID))
-	rpc_id(1,"playerJoined",Client.selfPeerID,"quickgame")
-	connectedFully = true
+	rpc_id(1,"readyToGetObjects",Client.selfPeerID)
 
 func _process(delta):
 	pass
@@ -35,26 +31,34 @@ remote func dirtCreated (d):
 	node.position = d["position"]
 	Vars.dirts[node.position] = node
 	node.realColor = d["color"]
-	Vars.scores[Vars.teamsByColors[node.realColor]] += 1
-	get_tree().root.get_node("Main").add_child(node)
+	node.team = d["team"]
+	Vars.scores[node.team] += 1
+	add_child(node)
 	$"CanvasLayer/Score1".text = str(Vars.scores[1])
 	$"CanvasLayer/Score2".text = str(Vars.scores[2])
 
 remote func dirtChanged (d):
-	Vars.scores[Vars.teamsByColors[Vars.dirts[d["position"]].realColor]] -= 1
+	Vars.scores[Vars.dirts[d["position"]].team] -= 1
 	Vars.dirts[d["position"]].realColor = d["color"]
-	Vars.scores[Vars.teamsByColors[Vars.dirts[d["position"]].realColor]] += 1
+	Vars.dirts[d["position"]].team = d["team"]
+	Vars.scores[Vars.dirts[d["position"]].team] += 1
 	Vars.dirts[d["position"]].set_process(true)
 	$"CanvasLayer/Score1".text = str(Vars.scores[1])
 	$"CanvasLayer/Score2".text = str(Vars.scores[2])
 
 remote func updateTeams (d):
 	Vars.teams = d
-	for i in Vars.teams:
-		Vars.teamsByColors[Vars.teams[i]["color"]] = i
 	$"CanvasLayer/Score1".modulate = Vars.teams[1]["color"]
 	$"CanvasLayer/Score2".modulate = Vars.teams[2]["color"]
 
+remote func gameEnded (d):
+	Vars.endGameStats = d
+	$FPSTimer.stop()
+	get_tree().change_scene("res://Prefabs/Scenes/GameOverScene.tscn")
+
+remote func gotGameTime (time):
+	$"CanvasLayer/Time".text = Vars.timeToString(time)
 
 func _on_FPSTimer_timeout():
 	$"CanvasLayer/FPS".set_text(str(Engine.get_frames_per_second()))
+	rpc_id(1,"demandGameTime",Client.selfPeerID)
