@@ -1,6 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
+[ext_resource path="res://Sprites/UI/frame.png" type="Texture" id=1]
 [ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Sprites/ProfilePictures/blank.png" type="Texture" id=3]
+[ext_resource path="res://SavedResources/UI/PurplePanel.tres" type="StyleBox" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -33,10 +36,32 @@ remote func updateStats (d):
 font_path = "res://Fonts/orange juice 2.0.ttf"
 
 [sub_resource type="DynamicFont" id=3]
-size = 84
+size = 36
+use_filter = true
 font_data = SubResource( 2 )
 
 [sub_resource type="GDScript" id=4]
+script/source = "extends Button
+
+
+func _ready():
+	pass
+
+
+func _on_RegisterButton_pressed():
+	get_tree().change_scene(\"res://Prefabs/Scenes/RegisterScene.tscn\")
+"
+
+[sub_resource type="DynamicFont" id=5]
+size = 36
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 84
+font_data = SubResource( 2 )
+
+[sub_resource type="GDScript" id=7]
 script/source = "extends Button
 
 
@@ -48,7 +73,7 @@ func _on_Quick1v1Button_pressed():
 	get_tree().root.get_node(\"Main\").rpc_id(1,\"playerJoined\",Client.selfPeerID,\"quick1v1\")
 "
 
-[sub_resource type="GDScript" id=7]
+[sub_resource type="GDScript" id=8]
 script/source = "extends Button
 
 
@@ -60,11 +85,11 @@ func _on_Quick2v2Button_pressed():
 	get_tree().root.get_node(\"Main\").rpc_id(1,\"playerJoined\",Client.selfPeerID,\"quick2v2\")
 "
 
-[sub_resource type="DynamicFont" id=5]
-size = 172
+[sub_resource type="DynamicFont" id=9]
+size = 112
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=10]
 size = 48
 font_data = ExtResource( 2 )
 
@@ -74,15 +99,92 @@ __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
 
+[node name="AccountPanel" type="Panel" parent="."]
+margin_left = 64.0
+margin_top = 128.0
+margin_right = 384.0
+margin_bottom = 384.0
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Picture" type="TextureRect" parent="AccountPanel"]
+margin_left = 48.0
+margin_top = 24.0
+margin_right = 112.0
+margin_bottom = 88.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PictureFrame" type="TextureRect" parent="AccountPanel"]
+margin_left = 40.0
+margin_top = 16.0
+margin_right = 120.0
+margin_bottom = 96.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RegisterButton" type="Button" parent="AccountPanel"]
+margin_left = 16.0
+margin_top = 168.0
+margin_right = 168.0
+margin_bottom = 256.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.568627, 0, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 0, 0.913725, 1 )
+text = "Register"
+flat = true
+script = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoginButton" type="Button" parent="AccountPanel"]
+margin_left = 168.0
+margin_top = 168.0
+margin_right = 320.0
+margin_bottom = 256.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
+text = "Login"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AccountName" type="Label" parent="AccountPanel"]
+margin_left = 120.0
+margin_top = 16.0
+margin_right = 320.0
+margin_bottom = 96.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Guest"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Quick1v1Button" type="Button" parent="."]
 margin_left = 384.0
 margin_top = 256.0
 margin_right = 896.0
 margin_bottom = 384.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 6 )
 text = "Quick 1v1"
 flat = true
-script = SubResource( 4 )
+script = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -92,10 +194,10 @@ margin_left = 384.0
 margin_top = 384.0
 margin_right = 896.0
 margin_bottom = 512.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 6 )
 text = "Quick 2v2"
 flat = true
-script = SubResource( 7 )
+script = SubResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -104,12 +206,13 @@ __meta__ = {
 
 [node name="Title" type="Label" parent="."]
 margin_right = 1280.0
-margin_bottom = 192.0
-custom_fonts/font = SubResource( 5 )
+margin_bottom = 128.0
+custom_fonts/font = SubResource( 9 )
 text = "PODCHEST!"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -118,7 +221,7 @@ margin_left = 1088.0
 margin_top = 568.0
 margin_right = 1280.0
 margin_bottom = 718.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 10 )
 text = "Lynext
 Regnatif
 IckuT"
@@ -133,7 +236,7 @@ margin_left = 1088.0
 margin_top = 416.0
 margin_right = 1280.0
 margin_bottom = 515.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 10 )
 text = "Ludermis
 Studios"
 align = 1
@@ -146,7 +249,7 @@ __meta__ = {
 margin_top = 624.0
 margin_right = 192.0
 margin_bottom = 720.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 10 )
 text = "Rooms : 0"
 align = 1
 valign = 1
@@ -158,12 +261,13 @@ __meta__ = {
 margin_top = 520.0
 margin_right = 192.0
 margin_bottom = 616.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 10 )
 text = "Online : 0"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="pressed" from="AccountPanel/RegisterButton" to="AccountPanel/RegisterButton" method="_on_RegisterButton_pressed"]
 [connection signal="pressed" from="Quick1v1Button" to="Quick1v1Button" method="_on_Quick1v1Button_pressed"]
 [connection signal="pressed" from="Quick2v2Button" to="Quick2v2Button" method="_on_Quick2v2Button_pressed"]

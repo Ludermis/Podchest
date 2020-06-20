@@ -23,6 +23,10 @@ func setup (id, pos, color, t):
 func _physics_process(delta):
 	if peerID != Client.selfPeerID:
 		return
+	if Input.is_action_just_released('wheeldown'):
+		$Camera2D.zoomLevel = min($Camera2D.zoomLevel + 1,12)
+	if Input.is_action_just_released('wheelup'):
+		$Camera2D.zoomLevel = max($Camera2D.zoomLevel - 1,1)
 	if Input.is_action_pressed('right'):
 		velocity.x = min(velocity.x + acceleration, maxSpeed)
 	elif Input.is_action_pressed('left'):
