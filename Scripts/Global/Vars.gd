@@ -10,6 +10,9 @@ var teams = {}
 var myTeam = -1
 var scores = {1: 0, 2: 0}
 var endGameStats
+var loggedIn = false
+var username = ""
+var accountInfo
 
 func clearVars():
 	players = {}

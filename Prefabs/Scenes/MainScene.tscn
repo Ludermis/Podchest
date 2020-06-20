@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Sprites/UI/frame.png" type="Texture" id=1]
 [ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=2]
@@ -15,14 +15,22 @@ func _ready():
 		Client.connect(\"connection_ok\",self,\"connection_ok\")
 		Client.connect(\"connection_failed\",self,\"connection_failed\")
 	else:
-		rpc_id(1,\"demandOnline\",Client.selfPeerID)
+		readyConnected()
+
+func readyConnected ():
+	rpc_id(1,\"demandOnline\",Client.selfPeerID)
+	if Vars.loggedIn:
+		$AccountPanel/AccountName.text = Vars.username
+		$AccountPanel/LoginButton.visible = false
+		$AccountPanel/RegisterButton.visible = false
+		$AccountPanel/LogoutButton.visible = true
 
 func _process (delta):
 	pass
 
 func connection_ok ():
 	print(str(\"PeerID : \", Client.selfPeerID))
-	rpc_id(1,\"demandOnline\",Client.selfPeerID)
+	readyConnected()
 
 func connection_failed ():
 	get_tree().change_scene_to(preload(\"res://Prefabs/Scenes/ConnectionFailedScene.tscn\"))
@@ -30,6 +38,9 @@ func connection_failed ():
 remote func updateStats (d):
 	$LabelRooms.text = \"Rooms : \" + str(d[\"rooms\"])
 	$LabelOnline.text = \"Online : \" + str(d[\"playerCount\"])
+
+func _on_DemandStatsTimer_timeout():
+	rpc_id(1,\"demandOnline\",Client.selfPeerID)
 "
 
 [sub_resource type="DynamicFontData" id=2]
@@ -50,6 +61,35 @@ func _ready():
 
 func _on_RegisterButton_pressed():
 	get_tree().change_scene(\"res://Prefabs/Scenes/RegisterScene.tscn\")
+"
+
+[sub_resource type="GDScript" id=11]
+script/source = "extends Button
+
+
+func _ready():
+	pass
+
+
+func _on_LoginButton_pressed():
+	get_tree().change_scene(\"res://Prefabs/Scenes/LoginScene.tscn\")
+"
+
+[sub_resource type="GDScript" id=12]
+script/source = "extends Button
+
+
+func _ready():
+	pass
+
+
+func _on_LogoutButton_pressed():
+	get_tree().root.get_node(\"Main\").rpc_id(1,\"logoutAccount\",Client.selfPeerID)
+	$\"../AccountName\".text = \"Guest\"
+	$\"../LoginButton\".visible = true
+	$\"../RegisterButton\".visible = true
+	self.visible = false
+	Vars.loggedIn = false
 "
 
 [sub_resource type="DynamicFont" id=5]
@@ -158,6 +198,24 @@ custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
 text = "Login"
 flat = true
+script = SubResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LogoutButton" type="Button" parent="AccountPanel"]
+visible = false
+margin_left = 16.0
+margin_top = 168.0
+margin_right = 320.0
+margin_bottom = 256.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
+text = "Logout"
+flat = true
+script = SubResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -268,6 +326,12 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DemandOnlineTimer" type="Timer" parent="."]
+autostart = true
 [connection signal="pressed" from="AccountPanel/RegisterButton" to="AccountPanel/RegisterButton" method="_on_RegisterButton_pressed"]
+[connection signal="pressed" from="AccountPanel/LoginButton" to="AccountPanel/LoginButton" method="_on_LoginButton_pressed"]
+[connection signal="pressed" from="AccountPanel/LogoutButton" to="AccountPanel/LogoutButton" method="_on_LogoutButton_pressed"]
 [connection signal="pressed" from="Quick1v1Button" to="Quick1v1Button" method="_on_Quick1v1Button_pressed"]
 [connection signal="pressed" from="Quick2v2Button" to="Quick2v2Button" method="_on_Quick2v2Button_pressed"]
+[connection signal="timeout" from="DemandOnlineTimer" to="." method="_on_DemandStatsTimer_timeout"]
