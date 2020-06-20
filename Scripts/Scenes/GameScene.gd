@@ -34,7 +34,7 @@ remote func playerDisconnected (who):
 
 remote func dirtCreated (d):
 	Vars.dirtCount += 1
-	var node = preload("res://Prefabs/Effects/Dirt.tscn").instance()
+	var node = preload("res://Prefabs/Objects/Dirt.tscn").instance()
 	#print("Dirt created " + str(Vars.dirtCount))
 	node.position = d["position"]
 	Vars.dirts[node.position] = node

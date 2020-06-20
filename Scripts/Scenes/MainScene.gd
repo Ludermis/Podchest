@@ -10,6 +10,7 @@ func _ready():
 		readyConnected()
 
 func logged():
+	Vars.loggedIn = true
 	$AccountPanel/AccountName.text = Vars.username
 	$AccountPanel/LoginButton.visible = false
 	$AccountPanel/RegisterButton.visible = false

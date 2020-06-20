@@ -8,6 +8,8 @@ var peerID
 var team = -1
 
 var castingSkill1 = false
+var arrowEffect : Node2D
+var skill1Effect : Node2D
 
 func _ready():
 	if peerID == Client.selfPeerID:
@@ -26,10 +28,22 @@ func _physics_process(delta):
 	if peerID != Client.selfPeerID:
 		return
 	
+	# Skill System
+	
 	if Input.is_action_just_pressed('skill1') && castingSkill1 == false:
 		castingSkill1 = true
+		skill1Effect = preload("res://Prefabs/Effects/SeedEffect.tscn").instance()
+		arrowEffect = preload("res://Prefabs/Effects/ArrowEffect.tscn").instance()
+		get_tree().root.get_node("Main").add_child(skill1Effect)
+		get_tree().root.get_node("Main").add_child(arrowEffect)
 	elif Input.is_action_just_pressed('skill1') && castingSkill1 == true:
 		castingSkill1 = false
+		skill1Effect.queue_free()
+		arrowEffect.queue_free()
+	
+	if castingSkill1:
+		skill1Effect.position = get_global_mouse_position()
+		arrowEffect.points = PoolVector2Array([position,get_global_mouse_position()])
 	
 	if Input.is_action_pressed('up'):
 		if !$Sprite.playing || $Sprite.animation != "up":
