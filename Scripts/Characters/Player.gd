@@ -23,6 +23,29 @@ func setup (id, pos, color, t):
 func _physics_process(delta):
 	if peerID != Client.selfPeerID:
 		return
+	
+	if Input.is_action_pressed('up'):
+		if !$Sprite.playing || $Sprite.animation != "up":
+			$Sprite.play("up")
+			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,$Sprite.animation)
+	elif Input.is_action_pressed('down'):
+		if !$Sprite.playing || $Sprite.animation != "down":
+			$Sprite.play("down")
+			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,$Sprite.animation)
+	elif Input.is_action_pressed('right'):
+		if !$Sprite.playing || $Sprite.animation != "right":
+			$Sprite.play("right")
+			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,$Sprite.animation)
+	elif Input.is_action_pressed('left'):
+		if !$Sprite.playing || $Sprite.animation != "left":
+			$Sprite.play("left")
+			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,$Sprite.animation)
+	else:
+		if $Sprite.playing:
+			$Sprite.stop()
+			$Sprite.frame = 0
+			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,"stop")
+	
 	if Input.is_action_just_released('wheeldown'):
 		$Camera2D.zoomLevel = min($Camera2D.zoomLevel + 1,12)
 	if Input.is_action_just_released('wheelup'):
@@ -33,7 +56,6 @@ func _physics_process(delta):
 		velocity.x = max(velocity.x - acceleration, -maxSpeed)
 	else:
 		velocity.x = lerp(velocity.x,0,Vars.friction)
-
 	if Input.is_action_pressed('down'):
 		velocity.y = min(velocity.y + acceleration, maxSpeed)
 	elif Input.is_action_pressed('up'):

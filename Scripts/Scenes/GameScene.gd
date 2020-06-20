@@ -10,6 +10,14 @@ remote func positionUpdated (who, newPosition):
 	if Vars.players.has(who):
 		Vars.players[who].position = newPosition
 
+remote func animationUpdated (who, anim):
+	if Vars.players.has(who):
+		if anim != "stop":
+			Vars.players[who].get_node("Sprite").play(anim)
+		else:
+			Vars.players[who].get_node("Sprite").stop()
+			Vars.players[who].get_node("Sprite").frame = 0
+
 remote func playerJoined (who, d):
 	print(str("New user instanced ", who))
 	var newPlayer = preload("res://Prefabs/Characters/Player.tscn").instance()
