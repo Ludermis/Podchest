@@ -7,6 +7,8 @@ var maxSpeed = 384
 var peerID
 var team = -1
 
+var castingSkill1 = false
+
 func _ready():
 	if peerID == Client.selfPeerID:
 		print("Timer started")
@@ -23,6 +25,11 @@ func setup (id, pos, color, t):
 func _physics_process(delta):
 	if peerID != Client.selfPeerID:
 		return
+	
+	if Input.is_action_just_pressed('skill1') && castingSkill1 == false:
+		castingSkill1 = true
+	elif Input.is_action_just_pressed('skill1') && castingSkill1 == true:
+		castingSkill1 = false
 	
 	if Input.is_action_pressed('up'):
 		if !$Sprite.playing || $Sprite.animation != "up":
@@ -64,7 +71,6 @@ func _physics_process(delta):
 		velocity.y = lerp(velocity.y,0,Vars.friction)
 	velocity = move_and_slide(velocity,Vector2.UP)
 	get_tree().root.get_node("Main").rpc_unreliable_id(1,"updatePosition",Client.selfPeerID,position)
-
 
 func _on_DirtTimer_timeout():
 	var vec = Vars.optimizeVector(position + Vector2(32,32),64)

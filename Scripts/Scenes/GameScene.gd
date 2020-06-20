@@ -20,7 +20,7 @@ remote func animationUpdated (who, anim):
 
 remote func playerJoined (who, d):
 	print(str("New user instanced ", who))
-	var newPlayer = preload("res://Prefabs/Characters/Player.tscn").instance()
+	var newPlayer = preload("res://Prefabs/Characters/Villager.tscn").instance()
 	newPlayer.setup(who,d["position"],d["color"],d["team"])
 	if newPlayer.peerID == Client.selfPeerID:
 		print("Camera working.")

@@ -28,8 +28,9 @@ margin_top = 192.0
 margin_right = 1280.0
 margin_bottom = 384.0
 custom_fonts/font = SubResource( 2 )
-text = "Try 
-CTRL + F5"
+text = "Click to URL bar.
+then press CTRL + F5
+this could work :)"
 align = 1
 valign = 1
 __meta__ = {

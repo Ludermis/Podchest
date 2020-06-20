@@ -4,44 +4,7 @@
 [ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Sprites/ProfilePictures/blank.png" type="Texture" id=3]
 [ext_resource path="res://SavedResources/UI/PurplePanel.tres" type="StyleBox" id=4]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends Node2D
-
-
-func _ready():
-	if Client.selfPeerID == 0:
-		Client.connectToServer()
-		Client.connect(\"connection_ok\",self,\"connection_ok\")
-		Client.connect(\"connection_failed\",self,\"connection_failed\")
-	else:
-		readyConnected()
-
-func readyConnected ():
-	rpc_id(1,\"demandOnline\",Client.selfPeerID)
-	if Vars.loggedIn:
-		$AccountPanel/AccountName.text = Vars.username
-		$AccountPanel/LoginButton.visible = false
-		$AccountPanel/RegisterButton.visible = false
-		$AccountPanel/LogoutButton.visible = true
-
-func _process (delta):
-	pass
-
-func connection_ok ():
-	print(str(\"PeerID : \", Client.selfPeerID))
-	readyConnected()
-
-func connection_failed ():
-	get_tree().change_scene_to(preload(\"res://Prefabs/Scenes/ConnectionFailedScene.tscn\"))
-
-remote func updateStats (d):
-	$LabelRooms.text = \"Rooms : \" + str(d[\"rooms\"])
-	$LabelOnline.text = \"Online : \" + str(d[\"playerCount\"])
-
-func _on_DemandStatsTimer_timeout():
-	rpc_id(1,\"demandOnline\",Client.selfPeerID)
-"
+[ext_resource path="res://Scripts/Scenes/MainScene.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFontData" id=2]
 font_path = "res://Fonts/orange juice 2.0.ttf"
@@ -90,6 +53,9 @@ func _on_LogoutButton_pressed():
 	$\"../RegisterButton\".visible = true
 	self.visible = false
 	Vars.loggedIn = false
+	var save = File.new()
+	save.open(\"user://account.txt\",File.WRITE)
+	save.store_string(JSON.print({\"loggedin\": false, \"username\": Vars.username, \"info\": Vars.accountInfo}, \" \"))
 "
 
 [sub_resource type="DynamicFont" id=5]
@@ -134,7 +100,7 @@ size = 48
 font_data = ExtResource( 2 )
 
 [node name="Main" type="Node2D"]
-script = SubResource( 1 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }

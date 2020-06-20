@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Sprites/Effects/seed.png" type="Texture" id=1]
+
+[node name="Dirt" type="Sprite" groups=[
+"Effect",
+"Seed",
+]]
+self_modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
+z_index = -2
+texture = ExtResource( 1 )
