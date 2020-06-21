@@ -10,6 +10,8 @@ var team = -1
 var castingSkill1 = false
 var arrowEffect : Node2D
 var skill1Effect : Node2D
+var skill1MaxRange = 1000
+var skill1Area = 11
 
 func _ready():
 	if peerID == Client.selfPeerID:
@@ -34,6 +36,8 @@ func _physics_process(delta):
 		castingSkill1 = true
 		skill1Effect = preload("res://Prefabs/Effects/SeedEffect.tscn").instance()
 		arrowEffect = preload("res://Prefabs/Effects/ArrowEffect.tscn").instance()
+		skill1Effect.drawArea = true
+		skill1Effect.areaOfEffect = skill1Area
 		get_tree().root.get_node("Main").add_child(skill1Effect)
 		get_tree().root.get_node("Main").add_child(arrowEffect)
 	elif Input.is_action_just_pressed('skill1') && castingSkill1 == true:
@@ -44,6 +48,16 @@ func _physics_process(delta):
 	if castingSkill1:
 		skill1Effect.position = get_global_mouse_position()
 		arrowEffect.points = PoolVector2Array([position,get_global_mouse_position()])
+		var canCast = position.distance_to(get_global_mouse_position()) <= skill1MaxRange
+		if !canCast:
+			arrowEffect.default_color = Color.red
+		else:
+			arrowEffect.default_color = Color.cyan
+		if Input.is_action_just_pressed("leftclick") && canCast:
+			get_tree().root.get_node("Main").rpc_id(1,"skillCast",Client.selfPeerID,{"skill": "villager_skill_1", "position": get_global_mouse_position()})
+			castingSkill1 = false
+			skill1Effect.queue_free()
+			arrowEffect.queue_free()
 	
 	if Input.is_action_pressed('up'):
 		if !$Sprite.playing || $Sprite.animation != "up":

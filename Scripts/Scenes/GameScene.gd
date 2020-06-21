@@ -54,6 +54,9 @@ remote func dirtChanged (d):
 	$"CanvasLayer/Score1".text = str(Vars.scores[1])
 	$"CanvasLayer/Score2".text = str(Vars.scores[2])
 
+remote func skillCast(who, data):
+	pass
+
 remote func updateTeams (d):
 	Vars.teams = d
 	$"CanvasLayer/Score1".modulate = Vars.teams[1]["color"]
