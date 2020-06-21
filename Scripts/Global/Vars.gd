@@ -13,6 +13,7 @@ var endGameStats
 var loggedIn = false
 var username = ""
 var accountInfo
+var time : float = 0 setget ,getTime
 
 func clearVars():
 	players = {}
@@ -21,6 +22,9 @@ func clearVars():
 	teams = {}
 	myTeam = -1
 	scores = {1: 0, 2: 0}
+
+func getTime() -> float:
+	return OS.get_ticks_msec() / 1000.0
 
 func _ready():
 	pass

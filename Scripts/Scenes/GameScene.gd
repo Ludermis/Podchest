@@ -55,7 +55,13 @@ remote func dirtChanged (d):
 	$"CanvasLayer/Score2".text = str(Vars.scores[2])
 
 remote func skillCast(who, data):
-	pass
+	if data["skill"] == "villager_skill_1":
+		var node = preload("res://Prefabs/Objects/Seed.tscn").instance()
+		node.startPos = data["startPosition"]
+		node.endPos = data["endPosition"]
+		node.area = data["area"]
+		node.whoSummoned = who
+		add_child(node)
 
 remote func updateTeams (d):
 	Vars.teams = d
