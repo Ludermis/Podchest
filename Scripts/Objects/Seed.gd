@@ -15,7 +15,8 @@ func _ready():
 		modulate = Vars.teams[Vars.players[whoSummoned]["team"]]["color"].darkened(0.5)
 
 func _process(delta):
-	position = position.move_toward(endPos,delta * speed)
+	if !planted:
+		position = position.move_toward(endPos,delta * speed)
 	$Particles2D.process_material.scale += delta
 	if planted == false && position.distance_to(endPos) < 0.1:
 		planted = true

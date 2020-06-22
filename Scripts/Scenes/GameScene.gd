@@ -62,6 +62,12 @@ remote func skillCast(who, data):
 		node.area = data["area"]
 		node.whoSummoned = who
 		add_child(node)
+	if data["skill"] == "villager_skill_2":
+		var node = preload("res://Prefabs/Objects/BearTrap.tscn").instance()
+		node.startPos = data["startPosition"]
+		node.endPos = data["endPosition"]
+		node.whoSummoned = who
+		add_child(node)
 
 remote func updateTeams (d):
 	Vars.teams = d

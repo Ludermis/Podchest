@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dirt1.png-8a3f55b5ee33da02e645c87f2f5ae60a.stex"
+path="res://.import/Bear_Trap.png-35689c1ccb32b2a38df36fb0fa00fd00.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Effects/dirt1.png"
-dest_files=[ "res://.import/dirt1.png-8a3f55b5ee33da02e645c87f2f5ae60a.stex" ]
+source_file="res://Sprites/Objects/Bear_Trap.png"
+dest_files=[ "res://.import/Bear_Trap.png-35689c1ccb32b2a38df36fb0fa00fd00.stex" ]
 
 [params]
 
@@ -19,8 +19,8 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
-flags/filter=true
+flags/repeat=0
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
