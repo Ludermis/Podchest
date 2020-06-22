@@ -30,6 +30,6 @@ func _process(delta):
 
 func dirtToPos (pos):
 	if !Vars.dirts.has(pos):
-		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,pos,Vars.teams[Vars.myTeam]["color"])
+		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,pos,Vars.myTeam)
 	elif Vars.dirts[pos].team != Vars.myTeam:
-		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,pos,Vars.teams[Vars.myTeam]["color"])
+		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,pos,Vars.myTeam)

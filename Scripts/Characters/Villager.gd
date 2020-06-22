@@ -10,7 +10,7 @@ var canMove = true
 var arrowEffect : Node2D
 
 var skills = {1:{"effect": null, "casting": false, "lastCasted": -1000,
-				"indicating": false, "maxRange": 1000, "area": 11, 
+				"indicating": false, "maxRange": 1000, "area": 31, 
 				"castTime": 1, "castStarted": -1000, "cooldown": 5, "castLocation": Vector2.ZERO}}
 
 func _ready():
@@ -143,6 +143,6 @@ func _physics_process(delta):
 func _on_DirtTimer_timeout():
 	var vec = Vars.optimizeVector(position + Vector2(32,32),64)
 	if !Vars.dirts.has(vec):
-		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,vec,modulate)
+		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,vec,Vars.myTeam)
 	elif Vars.dirts[vec].team != Vars.myTeam:
-		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,vec,modulate)
+		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,vec,Vars.myTeam)
