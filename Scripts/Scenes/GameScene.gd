@@ -54,20 +54,24 @@ remote func dirtChanged (d):
 	$"CanvasLayer/Score1".text = str(Vars.scores[1])
 	$"CanvasLayer/Score2".text = str(Vars.scores[2])
 
-remote func skillCast(who, data):
-	if data["skill"] == "villager_skill_1":
-		var node = preload("res://Prefabs/Objects/Seed.tscn").instance()
-		node.startPos = data["startPosition"]
-		node.endPos = data["endPosition"]
-		node.area = data["area"]
-		node.whoSummoned = who
-		add_child(node)
-	if data["skill"] == "villager_skill_2":
-		var node = preload("res://Prefabs/Objects/BearTrap.tscn").instance()
-		node.startPos = data["startPosition"]
-		node.endPos = data["endPosition"]
-		node.whoSummoned = who
-		add_child(node)
+remote func roomMasterChanged(newMaster):
+	Vars.roomMaster = newMaster
+
+remote func objectCreated (who, obj, data):
+	var node = load(obj).instance()
+	for i in data.keys():
+		node.set(i,data[i])
+	Vars.objects[data["id"]] = node
+	add_child(node)
+
+remote func objectUpdated (who, obj, data):
+	var node = Vars.objects[obj]
+	for i in data.keys():
+		node.set(i,data[i])
+
+remote func objectRemoved (who, obj):
+	Vars.objects[obj].queue_free()
+	Vars.objects.erase(obj)
 
 remote func updateTeams (d):
 	Vars.teams = d

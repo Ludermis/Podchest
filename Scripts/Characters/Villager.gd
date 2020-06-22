@@ -93,7 +93,7 @@ func skillSystem ():
 	if skills[1]["casting"]:
 		get_tree().root.get_node("Main/CanvasLayer/ProgressBar").value = (Vars.time - skills[1]["castStarted"]) / skills[1]["castTime"] * 100
 		if skills[1]["castStarted"] + skills[1]["castTime"] <= Vars.time:
-			get_tree().root.get_node("Main").rpc_id(1,"skillCast",Client.selfPeerID,{"skill": "villager_skill_1", "startPosition": position, "endPosition": skills[1]["castLocation"], "area": skills[1]["area"]})
+			get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/Seed.tscn",{"whoSummoned": Client.selfPeerID, "position": position, "endPosition": skills[1]["castLocation"], "area": skills[1]["area"]})
 			canMove = true
 			$Sprite.stop()
 			$Sprite.animation = "down"
@@ -152,7 +152,7 @@ func skillSystem ():
 	if skills[2]["casting"]:
 		get_tree().root.get_node("Main/CanvasLayer/ProgressBar").value = (Vars.time - skills[2]["castStarted"]) / skills[2]["castTime"] * 100
 		if skills[2]["castStarted"] + skills[2]["castTime"] <= Vars.time:
-			get_tree().root.get_node("Main").rpc_id(1,"skillCast",Client.selfPeerID,{"skill": "villager_skill_2", "startPosition": position, "endPosition": skills[2]["castLocation"]})
+			get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/BearTrap.tscn",{"whoSummoned": Client.selfPeerID, "position": position, "endPosition": skills[2]["castLocation"]})
 			canMove = true
 			$Sprite.stop()
 			$Sprite.animation = "down"
@@ -215,7 +215,7 @@ func _physics_process(delta):
 		velocity.y = lerp(velocity.y,0,Vars.friction)
 		velocity.x = lerp(velocity.x,0,Vars.friction)
 	velocity = move_and_slide(velocity,Vector2.UP)
-	get_tree().root.get_node("Main").rpc_unreliable_id(1,"updatePosition",Client.selfPeerID,position)
+	get_tree().root.get_node("Main").rpc_id(1,"updatePosition",Client.selfPeerID,position)
 
 func _on_DirtTimer_timeout():
 	var vec = Vars.optimizeVector(position + Vector2(32,32),64)

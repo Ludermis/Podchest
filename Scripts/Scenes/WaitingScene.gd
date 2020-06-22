@@ -11,5 +11,8 @@ func _process (delta):
 remote func gameStarted ():
 	get_tree().change_scene("res://Prefabs/Scenes/GameScene.tscn")
 
+remote func roomMasterChanged(newMaster):
+	Vars.roomMaster = newMaster
+
 remote func playerCountUpdated (count, mx):
 	$Players.text = str(count) + " / " + str(mx)

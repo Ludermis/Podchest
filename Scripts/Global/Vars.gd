@@ -14,8 +14,12 @@ var loggedIn = false
 var username = ""
 var accountInfo
 var time : float = 0 setget ,getTime
+var objects = {}
+var roomMaster = -1
 
 func clearVars():
+	roomMaster = -1
+	objects = {}
 	players = {}
 	dirtCount = 0
 	dirts = {}
