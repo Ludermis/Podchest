@@ -30,21 +30,21 @@ bg_color = Color( 0.435294, 0.423529, 0.592157, 1 )
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=5]
 use_filter = true
 font_data = ExtResource( 5 )
 
-[sub_resource type="Theme" id=8]
-TooltipLabel/fonts/font = SubResource( 7 )
+[sub_resource type="Theme" id=6]
+TooltipLabel/fonts/font = SubResource( 5 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=7]
 size = 47
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 4 )
 shader_param/value = 100.0
 shader_param/thickness = 30.0
@@ -123,7 +123,7 @@ margin_bottom = 704.0
 hint_tooltip = "(5 seconds cooldown)
 Cast to place a blooming flower.
 Blooms after 5 seconds."
-theme = SubResource( 8 )
+theme = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -143,7 +143,7 @@ __meta__ = {
 margin_left = 32.0
 margin_right = 96.0
 margin_bottom = 64.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
 text = "Q"
 align = 1
 valign = 1
@@ -153,7 +153,7 @@ __meta__ = {
 
 [node name="Progress" type="Panel" parent="CanvasLayer/Skill1"]
 modulate = Color( 0, 1, 0, 1 )
-material = SubResource( 6 )
+material = SubResource( 8 )
 margin_left = 32.0
 margin_top = -3.28436
 margin_right = 96.0
@@ -165,4 +165,10 @@ __meta__ = {
 [node name="FPSTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="EndTimer" type="Timer" parent="."]
+pause_mode = 2
+wait_time = 1.5
+one_shot = true
 [connection signal="timeout" from="FPSTimer" to="." method="_on_FPSTimer_timeout"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]

@@ -71,7 +71,9 @@ remote func updateTeams (d):
 remote func gameEnded (d):
 	Vars.endGameStats = d
 	$FPSTimer.stop()
-	get_tree().change_scene("res://Prefabs/Scenes/GameOverScene.tscn")
+	$"CanvasLayer/Time".text = "Game Ended"
+	$EndTimer.start()
+	get_tree().paused = true
 
 remote func gotGameTime (time):
 	$"CanvasLayer/Time".text = Vars.timeToString(time)
@@ -79,3 +81,7 @@ remote func gotGameTime (time):
 func _on_FPSTimer_timeout():
 	$"CanvasLayer/FPS".set_text(str(Engine.get_frames_per_second()))
 	rpc_id(1,"demandGameTime",Client.selfPeerID)
+
+func _on_EndTimer_timeout():
+	get_tree().paused = false
+	get_tree().change_scene("res://Prefabs/Scenes/GameOverScene.tscn")

@@ -23,7 +23,7 @@ func setup (id, pos, color, t):
 	position = pos
 	set_physics_process(true)
 	Vars.players[peerID] = self
-	modulate = color
+	modulate = color.blend(Color(1,1,1,0.5))
 	team = t
 
 func skillSystem ():

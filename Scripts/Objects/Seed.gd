@@ -11,6 +11,8 @@ var timeToExplode = 5
 
 func _ready():
 	position = startPos
+	if Vars.myTeam != Vars.players[whoSummoned]["team"]:
+		modulate = Vars.teams[Vars.players[whoSummoned]["team"]]["color"].darkened(0.5)
 
 func _process(delta):
 	position = position.move_toward(endPos,delta * speed)
