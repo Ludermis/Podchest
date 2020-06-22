@@ -16,7 +16,7 @@ remote func animationUpdated (who, anim):
 			Vars.players[who].get_node("Sprite").play(anim)
 		else:
 			Vars.players[who].get_node("Sprite").stop()
-			Vars.players[who].get_node("Sprite").frame = 0
+			Vars.players[who].get_node("Sprite").frame = 5
 
 remote func playerJoined (who, d):
 	print(str("New user instanced ", who))

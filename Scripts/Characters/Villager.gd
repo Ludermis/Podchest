@@ -10,7 +10,7 @@ var canMove = true
 var arrowEffect : Node2D
 
 var skills = {1:{"effect": null, "casting": false, "lastCasted": -1000,
-				"indicating": false, "maxRange": 1000, "area": 31, 
+				"indicating": false, "maxRange": 1000, "area": 11, 
 				"castTime": 1, "castStarted": -1000, "cooldown": 5, "castLocation": Vector2.ZERO}}
 
 func _ready():
@@ -67,6 +67,8 @@ func skillSystem ():
 			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").modulate = Color.blue
 			skills[1]["castLocation"] = get_global_mouse_position()
 			canMove = false
+			$Sprite.play("cast")
+			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,$Sprite.animation)
 			skills[1]["castStarted"] = Vars.time
 			skills[1]["effect"].queue_free()
 			arrowEffect.queue_free()
@@ -77,6 +79,11 @@ func skillSystem ():
 		if skills[1]["castStarted"] + skills[1]["castTime"] <= Vars.time:
 			get_tree().root.get_node("Main").rpc_id(1,"skillCast",Client.selfPeerID,{"skill": "villager_skill_1", "startPosition": position, "endPosition": skills[1]["castLocation"], "area": skills[1]["area"]})
 			canMove = true
+			$Sprite.stop()
+			$Sprite.animation = "down"
+			$Sprite.frame = 5
+			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,"down")
+			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,"stop")
 			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
 			skills[1]["casting"] = false
 			skills[1]["lastCasted"] = Vars.time
@@ -109,12 +116,7 @@ func _physics_process(delta):
 		else:
 			if $Sprite.playing:
 				$Sprite.stop()
-				$Sprite.frame = 0
-				get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,"stop")
-	else:
-		if $Sprite.playing:
-				$Sprite.stop()
-				$Sprite.frame = 0
+				$Sprite.frame = 5
 				get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,"stop")
 	
 	if Input.is_action_just_released('wheeldown'):
