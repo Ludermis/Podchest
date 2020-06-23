@@ -65,11 +65,15 @@ remote func objectCreated (who, obj, data):
 	add_child(node)
 
 remote func objectUpdated (who, obj, data):
+	if !Vars.objects.has(obj):
+		return
 	var node = Vars.objects[obj]
 	for i in data.keys():
 		node.set(i,data[i])
 
 remote func objectRemoved (who, obj):
+	if !Vars.objects.has(obj):
+		return
 	Vars.objects[obj].queue_free()
 	Vars.objects.erase(obj)
 
@@ -85,8 +89,8 @@ remote func gameEnded (d):
 	$EndTimer.start()
 	get_tree().paused = true
 
-remote func gotGameTime (time, unixTime):
-	$"CanvasLayer/Ping".text = str(OS.get_system_time_msecs() - unixTime) + " ms"
+remote func gotGameTime (time, ping):
+	$"CanvasLayer/Ping".text = str(ping) + " ms"
 	$"CanvasLayer/Time".text = Vars.timeToString(time)
 
 func _on_FPSTimer_timeout():
