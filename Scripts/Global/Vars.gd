@@ -3,7 +3,6 @@ extends Node
 var friction = 0.2
 var serverIP = "176.41.149.112"
 var serverPort = 27015
-var players = {}
 var dirtCount = 0
 var dirts = {}
 var teams = {}
@@ -20,7 +19,6 @@ var roomMaster = -1
 func clearVars():
 	roomMaster = -1
 	objects = {}
-	players = {}
 	dirtCount = 0
 	dirts = {}
 	teams = {}

@@ -10,8 +10,8 @@ var materialScale = 1.0
 var timeToExplode = 5
 
 func _ready():
-	if Vars.myTeam != Vars.players[whoSummoned]["team"]:
-		modulate = Vars.teams[Vars.players[whoSummoned]["team"]]["color"].blend(Color(1,1,1,0.3))
+	if Vars.myTeam != Vars.objects[whoSummoned]["team"]:
+		modulate = Vars.teams[Vars.objects[whoSummoned]["team"]]["color"].blend(Color(1,1,1,0.3))
 
 func _process(delta):
 	$Particles2D.process_material.scale = materialScale
@@ -36,6 +36,6 @@ func _process(delta):
 
 func dirtToPos (pos):
 	if !Vars.dirts.has(pos):
-		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,pos,Vars.players[whoSummoned]["team"])
-	elif Vars.dirts[pos].team != Vars.players[whoSummoned]["team"]:
-		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,pos,Vars.players[whoSummoned]["team"])
+		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,pos,Vars.objects[whoSummoned]["team"])
+	elif Vars.dirts[pos].team != Vars.objects[whoSummoned]["team"]:
+		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,pos,Vars.objects[whoSummoned]["team"])

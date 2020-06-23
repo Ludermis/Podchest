@@ -4,10 +4,13 @@ var velocity = Vector2.ZERO
 var jumpHeight = 1024
 var acceleration = 64
 var maxSpeed = 384
-var peerID
+var id
 var team = -1
 var canMove = true
 var arrowEffect : Node2D
+
+var animation = "" setget setAnimation
+var animationPlaying = false setget setAnimationPlaying
 
 var skills = 	{1:
 					{
@@ -23,18 +26,17 @@ var skills = 	{1:
 					}
 				}
 
-func _ready():
-	if peerID == Client.selfPeerID:
-		print("Timer started")
-		$DirtTimer.start()
+func setAnimation (anim):
+	$Sprite.animation = anim
 
-func setup (id, pos, color, t):
-	peerID = id
-	position = pos
+func setAnimationPlaying (playing):
+	$Sprite.playing = playing
+	if playing == false:
+		$Sprite.frame = 5
+
+func _ready():
 	set_physics_process(true)
-	Vars.players[peerID] = self
-	modulate = color.blend(Color(1,1,1,0.5))
-	team = t
+	$DirtTimer.start()
 
 func anySkillCasting ():
 	return (skills[1]["casting"] || skills[2]["casting"])
@@ -44,7 +46,6 @@ func anySkillIndicating ():
 
 func skillSystem ():
 	# SKILL 1
-	
 	if !skills[1]["casting"]:
 		if skills[1]["lastCasted"] + skills[1]["cooldown"] > Vars.time:
 			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").get_material().set_shader_param("value",(Vars.time - skills[1]["lastCasted"]) / skills[1]["cooldown"] * 100)
@@ -88,7 +89,6 @@ func skillSystem ():
 			skills[1]["castLocation"] = get_global_mouse_position()
 			canMove = false
 			$Sprite.play("cast")
-			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,$Sprite.animation)
 			skills[1]["castStarted"] = Vars.time
 			skills[1]["effect"].queue_free()
 			arrowEffect.queue_free()
@@ -102,8 +102,6 @@ func skillSystem ():
 			$Sprite.stop()
 			$Sprite.animation = "down"
 			$Sprite.frame = 5
-			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,"down")
-			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,"stop")
 			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
 			skills[1]["casting"] = false
 			skills[1]["lastCasted"] = Vars.time
@@ -151,7 +149,6 @@ func skillSystem ():
 			skills[2]["castLocation"] = get_global_mouse_position()
 			canMove = false
 			$Sprite.play("cast")
-			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,$Sprite.animation)
 			skills[2]["castStarted"] = Vars.time
 			skills[2]["effect"].queue_free()
 			arrowEffect.queue_free()
@@ -165,16 +162,13 @@ func skillSystem ():
 			$Sprite.stop()
 			$Sprite.animation = "down"
 			$Sprite.frame = 5
-			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,"down")
-			get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,"stop")
 			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
 			skills[2]["casting"] = false
 			skills[2]["lastCasted"] = Vars.time
 
 func _physics_process(delta):
-	if peerID != Client.selfPeerID:
+	if id != Client.selfPeerID:
 		return
-	
 	# Skill System
 	
 	skillSystem()
@@ -183,24 +177,19 @@ func _physics_process(delta):
 		if Input.is_action_pressed('up'):
 			if !$Sprite.playing || $Sprite.animation != "up":
 				$Sprite.play("up")
-				get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,$Sprite.animation)
 		elif Input.is_action_pressed('down'):
 			if !$Sprite.playing || $Sprite.animation != "down":
 				$Sprite.play("down")
-				get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,$Sprite.animation)
 		elif Input.is_action_pressed('right'):
 			if !$Sprite.playing || $Sprite.animation != "right":
 				$Sprite.play("right")
-				get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,$Sprite.animation)
 		elif Input.is_action_pressed('left'):
 			if !$Sprite.playing || $Sprite.animation != "left":
 				$Sprite.play("left")
-				get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,$Sprite.animation)
 		else:
 			if $Sprite.playing:
 				$Sprite.stop()
 				$Sprite.frame = 5
-				get_tree().root.get_node("Main").rpc_id(1,"updateAnimation",Client.selfPeerID,"stop")
 	
 	if Input.is_action_just_released('wheeldown'):
 		$Camera2D.zoomLevel = min($Camera2D.zoomLevel + 1,12)
@@ -223,11 +212,12 @@ func _physics_process(delta):
 		velocity.y = lerp(velocity.y,0,Vars.friction)
 		velocity.x = lerp(velocity.x,0,Vars.friction)
 	velocity = move_and_slide(velocity,Vector2.UP)
-	get_tree().root.get_node("Main").rpc_id(1,"updatePosition",Client.selfPeerID,position)
+	get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,Client.selfPeerID,{"position": position, "animation": $Sprite.animation, "animationPlaying": $Sprite.playing})
 
 func _on_DirtTimer_timeout():
-	var vec = Vars.optimizeVector(position + Vector2(32,32),64)
-	if !Vars.dirts.has(vec):
-		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,vec,Vars.myTeam)
-	elif Vars.dirts[vec].team != Vars.myTeam:
-		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,vec,Vars.myTeam)
+	if Client.selfPeerID == Vars.roomMaster:
+		var vec = Vars.optimizeVector(position + Vector2(32,32),64)
+		if !Vars.dirts.has(vec):
+			get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,vec,team)
+		elif Vars.dirts[vec].team != team:
+			get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,vec,team)

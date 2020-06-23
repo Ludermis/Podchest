@@ -12,31 +12,21 @@ func _notification(what):
 	elif what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
 		rpc_id(1,"playerUnfocused",Client.selfPeerID)
 
-remote func positionUpdated (who, newPosition):
-	if Vars.players.has(who):
-		Vars.players[who].position = newPosition
-
-remote func animationUpdated (who, anim):
-	if Vars.players.has(who):
-		if anim != "stop":
-			Vars.players[who].get_node("Sprite").play(anim)
-		else:
-			Vars.players[who].get_node("Sprite").stop()
-			Vars.players[who].get_node("Sprite").frame = 5
-
-remote func playerJoined (who, d):
+remote func playerJoined (who, obj, data):
 	print(str("New user instanced ", who))
-	var newPlayer = preload("res://Prefabs/Characters/Villager.tscn").instance()
-	newPlayer.setup(who,d["position"],d["color"],d["team"])
-	if newPlayer.peerID == Client.selfPeerID:
+	var node = load(obj).instance()
+	for i in data.keys():
+		node.set(i,data[i])
+	if node.id == Client.selfPeerID:
 		print("Camera working.")
-		Vars.myTeam = d["team"]
-		newPlayer.add_child(preload("res://Prefabs/Misc/PlayerCamera.tscn").instance())
-	add_child(newPlayer)
+		Vars.myTeam = data["team"]
+		node.add_child(preload("res://Prefabs/Misc/PlayerCamera.tscn").instance())
+	Vars.objects[data["id"]] = node
+	add_child(node)
 
 remote func playerDisconnected (who):
 	print(str("A user disconnected ", who))
-	Vars.players[who].queue_free()
+	Vars.objects[who].queue_free()
 
 remote func dirtCreated (d):
 	Vars.dirtCount += 1
@@ -95,12 +85,13 @@ remote func gameEnded (d):
 	$EndTimer.start()
 	get_tree().paused = true
 
-remote func gotGameTime (time):
+remote func gotGameTime (time, unixTime):
+	$"CanvasLayer/Ping".text = str(OS.get_system_time_msecs() - unixTime) + " ms"
 	$"CanvasLayer/Time".text = Vars.timeToString(time)
 
 func _on_FPSTimer_timeout():
 	$"CanvasLayer/FPS".set_text(str(Engine.get_frames_per_second()))
-	rpc_id(1,"demandGameTime",Client.selfPeerID)
+	rpc_id(1,"demandGameTime",Client.selfPeerID,OS.get_system_time_msecs())
 
 func _on_EndTimer_timeout():
 	get_tree().paused = false

@@ -9,12 +9,13 @@ var trappedPlayer = -1
 var trapTimeRemaining = 0
 
 func _ready():
-	if Vars.myTeam != Vars.players[whoSummoned]["team"]:
-		modulate = Vars.teams[Vars.players[whoSummoned]["team"]]["color"].blend(Color(1,1,1,0.3))
+	if Vars.myTeam != Vars.objects[whoSummoned]["team"]:
+		modulate = Vars.teams[Vars.objects[whoSummoned]["team"]]["color"].blend(Color(1,1,1,0.3))
 
 func _process(delta):
 	if trappedPlayer == Client.selfPeerID:
-		Vars.players[Client.selfPeerID].canMove = false
+		Vars.objects[Client.selfPeerID].canMove = false
+		Vars.objects[Client.selfPeerID].animationPlaying = false
 	if Vars.roomMaster == Client.selfPeerID:
 		if !planted:
 			position = position.move_toward(endPosition,delta * speed)
@@ -33,11 +34,10 @@ func _on_Area2D_body_entered(body):
 		if !planted:
 			return
 		print(str(body))
-		if body.is_in_group("Player") && Vars.players[body.peerID]["team"] != Vars.players[whoSummoned]["team"]:
+		if body.is_in_group("Player") && Vars.objects[body.id]["team"] != Vars.objects[whoSummoned]["team"]:
 			trapTimeRemaining = 2
-			trappedPlayer = body.peerID
-
+			trappedPlayer = body.id
 
 func _on_BearTrap_tree_exited():
 	if trappedPlayer == Client.selfPeerID:
-		Vars.players[Client.selfPeerID].canMove = true
+		Vars.objects[Client.selfPeerID].canMove = true
