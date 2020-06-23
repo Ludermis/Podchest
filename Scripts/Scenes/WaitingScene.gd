@@ -16,3 +16,8 @@ remote func roomMasterChanged(newMaster):
 
 remote func playerCountUpdated (count, mx):
 	$Players.text = str(count) + " / " + str(mx)
+
+
+func _on_CancelButton_pressed():
+	rpc_id(1,"leaveRoom",Client.selfPeerID)
+	get_tree().change_scene("res://Prefabs/Scenes/MainScene.tscn")

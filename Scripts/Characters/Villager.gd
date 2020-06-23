@@ -18,7 +18,7 @@ var skills = 	{1:
 				2:
 					{
 						"effect": null, "casting": false, "lastCasted": -1000,
-						"indicating": false, "maxRange": 1000, "castTime": 1, 
+						"indicating": false, "maxRange": 200, "castTime": 1, 
 						"castStarted": -1000, "cooldown": 7, "castLocation": Vector2.ZERO
 					}
 				}
@@ -54,7 +54,11 @@ func skillSystem ():
 			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").modulate = Color.lime
 	
 	# INDICATING START
-	if Input.is_action_just_pressed('skill1') && skills[1]["lastCasted"] + skills[1]["cooldown"] <= Vars.time && !anySkillCasting() && !anySkillIndicating():
+	if Input.is_action_just_pressed('skill1') && skills[1]["lastCasted"] + skills[1]["cooldown"] <= Vars.time && !anySkillCasting() && !skills[1]["indicating"]:
+		if skills[2]["indicating"]:
+			skills[2]["indicating"] = false
+			skills[2]["effect"].queue_free()
+			arrowEffect.queue_free()
 		skills[1]["indicating"] = true
 		skills[1]["effect"] = preload("res://Prefabs/Effects/SeedEffect.tscn").instance()
 		arrowEffect = preload("res://Prefabs/Effects/ArrowEffect.tscn").instance()
@@ -115,7 +119,11 @@ func skillSystem ():
 			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").modulate = Color.lime
 	
 	# INDICATING START
-	if Input.is_action_just_pressed('skill2') && skills[2]["lastCasted"] + skills[2]["cooldown"] <= Vars.time && !anySkillCasting() && !anySkillIndicating():
+	if Input.is_action_just_pressed('skill2') && skills[2]["lastCasted"] + skills[2]["cooldown"] <= Vars.time && !anySkillCasting() && !skills[2]["indicating"]:
+		if skills[1]["indicating"]:
+			skills[1]["indicating"] = false
+			skills[1]["effect"].queue_free()
+			arrowEffect.queue_free()
 		skills[2]["indicating"] = true
 		skills[2]["effect"] = preload("res://Prefabs/Effects/BearTrapEffect.tscn").instance()
 		arrowEffect = preload("res://Prefabs/Effects/ArrowEffect.tscn").instance()

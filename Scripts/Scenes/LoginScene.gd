@@ -5,7 +5,7 @@ func _ready():
 	pass
 
 remote func loginCompleted (info):
-	Vars.username = $Username.text
+	Vars.username = $Container/Username.text
 	Vars.accountInfo = info
 	Vars.loggedIn = true
 	var save = File.new()

@@ -5,15 +5,39 @@ var whoSummoned
 var speed = 512
 var planted = false
 var id
+var trappedPlayer = -1
+var trapTimeRemaining = 0
 
 func _ready():
 	if Vars.myTeam != Vars.players[whoSummoned]["team"]:
 		modulate = Vars.teams[Vars.players[whoSummoned]["team"]]["color"].blend(Color(1,1,1,0.3))
 
 func _process(delta):
+	if trappedPlayer == Client.selfPeerID:
+		Vars.players[Client.selfPeerID].canMove = false
 	if Vars.roomMaster == Client.selfPeerID:
 		if !planted:
 			position = position.move_toward(endPosition,delta * speed)
 		if planted == false && position.distance_to(endPosition) < 0.1:
 			planted = true
-		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"position": position,"planted": planted})
+		if planted && trappedPlayer != -1:
+			trapTimeRemaining -= delta
+			if trapTimeRemaining < 0:
+				get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+				queue_free()
+		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"position": position,"planted": planted, "trapTimeRemaining": trapTimeRemaining, "trappedPlayer": trappedPlayer})
+		
+
+func _on_Area2D_body_entered(body):
+	if Vars.roomMaster == Client.selfPeerID:
+		if !planted:
+			return
+		print(str(body))
+		if body.is_in_group("Player") && Vars.players[body.peerID]["team"] != Vars.players[whoSummoned]["team"]:
+			trapTimeRemaining = 2
+			trappedPlayer = body.peerID
+
+
+func _on_BearTrap_tree_exited():
+	if trappedPlayer == Client.selfPeerID:
+		Vars.players[Client.selfPeerID].canMove = true

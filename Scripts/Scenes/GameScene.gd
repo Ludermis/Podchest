@@ -6,6 +6,12 @@ func _ready():
 func _process(delta):
 	pass
 
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_FOCUS_IN:
+		rpc_id(1,"playerFocused",Client.selfPeerID)
+	elif what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+		rpc_id(1,"playerUnfocused",Client.selfPeerID)
+
 remote func positionUpdated (who, newPosition):
 	if Vars.players.has(who):
 		Vars.players[who].position = newPosition
@@ -56,6 +62,10 @@ remote func dirtChanged (d):
 
 remote func roomMasterChanged(newMaster):
 	Vars.roomMaster = newMaster
+	if Vars.roomMaster == Client.selfPeerID:
+		$CanvasLayer/RoomMaster.visible = true
+	else:
+		$CanvasLayer/RoomMaster.visible = false
 
 remote func objectCreated (who, obj, data):
 	var node = load(obj).instance()
