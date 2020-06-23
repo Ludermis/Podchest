@@ -15,6 +15,7 @@ var accountInfo
 var time : float = 0 setget ,getTime
 var objects = {}
 var roomMaster = -1
+var ping = 9999
 
 func clearVars():
 	roomMaster = -1
@@ -22,6 +23,7 @@ func clearVars():
 	dirtCount = 0
 	dirts = {}
 	teams = {}
+	ping = 9999
 	myTeam = -1
 	scores = {1: 0, 2: 0}
 
