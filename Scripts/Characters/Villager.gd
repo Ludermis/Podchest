@@ -11,6 +11,8 @@ var arrowEffect : Node2D
 
 var animation = "" setget setAnimation
 var animationPlaying = false setget setAnimationPlaying
+var scytheActive = false setget setScytheActive
+var scytheRotation = 0 setget setScytheRotation
 
 var skills = 	{1:
 					{
@@ -23,23 +25,44 @@ var skills = 	{1:
 						"effect": null, "casting": false, "lastCasted": -1000,
 						"indicating": false, "maxRange": 200, "castTime": 1, 
 						"castStarted": -1000, "cooldown": 7, "castLocation": Vector2.ZERO
+					},
+				3:
+					{
+						"casting": false, "lastCasted": -1000, "activeTime": 10,
+						"castTime": 1, "castStarted": -1000, "cooldown": 25
 					}
 				}
 
 func setAnimation (anim):
+	animation = anim
 	$Sprite.animation = anim
 
 func setAnimationPlaying (playing):
+	animationPlaying = playing
 	$Sprite.playing = playing
 	if playing == false:
 		$Sprite.frame = 5
+
+func setScytheActive (isActive):
+	scytheActive = isActive
+	if isActive:
+		$DirtTimerScythe.start()
+		$Schyte.visible = true
+	else:
+		$DirtTimerScythe.stop()
+		$Schyte.visible = false
+
+func setScytheRotation (rot):
+	scytheRotation = rot
+	if id != Client.selfPeerID:
+		$Schyte.rotation = rot
 
 func _ready():
 	set_physics_process(true)
 	$DirtTimer.start()
 
 func anySkillCasting ():
-	return (skills[1]["casting"] || skills[2]["casting"])
+	return (skills[1]["casting"] || skills[2]["casting"] || skills[3]["casting"])
 
 func anySkillIndicating ():
 	return (skills[1]["indicating"] || skills[2]["indicating"])
@@ -51,7 +74,7 @@ func skillSystem ():
 			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").get_material().set_shader_param("value",(Vars.time - skills[1]["lastCasted"]) / skills[1]["cooldown"] * 100)
 			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").modulate = Color.red
 		else:
-			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").get_material().set_shader_param("value",100)
+			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").get_material().set_shader_param("value",101)
 			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").modulate = Color.lime
 	
 	# INDICATING START
@@ -113,7 +136,7 @@ func skillSystem ():
 			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").get_material().set_shader_param("value",(Vars.time - skills[2]["lastCasted"]) / skills[2]["cooldown"] * 100)
 			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").modulate = Color.red
 		else:
-			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").get_material().set_shader_param("value",100)
+			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").get_material().set_shader_param("value",101)
 			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").modulate = Color.lime
 	
 	# INDICATING START
@@ -165,6 +188,50 @@ func skillSystem ():
 			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
 			skills[2]["casting"] = false
 			skills[2]["lastCasted"] = Vars.time
+	
+	# SKILL 3
+	
+	if !skills[3]["casting"]:
+		if skills[3]["lastCasted"] + skills[3]["cooldown"] > Vars.time:
+			get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").get_material().set_shader_param("value",(Vars.time - skills[3]["lastCasted"]) / skills[3]["cooldown"] * 100.0)
+			get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").modulate = Color.red
+		else:
+			get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").get_material().set_shader_param("value",101.0)
+			get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").modulate = Color.lime
+	
+	# INDICATING START
+	if Input.is_action_just_pressed('skill3') && skills[3]["lastCasted"] + skills[3]["cooldown"] <= Vars.time && !anySkillCasting():
+		if skills[1]["indicating"]:
+			skills[1]["indicating"] = false
+			skills[1]["effect"].queue_free()
+			arrowEffect.queue_free()
+		if skills[2]["indicating"]:
+			skills[2]["indicating"] = false
+			skills[2]["effect"].queue_free()
+			arrowEffect.queue_free()
+		get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
+		skills[3]["casting"] = true
+		get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").modulate = Color.blue
+		canMove = false
+		$Sprite.play("cast")
+		skills[3]["castStarted"] = Vars.time
+	
+	# CASTING UPDATE
+	if skills[3]["casting"]:
+		get_tree().root.get_node("Main/CanvasLayer/ProgressBar").value = (Vars.time - skills[3]["castStarted"]) / skills[3]["castTime"] * 100
+		if skills[3]["castStarted"] + skills[3]["castTime"] <= Vars.time:
+			setScytheActive(true)
+			get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"scytheActive": true})
+			canMove = true
+			$Sprite.stop()
+			$Sprite.animation = "down"
+			$Sprite.frame = 5
+			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
+			skills[3]["casting"] = false
+			skills[3]["lastCasted"] = Vars.time
+	if Vars.time - skills[3]["lastCasted"] >= skills[3]["activeTime"]:
+		setScytheActive(false)
+		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"scytheActive": false})
 
 func _physics_process(delta):
 	if id != Client.selfPeerID:
@@ -212,7 +279,10 @@ func _physics_process(delta):
 		velocity.y = lerp(velocity.y,0,Vars.friction)
 		velocity.x = lerp(velocity.x,0,Vars.friction)
 	velocity = move_and_slide(velocity,Vector2.UP)
-	get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,Client.selfPeerID,{"position": position, "animation": $Sprite.animation, "animationPlaying": $Sprite.playing})
+	var sendingDict = {"position": position, "animation": $Sprite.animation, "animationPlaying": $Sprite.playing}
+	if scytheActive:
+		sendingDict["scytheRotation"] = $Schyte.rotation
+	get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,sendingDict)
 
 func _on_DirtTimer_timeout():
 	if Client.selfPeerID == Vars.roomMaster:
