@@ -17,7 +17,7 @@ var scytheRotation = 0 setget setScytheRotation
 var skills = 	{1:
 					{
 						"effect": null, "casting": false, "lastCasted": -1000,
-						"indicating": false, "maxRange": 1000, "area": 11, 
+						"indicating": false, "maxRange": 1000, "area": 5, 
 						"castTime": 1, "castStarted": -1000, "cooldown": 5, "castLocation": Vector2.ZERO
 					},
 				2:

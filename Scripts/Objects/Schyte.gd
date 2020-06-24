@@ -24,7 +24,8 @@ func dirtToPos (pos):
 
 
 func _on_DirtTimerScythe_timeout():
-	var optimizedPos = Vars.optimizeVector($"..".position + Vector2(32,32),64)
-	var vec = (get_global_mouse_position() - optimizedPos).normalized()
-	vec = Vars.optimizeVector(optimizedPos + vec * 64 + Vector2(32,32), 64)
-	dirtToPos(vec)
+	if visible && Client.selfPeerID == $"..".id:
+		var optimizedPos = Vars.optimizeVector($"..".position + Vector2(32,32),64)
+		var vec = (get_global_mouse_position() - optimizedPos).normalized()
+		vec = Vars.optimizeVector(optimizedPos + vec * 64 + Vector2(32,32), 64)
+		dirtToPos(vec)

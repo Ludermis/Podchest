@@ -11,7 +11,6 @@ var trapTimeRemaining = 0
 func _ready():
 	if Vars.myTeam != Vars.objects[whoSummoned]["team"]:
 		modulate = Vars.teams[Vars.objects[whoSummoned]["team"]]["color"].blend(Color(1,1,1,0.3))
-
 func _process(delta):
 	if trappedPlayer == Client.selfPeerID:
 		Vars.objects[Client.selfPeerID].canMove = false
@@ -21,6 +20,10 @@ func _process(delta):
 			position = position.move_toward(endPosition,delta * speed)
 		if planted == false && position.distance_to(endPosition) < 0.1:
 			planted = true
+		if planted && trappedPlayer == -1:
+			var arr = $Area2D.get_overlapping_bodies()
+			for i in arr:
+				_on_Area2D_body_entered(i)
 		if planted && trappedPlayer != -1:
 			trapTimeRemaining -= delta
 			if trapTimeRemaining < 0:
@@ -31,9 +34,8 @@ func _process(delta):
 
 func _on_Area2D_body_entered(body):
 	if Vars.roomMaster == Client.selfPeerID:
-		if !planted:
+		if !planted || trappedPlayer != -1:
 			return
-		print(str(body))
 		if body.is_in_group("Player") && Vars.objects[body.id]["team"] != Vars.objects[whoSummoned]["team"]:
 			trapTimeRemaining = 2
 			trappedPlayer = body.id
