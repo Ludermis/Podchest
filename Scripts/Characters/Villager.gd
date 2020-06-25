@@ -23,7 +23,7 @@ var skills = 	{1:
 				2:
 					{
 						"effect": null, "casting": false, "lastCasted": -1000,
-						"indicating": false, "maxRange": 200, "castTime": 1, 
+						"indicating": false, "maxRange": 200, "castTime": 0.5, 
 						"castStarted": -1000, "cooldown": 7, "castLocation": Vector2.ZERO
 					},
 				3:

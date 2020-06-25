@@ -9,7 +9,7 @@ remote func registerCompleted ():
 	$Message.text = "Registration completed! You can go back and login now."
 	$Message.visible = true
 	$Container/Username.visible = false
-	$Container/Username.visible = false
+	$Container/Password.visible = false
 	$RegisterButton.visible = false
 
 remote func registerFailed (msg):

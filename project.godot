@@ -28,8 +28,8 @@ Client="*res://Scripts/Network/Client.gd"
 
 [display]
 
-window/size/width=1280
-window/size/height=720
+window/size/width=1920
+window/size/height=937
 window/size/resizable=false
 mouse_cursor/custom_image="res://Sprites/Misc/cursor.png"
 window/stretch/mode="2d"
