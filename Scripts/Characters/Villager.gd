@@ -259,7 +259,7 @@ func _physics_process(delta):
 				$Sprite.frame = 5
 	
 	if Input.is_action_just_released('wheeldown'):
-		$Camera2D.zoomLevel = min($Camera2D.zoomLevel + 1,12)
+		$Camera2D.zoomLevel = min($Camera2D.zoomLevel + 1,4)
 	if Input.is_action_just_released('wheelup'):
 		$Camera2D.zoomLevel = max($Camera2D.zoomLevel - 1,1)
 	if canMove:
@@ -288,6 +288,6 @@ func _on_DirtTimer_timeout():
 	if Client.selfPeerID == Vars.roomMaster:
 		var vec = Vars.optimizeVector(position + Vector2(32,32),64)
 		if !Vars.dirts.has(vec):
-			get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,vec,team)
+			Vars.tryPlaceDirt(Client.selfPeerID,vec,team)
 		elif Vars.dirts[vec].team != team:
-			get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,vec,team)
+			Vars.tryChangeDirt(Client.selfPeerID,vec,team)

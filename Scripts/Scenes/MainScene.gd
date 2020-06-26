@@ -2,6 +2,7 @@ extends Node2D
 
 
 func _ready():
+	$LabelBuild.text = "Build" + Vars.build
 	if Client.selfPeerID == 0:
 		Client.connectToServer()
 		Client.connect("connection_ok",self,"connection_ok")
@@ -15,6 +16,10 @@ func logged():
 	$PlayPanel/LoginButton.visible = false
 	$PlayPanel/RegisterButton.visible = false
 	$PlayPanel/LogoutButton.visible = true
+
+remote func wrongBuild (newBuild):
+	Vars.newBuildIfMineWrong = newBuild
+	get_tree().change_scene_to(preload("res://Prefabs/Scenes/WrongBuildScene.tscn"))
 
 remote func loginCompleted (info):
 	logged()
@@ -40,6 +45,7 @@ func readyConnected ():
 				get_tree().root.get_node("Main").rpc_id(1,"loginAccount",Client.selfPeerID,Vars.username,Vars.accountInfo["password"])
 	else:
 		logged()
+	get_tree().root.get_node("Main").rpc_id(1,"confirmBuild",Client.selfPeerID,Vars.build)
 func _process (delta):
 	pass
 

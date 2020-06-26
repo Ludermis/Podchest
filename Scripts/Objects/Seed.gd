@@ -36,6 +36,6 @@ func _process(delta):
 
 func dirtToPos (pos):
 	if !Vars.dirts.has(pos):
-		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,pos,Vars.objects[whoSummoned]["team"])
+		Vars.tryPlaceDirt(Client.selfPeerID,pos,Vars.objects[whoSummoned]["team"])
 	elif Vars.dirts[pos].team != Vars.objects[whoSummoned]["team"]:
-		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,pos,Vars.objects[whoSummoned]["team"])
+		Vars.tryChangeDirt(Client.selfPeerID,pos,Vars.objects[whoSummoned]["team"])

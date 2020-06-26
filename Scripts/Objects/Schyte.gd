@@ -18,9 +18,9 @@ func _process(delta):
 
 func dirtToPos (pos):
 	if !Vars.dirts.has(pos):
-		get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",Client.selfPeerID,pos,$"..".team)
+		Vars.tryPlaceDirt(Client.selfPeerID,pos,$"..".team)
 	elif Vars.dirts[pos].team != $"..".team:
-		get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",Client.selfPeerID,pos,$"..".team)
+		Vars.tryChangeDirt(Client.selfPeerID,pos,$"..".team)
 
 
 func _on_DirtTimerScythe_timeout():

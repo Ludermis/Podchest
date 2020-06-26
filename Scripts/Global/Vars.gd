@@ -16,7 +16,11 @@ var time : float = 0 setget ,getTime
 var objects = {}
 var roomMaster = -1
 var ping = 9999
+var build = "3"
+var newBuildIfMineWrong
 
+var mapSizeX = 50
+var mapSizeY = 50
 var selectedGamemode = "quick1v1"
 
 func clearVars():
@@ -47,6 +51,16 @@ func timeToString (t):
 		rtn += "0"
 	rtn += str(seconds)
 	return rtn
+
+func tryPlaceDirt (id, pos, team):
+	if pos.x < 0 || pos.y < -(mapSizeY - 1) * 64 || pos.x > (mapSizeX - 1) * 64 || pos.y > 0:
+		return
+	get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",id,pos,team)
+
+func tryChangeDirt (id, pos, team):
+	if pos.x < 0 || pos.y < -(mapSizeY - 1) * 64 || pos.x > (mapSizeX - 1) * 64 || pos.y > 0:
+		return
+	get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",id,pos,team)
 
 func optimizeVector(pos, opt):
 	var newv = Vector2.ZERO;

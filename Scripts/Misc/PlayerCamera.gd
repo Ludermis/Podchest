@@ -1,6 +1,6 @@
 extends Camera2D
 
-var zoomLevel = 5
+var zoomLevel = 4
 
 func _ready():
 	zoom.x = zoomLevel * (2.0 / 5.0)
