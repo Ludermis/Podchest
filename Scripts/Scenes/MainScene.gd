@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _ready():
-	$LabelBuild.text = "Build" + Vars.build
+	$LabelBuild.text = "Build " + Vars.build
 	if Client.selfPeerID == 0:
 		Client.connectToServer()
 		Client.connect("connection_ok",self,"connection_ok")
