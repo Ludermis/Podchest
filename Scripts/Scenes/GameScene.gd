@@ -13,6 +13,9 @@ func _notification(what):
 		rpc_id(1,"playerUnfocused",Client.selfPeerID)
 
 remote func playerJoined (who, obj, data):
+	if Vars.objects.has(who):
+		print("We got playerJoined but that player already exist ?")
+		return
 	print(str("New user instanced ", who))
 	var node = load(obj).instance()
 	for i in data.keys():
@@ -25,13 +28,18 @@ remote func playerJoined (who, obj, data):
 	add_child(node)
 
 remote func playerDisconnected (who):
+	if !Vars.objects.has(who):
+		print("We got playerDisconnected but that player doesn't exist ?")
+		return
 	print(str("A user disconnected ", who))
 	Vars.objects[who].queue_free()
 
 remote func dirtCreated (d):
+	if Vars.dirts.has(d["position"]):
+		print("We got dirtCreated a dirt already exists there ?")
+		return
 	Vars.dirtCount += 1
 	var node = preload("res://Prefabs/Objects/Dirt.tscn").instance()
-	#print("Dirt created " + str(Vars.dirtCount))
 	node.position = d["position"]
 	Vars.dirts[node.position] = node
 	node.realColor = d["color"]
@@ -42,6 +50,9 @@ remote func dirtCreated (d):
 	$"CanvasLayer/Score2".text = str(Vars.scores[2])
 
 remote func dirtChanged (d):
+	if !Vars.dirts.has(d["position"]):
+		print("We got dirtChanged but no dirt exists there ?")
+		return
 	Vars.scores[Vars.dirts[d["position"]].team] -= 1
 	Vars.dirts[d["position"]].realColor = d["color"]
 	Vars.dirts[d["position"]].team = d["team"]
@@ -58,6 +69,9 @@ remote func roomMasterChanged(newMaster):
 		$CanvasLayer/RoomMaster.visible = false
 
 remote func objectCreated (who, obj, data):
+	if Vars.objects.has(data["id"]):
+		print("We got objectCreated but that object already exists ?")
+		return
 	var node = load(obj).instance()
 	for i in data.keys():
 		node.set(i,data[i])
@@ -66,6 +80,7 @@ remote func objectCreated (who, obj, data):
 
 remote func objectUpdated (who, obj, data):
 	if !Vars.objects.has(obj):
+		print("We got objectUpdated but that object doesn't exists ?")
 		return
 	var node = Vars.objects[obj]
 	for i in data.keys():
@@ -73,6 +88,7 @@ remote func objectUpdated (who, obj, data):
 
 remote func objectRemoved (who, obj):
 	if !Vars.objects.has(obj):
+		print("We got objectRemoved but that object doesn't exists ?")
 		return
 	Vars.objects[obj].queue_free()
 	Vars.objects.erase(obj)

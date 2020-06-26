@@ -34,16 +34,16 @@ Label/fonts/font = null
 Label/styles/normal = null
 Panel/styles/panel = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=3]
 size = 36
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=14]
+[sub_resource type="DynamicFont" id=4]
 use_filter = true
 font_data = ExtResource( 8 )
 
-[sub_resource type="StyleBoxFlat" id=23]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 8
 border_width_top = 4
@@ -55,7 +55,7 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id=18]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.862745, 1, 0.796078, 1 )
 border_width_left = 8
 border_width_top = 4
@@ -67,7 +67,7 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id=19]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0, 1, 0.929412, 0.345098 )
 border_color = Color( 0.678431, 0.0941176, 0.0941176, 1 )
 corner_radius_top_left = 16
@@ -75,14 +75,14 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="DynamicFont" id=17]
+[sub_resource type="DynamicFont" id=8]
 size = 50
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="ButtonGroup" id=22]
+[sub_resource type="ButtonGroup" id=9]
 
-[sub_resource type="GDScript" id=20]
+[sub_resource type="GDScript" id=10]
 script/source = "extends ToolButton
 
 
@@ -96,7 +96,7 @@ func _on_1v1Toggle_toggled(button_pressed):
 			Vars.selectedGamemode = \"quick1v1\"
 "
 
-[sub_resource type="GDScript" id=21]
+[sub_resource type="GDScript" id=11]
 script/source = "extends ToolButton
 
 
@@ -110,19 +110,19 @@ func _on_2v2Toggle_toggled(button_pressed):
 			Vars.selectedGamemode = \"quick2v2\"
 "
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=12]
 size = 66
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFontData" id=3]
+[sub_resource type="DynamicFontData" id=13]
 font_path = "res://Fonts/orange juice 2.0.ttf"
 
-[sub_resource type="DynamicFont" id=15]
+[sub_resource type="DynamicFont" id=14]
 size = 80
 use_filter = true
-font_data = SubResource( 3 )
+font_data = SubResource( 13 )
 
-[sub_resource type="GDScript" id=16]
+[sub_resource type="GDScript" id=15]
 script/source = "extends Button
 
 
@@ -135,12 +135,12 @@ func _on_PlayButton_pressed():
 	get_tree().root.get_node(\"Main\").rpc_id(1,\"playerJoined\",Client.selfPeerID,Vars.selectedGamemode)
 "
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=16]
 size = 36
 use_filter = true
-font_data = SubResource( 3 )
+font_data = SubResource( 13 )
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=17]
 script/source = "extends Button
 
 
@@ -152,7 +152,7 @@ func _on_RegisterButton_pressed():
 	get_tree().change_scene(\"res://Prefabs/Scenes/RegisterScene.tscn\")
 "
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=18]
 script/source = "extends Button
 
 
@@ -164,7 +164,7 @@ func _on_LoginButton_pressed():
 	get_tree().change_scene(\"res://Prefabs/Scenes/LoginScene.tscn\")
 "
 
-[sub_resource type="GDScript" id=7]
+[sub_resource type="GDScript" id=19]
 script/source = "extends Button
 
 
@@ -184,7 +184,7 @@ func _on_LogoutButton_pressed():
 	save.store_string(JSON.print({\"loggedin\": false, \"username\": Vars.username, \"info\": Vars.accountInfo}, \" \"))
 "
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=20]
 size = 48
 font_data = ExtResource( 2 )
 
@@ -242,7 +242,7 @@ margin_left = 22.0
 margin_top = 101.0
 margin_right = 320.0
 margin_bottom = 151.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Guest"
 valign = 1
@@ -266,7 +266,7 @@ __meta__ = {
 margin_left = 24.0
 margin_right = 440.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Offers"
 align = 1
@@ -282,7 +282,7 @@ margin_left = 16.0
 margin_top = 40.0
 margin_right = 440.0
 margin_bottom = 136.0
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 4 )
 text = "1) Ruhunuzu bize satarak TAM 100 ALTIN kazanabilirsiniz!
 
 2) 81 TL'lik nakit çekerek, Villager karakterinin özel versiyonuna sahip olabilirsiniz!"
@@ -303,7 +303,7 @@ __meta__ = {
 margin_left = 24.0
 margin_right = 440.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Shop & Collection"
 align = 1
@@ -329,7 +329,7 @@ margin_left = 93.0
 margin_top = 77.0
 margin_right = 509.0
 margin_bottom = 127.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Buraya reklam çakıyorum"
 align = 1
@@ -355,7 +355,7 @@ margin_left = 93.0
 margin_top = 77.0
 margin_right = 525.0
 margin_bottom = 127.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Buraya da reklam çakıyorum"
 align = 1
@@ -380,7 +380,7 @@ margin_left = 88.0
 margin_top = -8.0
 margin_right = 504.0
 margin_bottom = 56.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Select Game Mode"
 align = 1
@@ -405,19 +405,19 @@ margin_left = 176.0
 margin_right = 272.0
 margin_bottom = 176.0
 rect_min_size = Vector2( 96, 176 )
-custom_styles/hover = SubResource( 23 )
-custom_styles/pressed = SubResource( 18 )
-custom_styles/normal = SubResource( 19 )
-custom_fonts/font = SubResource( 17 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0, 0, 1, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 1, 1 )
 toggle_mode = true
 pressed = true
-group = SubResource( 22 )
+group = SubResource( 9 )
 text = "1v1"
 flat = false
-script = SubResource( 20 )
+script = SubResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -427,19 +427,19 @@ margin_left = 288.0
 margin_right = 384.0
 margin_bottom = 176.0
 rect_min_size = Vector2( 96, 176 )
-custom_styles/hover = SubResource( 23 )
-custom_styles/pressed = SubResource( 18 )
-custom_styles/normal = SubResource( 19 )
-custom_fonts/font = SubResource( 17 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 1, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 1, 1 )
 toggle_mode = true
-group = SubResource( 22 )
+group = SubResource( 9 )
 text = "2v2"
 flat = false
-script = SubResource( 21 )
+script = SubResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -459,7 +459,7 @@ __meta__ = {
 margin_left = 88.0
 margin_right = 504.0
 margin_bottom = 64.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Your Party"
 align = 1
@@ -473,7 +473,7 @@ margin_left = 88.0
 margin_top = 72.0
 margin_right = 504.0
 margin_bottom = 136.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Empty"
 align = 1
@@ -499,7 +499,7 @@ margin_left = 17.0
 margin_top = -1.0
 margin_right = 589.0
 margin_bottom = 78.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 12 )
 text = "PODCHEST!"
 align = 1
 valign = 1
@@ -523,13 +523,13 @@ margin_left = 139.0
 margin_top = 120.0
 margin_right = 459.0
 margin_bottom = 208.0
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
 text = "Play"
 flat = true
-script = SubResource( 16 )
+script = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -539,13 +539,13 @@ margin_left = 155.0
 margin_top = 200.0
 margin_right = 307.0
 margin_bottom = 288.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 16 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.568627, 0, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0.913725, 1 )
 text = "Register"
 flat = true
-script = SubResource( 5 )
+script = SubResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -555,13 +555,13 @@ margin_left = 307.0
 margin_top = 200.0
 margin_right = 459.0
 margin_bottom = 288.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 16 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
 text = "Login"
 flat = true
-script = SubResource( 6 )
+script = SubResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -572,13 +572,13 @@ margin_left = 139.0
 margin_top = 200.0
 margin_right = 443.0
 margin_bottom = 288.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 16 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
 text = "Logout"
 flat = true
-script = SubResource( 7 )
+script = SubResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -588,7 +588,7 @@ margin_left = 1728.0
 margin_top = 840.0
 margin_right = 1920.0
 margin_bottom = 939.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 20 )
 text = "Ludermis
 Studios"
 align = 1
@@ -601,7 +601,7 @@ __meta__ = {
 margin_top = 840.0
 margin_right = 192.0
 margin_bottom = 936.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 20 )
 text = "Rooms : 0"
 align = 1
 valign = 1
@@ -613,7 +613,7 @@ __meta__ = {
 margin_top = 744.0
 margin_right = 192.0
 margin_bottom = 840.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 20 )
 text = "Online : 0"
 align = 1
 valign = 1
@@ -624,7 +624,7 @@ __meta__ = {
 [node name="LabelBuild" type="Label" parent="."]
 margin_right = 192.0
 margin_bottom = 96.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 20 )
 text = "Build 2"
 align = 1
 valign = 1
