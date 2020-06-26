@@ -17,6 +17,8 @@ var objects = {}
 var roomMaster = -1
 var ping = 9999
 
+var selectedGamemode = "quick1v1"
+
 func clearVars():
 	roomMaster = -1
 	objects = {}

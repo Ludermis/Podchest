@@ -12,9 +12,9 @@ func _ready():
 func logged():
 	Vars.loggedIn = true
 	$AccountPanel/AccountName.text = Vars.username
-	$AccountPanel/LoginButton.visible = false
-	$AccountPanel/RegisterButton.visible = false
-	$AccountPanel/LogoutButton.visible = true
+	$PlayPanel/LoginButton.visible = false
+	$PlayPanel/RegisterButton.visible = false
+	$PlayPanel/LogoutButton.visible = true
 
 remote func loginCompleted (info):
 	logged()
@@ -24,6 +24,9 @@ remote func loginFailed ():
 
 func readyConnected ():
 	rpc_id(1,"demandOnline",Client.selfPeerID)
+	if Vars.selectedGamemode == "quick2v2":
+		$"GamemodePanel/HBoxContainer/1v1Toggle".pressed = false
+		$"GamemodePanel/HBoxContainer/2v2Toggle".pressed = true
 	if !Vars.loggedIn:
 		var save = File.new()
 		if save.file_exists("user://account.txt"):

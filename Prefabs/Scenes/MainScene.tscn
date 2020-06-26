@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Sprites/UI/frame.png" type="Texture" id=1]
 [ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=2]
@@ -6,16 +6,141 @@
 [ext_resource path="res://SavedResources/UI/PurplePanel.tres" type="StyleBox" id=4]
 [ext_resource path="res://Scripts/Scenes/MainScene.gd" type="Script" id=5]
 [ext_resource path="res://Sprites/UI/Backgrounds/background1.jpg" type="Texture" id=6]
+[ext_resource path="res://Sprites/UI/gear.png" type="Texture" id=7]
+[ext_resource path="res://Fonts/arial.ttf" type="DynamicFontData" id=8]
 
-[sub_resource type="DynamicFontData" id=1]
-font_path = "res://Fonts/orange juice 2.0.ttf"
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.419608, 0.305882, 0.564706, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+corner_detail = 16
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="Theme" id=2]
+Label/colors/font_color = Color( 1, 1, 1, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/fonts/font = null
+Label/styles/normal = null
+Panel/styles/panel = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
 size = 36
 use_filter = true
-font_data = SubResource( 1 )
+font_data = ExtResource( 2 )
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="DynamicFont" id=14]
+use_filter = true
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 8
+border_width_top = 4
+border_width_right = 8
+border_width_bottom = 4
+border_color = Color( 0.0941176, 0.678431, 0.6, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.862745, 1, 0.796078, 1 )
+border_width_left = 8
+border_width_top = 4
+border_width_right = 8
+border_width_bottom = 4
+border_color = Color( 0.188235, 0.678431, 0.0941176, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0, 1, 0.929412, 0.345098 )
+border_color = Color( 0.678431, 0.0941176, 0.0941176, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="DynamicFont" id=17]
+size = 50
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="ButtonGroup" id=22]
+
+[sub_resource type="GDScript" id=20]
+script/source = "extends ToolButton
+
+
+func _ready():
+	pass
+
+
+func _on_1v1Toggle_toggled(button_pressed):
+	if button_pressed:
+		if Vars.selectedGamemode == \"quick2v2\":
+			Vars.selectedGamemode = \"quick1v1\"
+"
+
+[sub_resource type="GDScript" id=21]
+script/source = "extends ToolButton
+
+
+func _ready():
+	pass
+
+
+func _on_2v2Toggle_toggled(button_pressed):
+	if button_pressed:
+		if Vars.selectedGamemode == \"quick1v1\":
+			Vars.selectedGamemode = \"quick2v2\"
+"
+
+[sub_resource type="DynamicFont" id=9]
+size = 66
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Fonts/orange juice 2.0.ttf"
+
+[sub_resource type="DynamicFont" id=15]
+size = 80
+use_filter = true
+font_data = SubResource( 3 )
+
+[sub_resource type="GDScript" id=16]
+script/source = "extends Button
+
+
+func _ready():
+	pass
+
+
+func _on_PlayButton_pressed():
+	get_tree().change_scene_to(preload(\"res://Prefabs/Scenes/WaitingScene.tscn\"))
+	get_tree().root.get_node(\"Main\").rpc_id(1,\"playerJoined\",Client.selfPeerID,Vars.selectedGamemode)
+"
+
+[sub_resource type="DynamicFont" id=4]
+size = 36
+use_filter = true
+font_data = SubResource( 3 )
+
+[sub_resource type="GDScript" id=5]
 script/source = "extends Button
 
 
@@ -27,7 +152,7 @@ func _on_RegisterButton_pressed():
 	get_tree().change_scene(\"res://Prefabs/Scenes/RegisterScene.tscn\")
 "
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=6]
 script/source = "extends Button
 
 
@@ -39,7 +164,7 @@ func _on_LoginButton_pressed():
 	get_tree().change_scene(\"res://Prefabs/Scenes/LoginScene.tscn\")
 "
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=7]
 script/source = "extends Button
 
 
@@ -49,7 +174,7 @@ func _ready():
 
 func _on_LogoutButton_pressed():
 	get_tree().root.get_node(\"Main\").rpc_id(1,\"logoutAccount\",Client.selfPeerID)
-	$\"../AccountName\".text = \"Guest\"
+	get_tree().root.get_node(\"Main/AccountPanel/AccountName\").text = \"Guest\"
 	$\"../LoginButton\".visible = true
 	$\"../RegisterButton\".visible = true
 	self.visible = false
@@ -59,44 +184,7 @@ func _on_LogoutButton_pressed():
 	save.store_string(JSON.print({\"loggedin\": false, \"username\": Vars.username, \"info\": Vars.accountInfo}, \" \"))
 "
 
-[sub_resource type="DynamicFont" id=6]
-size = 36
-use_filter = true
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=7]
-size = 84
-font_data = SubResource( 1 )
-
-[sub_resource type="GDScript" id=8]
-script/source = "extends Button
-
-
-func _ready():
-	pass
-
-func _on_Quick1v1Button_pressed():
-	get_tree().change_scene_to(preload(\"res://Prefabs/Scenes/WaitingScene.tscn\"))
-	get_tree().root.get_node(\"Main\").rpc_id(1,\"playerJoined\",Client.selfPeerID,\"quick1v1\")
-"
-
-[sub_resource type="GDScript" id=9]
-script/source = "extends Button
-
-
-func _ready():
-	pass
-
-func _on_Quick2v2Button_pressed():
-	get_tree().change_scene_to(preload(\"res://Prefabs/Scenes/WaitingScene.tscn\"))
-	get_tree().root.get_node(\"Main\").rpc_id(1,\"playerJoined\",Client.selfPeerID,\"quick2v2\")
-"
-
-[sub_resource type="DynamicFont" id=10]
-size = 112
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=13]
 size = 48
 font_data = ExtResource( 2 )
 
@@ -112,24 +200,26 @@ margin_bottom = 936.0
 texture = ExtResource( 6 )
 expand = true
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="AccountPanel" type="Panel" parent="."]
-margin_left = 64.0
-margin_top = 128.0
-margin_right = 384.0
-margin_bottom = 384.0
+margin_left = 192.0
+margin_top = 131.0
+margin_right = 635.0
+margin_bottom = 387.0
+theme = SubResource( 2 )
 custom_styles/panel = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Picture" type="TextureRect" parent="AccountPanel"]
-margin_left = 48.0
-margin_top = 24.0
-margin_right = 112.0
-margin_bottom = 88.0
+margin_left = 40.0923
+margin_top = 21.5411
+margin_right = 104.092
+margin_bottom = 85.5411
 texture = ExtResource( 3 )
 expand = true
 __meta__ = {
@@ -137,140 +227,368 @@ __meta__ = {
 }
 
 [node name="PictureFrame" type="TextureRect" parent="AccountPanel"]
-margin_left = 40.0
-margin_top = 16.0
-margin_right = 120.0
-margin_bottom = 96.0
+margin_left = 32.0923
+margin_top = 13.5411
+margin_right = 112.092
+margin_bottom = 93.5411
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RegisterButton" type="Button" parent="AccountPanel"]
+[node name="AccountName" type="Label" parent="AccountPanel"]
+margin_left = 22.0
+margin_top = 101.0
+margin_right = 320.0
+margin_bottom = 151.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Guest"
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OffersPanel" type="Panel" parent="."]
+margin_left = 195.0
+margin_top = 395.0
+margin_right = 638.0
+margin_bottom = 539.0
+theme = SubResource( 2 )
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="OffersPanel"]
+margin_left = 24.0
+margin_right = 440.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Offers"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="OffersPanel"]
+modulate = Color( 0, 0, 0, 1 )
 margin_left = 16.0
-margin_top = 168.0
-margin_right = 168.0
-margin_bottom = 256.0
-custom_fonts/font = SubResource( 2 )
+margin_top = 40.0
+margin_right = 440.0
+margin_bottom = 136.0
+custom_fonts/font = SubResource( 14 )
+text = "1) Ruhunuzu bize satarak TAM 100 ALTIN kazanabilirsiniz!
+
+2) 81 TL'lik nakit çekerek, Villager karakterinin özel versiyonuna sahip olabilirsiniz!"
+autowrap = true
+
+[node name="MiscPanel" type="Panel" parent="."]
+margin_left = 195.0
+margin_top = 547.0
+margin_right = 638.0
+margin_bottom = 771.0
+theme = SubResource( 2 )
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="MiscPanel"]
+margin_left = 24.0
+margin_right = 440.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Shop & Collection"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AdPanel1" type="Panel" parent="."]
+margin_left = 643.0
+margin_top = 547.0
+margin_right = 1227.0
+margin_bottom = 771.0
+theme = SubResource( 2 )
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="AdPanel1"]
+margin_left = 93.0
+margin_top = 77.0
+margin_right = 509.0
+margin_bottom = 127.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Buraya reklam çakıyorum"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AdPanel2" type="Panel" parent="."]
+margin_left = 1235.0
+margin_top = 547.0
+margin_right = 1819.0
+margin_bottom = 771.0
+theme = SubResource( 2 )
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="AdPanel2"]
+margin_left = 93.0
+margin_top = 77.0
+margin_right = 525.0
+margin_bottom = 127.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Buraya da reklam çakıyorum"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GamemodePanel" type="Panel" parent="."]
+margin_left = 1232.0
+margin_top = 128.0
+margin_right = 1816.0
+margin_bottom = 352.0
+theme = SubResource( 2 )
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="GamemodePanel"]
+margin_left = 88.0
+margin_top = -8.0
+margin_right = 504.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Select Game Mode"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GamemodePanel"]
+margin_left = 24.0
+margin_top = 40.0
+margin_right = 584.0
+margin_bottom = 216.0
+custom_constants/separation = 16
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1v1Toggle" type="ToolButton" parent="GamemodePanel/HBoxContainer"]
+margin_left = 176.0
+margin_right = 272.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 96, 176 )
+custom_styles/hover = SubResource( 23 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/normal = SubResource( 19 )
+custom_fonts/font = SubResource( 17 )
+custom_colors/font_color = Color( 0, 0, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 1, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 1, 1 )
+toggle_mode = true
+pressed = true
+group = SubResource( 22 )
+text = "1v1"
+flat = false
+script = SubResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2v2Toggle" type="ToolButton" parent="GamemodePanel/HBoxContainer"]
+margin_left = 288.0
+margin_right = 384.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 96, 176 )
+custom_styles/hover = SubResource( 23 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/normal = SubResource( 19 )
+custom_fonts/font = SubResource( 17 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 1, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 1, 1 )
+toggle_mode = true
+group = SubResource( 22 )
+text = "2v2"
+flat = false
+script = SubResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PartyPanel" type="Panel" parent="."]
+margin_left = 1232.0
+margin_top = 360.0
+margin_right = 1816.0
+margin_bottom = 536.0
+theme = SubResource( 2 )
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="PartyPanel"]
+margin_left = 88.0
+margin_right = 504.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Your Party"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Status" type="Label" parent="PartyPanel"]
+margin_left = 88.0
+margin_top = 72.0
+margin_right = 504.0
+margin_bottom = 136.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Empty"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayPanel" type="Panel" parent="."]
+margin_left = 637.0
+margin_top = 128.0
+margin_right = 1226.0
+margin_bottom = 539.0
+theme = SubResource( 2 )
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="PlayPanel"]
+modulate = Color( 0.203922, 0.203922, 0.203922, 1 )
+margin_left = 17.0
+margin_top = -1.0
+margin_right = 589.0
+margin_bottom = 78.0
+custom_fonts/font = SubResource( 9 )
+text = "PODCHEST!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gear" type="TextureRect" parent="PlayPanel"]
+margin_left = 22.0
+margin_top = 3.0
+margin_right = 78.0
+margin_bottom = 59.0
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="PlayPanel"]
+margin_left = 139.0
+margin_top = 120.0
+margin_right = 459.0
+margin_bottom = 208.0
+custom_fonts/font = SubResource( 15 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
+text = "Play"
+flat = true
+script = SubResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RegisterButton" type="Button" parent="PlayPanel"]
+margin_left = 155.0
+margin_top = 200.0
+margin_right = 307.0
+margin_bottom = 288.0
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.568627, 0, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0.913725, 1 )
 text = "Register"
-flat = true
-script = SubResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LoginButton" type="Button" parent="AccountPanel"]
-margin_left = 168.0
-margin_top = 168.0
-margin_right = 320.0
-margin_bottom = 256.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
-text = "Login"
-flat = true
-script = SubResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LogoutButton" type="Button" parent="AccountPanel"]
-visible = false
-margin_left = 16.0
-margin_top = 168.0
-margin_right = 320.0
-margin_bottom = 256.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
-text = "Logout"
 flat = true
 script = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AccountName" type="Label" parent="AccountPanel"]
-margin_left = 120.0
-margin_top = 16.0
-margin_right = 320.0
-margin_bottom = 96.0
-custom_fonts/font = SubResource( 6 )
+[node name="LoginButton" type="Button" parent="PlayPanel"]
+margin_left = 307.0
+margin_top = 200.0
+margin_right = 459.0
+margin_bottom = 288.0
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Guest"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Quick1v1Button" type="Button" parent="."]
-margin_left = 384.0
-margin_top = 256.0
-margin_right = 896.0
-margin_bottom = 384.0
-custom_fonts/font = SubResource( 7 )
-text = "Quick 1v1"
+custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
+text = "Login"
 flat = true
-script = SubResource( 8 )
+script = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quick2v2Button" type="Button" parent="."]
-margin_left = 384.0
-margin_top = 384.0
-margin_right = 896.0
-margin_bottom = 512.0
-custom_fonts/font = SubResource( 7 )
-text = "Quick 2v2"
+[node name="LogoutButton" type="Button" parent="PlayPanel"]
+visible = false
+margin_left = 139.0
+margin_top = 200.0
+margin_right = 443.0
+margin_bottom = 288.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
+text = "Logout"
 flat = true
-script = SubResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Player" type="Node2D" parent="."]
-
-[node name="Title" type="Label" parent="."]
-margin_right = 1280.0
-margin_bottom = 128.0
-custom_fonts/font = SubResource( 10 )
-text = "PODCHEST!"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="LabelCredits" type="Label" parent="."]
-margin_left = 1088.0
-margin_top = 568.0
-margin_right = 1280.0
-margin_bottom = 718.0
-custom_fonts/font = SubResource( 11 )
-text = "Lynext
-Regnatif
-IckuT"
-align = 1
-valign = 1
+script = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LabelLudermis" type="Label" parent="."]
-margin_left = 1088.0
-margin_top = 416.0
-margin_right = 1280.0
-margin_bottom = 515.0
-custom_fonts/font = SubResource( 11 )
+margin_left = 1728.0
+margin_top = 840.0
+margin_right = 1920.0
+margin_bottom = 939.0
+custom_fonts/font = SubResource( 13 )
 text = "Ludermis
 Studios"
 align = 1
@@ -280,10 +598,10 @@ __meta__ = {
 }
 
 [node name="LabelRooms" type="Label" parent="."]
-margin_top = 624.0
+margin_top = 840.0
 margin_right = 192.0
-margin_bottom = 720.0
-custom_fonts/font = SubResource( 11 )
+margin_bottom = 936.0
+custom_fonts/font = SubResource( 13 )
 text = "Rooms : 0"
 align = 1
 valign = 1
@@ -292,10 +610,10 @@ __meta__ = {
 }
 
 [node name="LabelOnline" type="Label" parent="."]
-margin_top = 520.0
+margin_top = 744.0
 margin_right = 192.0
-margin_bottom = 616.0
-custom_fonts/font = SubResource( 11 )
+margin_bottom = 840.0
+custom_fonts/font = SubResource( 13 )
 text = "Online : 0"
 align = 1
 valign = 1
@@ -306,7 +624,7 @@ __meta__ = {
 [node name="LabelBuild" type="Label" parent="."]
 margin_right = 192.0
 margin_bottom = 96.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
 text = "Build 2"
 align = 1
 valign = 1
@@ -316,9 +634,10 @@ __meta__ = {
 
 [node name="DemandOnlineTimer" type="Timer" parent="."]
 autostart = true
-[connection signal="pressed" from="AccountPanel/RegisterButton" to="AccountPanel/RegisterButton" method="_on_RegisterButton_pressed"]
-[connection signal="pressed" from="AccountPanel/LoginButton" to="AccountPanel/LoginButton" method="_on_LoginButton_pressed"]
-[connection signal="pressed" from="AccountPanel/LogoutButton" to="AccountPanel/LogoutButton" method="_on_LogoutButton_pressed"]
-[connection signal="pressed" from="Quick1v1Button" to="Quick1v1Button" method="_on_Quick1v1Button_pressed"]
-[connection signal="pressed" from="Quick2v2Button" to="Quick2v2Button" method="_on_Quick2v2Button_pressed"]
+[connection signal="toggled" from="GamemodePanel/HBoxContainer/1v1Toggle" to="GamemodePanel/HBoxContainer/1v1Toggle" method="_on_1v1Toggle_toggled"]
+[connection signal="toggled" from="GamemodePanel/HBoxContainer/2v2Toggle" to="GamemodePanel/HBoxContainer/2v2Toggle" method="_on_2v2Toggle_toggled"]
+[connection signal="pressed" from="PlayPanel/PlayButton" to="PlayPanel/PlayButton" method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="PlayPanel/RegisterButton" to="PlayPanel/RegisterButton" method="_on_RegisterButton_pressed"]
+[connection signal="pressed" from="PlayPanel/LoginButton" to="PlayPanel/LoginButton" method="_on_LoginButton_pressed"]
+[connection signal="pressed" from="PlayPanel/LogoutButton" to="PlayPanel/LogoutButton" method="_on_LogoutButton_pressed"]
 [connection signal="timeout" from="DemandOnlineTimer" to="." method="_on_DemandStatsTimer_timeout"]
