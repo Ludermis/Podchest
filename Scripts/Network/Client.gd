@@ -3,7 +3,7 @@ extends Node
 var client
 var url
 var selfPeerID = 0
-var maxTries = 5
+var maxTries = 10
 var tries = 0
 
 signal connection_ok

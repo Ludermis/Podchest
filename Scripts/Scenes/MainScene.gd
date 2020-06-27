@@ -12,6 +12,10 @@ func _ready():
 
 func logged():
 	Vars.loggedIn = true
+	$AccountPanel/CoinLabel.text = str(Vars.accountInfo["gold"])
+	$AccountPanel/APLabel.text = str(Vars.accountInfo["AP"])
+	$MiscPanel/CollectionButton.disabled = false
+	$MiscPanel/CollectionButton.modulate = Color.white
 	$AccountPanel/AccountName.text = Vars.username
 	$PlayPanel/LoginButton.visible = false
 	$PlayPanel/RegisterButton.visible = false
@@ -22,6 +26,7 @@ remote func wrongBuild (newBuild):
 	get_tree().change_scene_to(preload("res://Prefabs/Scenes/WrongBuildScene.tscn"))
 
 remote func loginCompleted (info):
+	Vars.accountInfo = info
 	logged()
 
 remote func loginFailed ():
@@ -29,6 +34,8 @@ remote func loginFailed ():
 
 func readyConnected ():
 	rpc_id(1,"demandOnline",Client.selfPeerID)
+	$MiscPanel/CollectionButton.modulate = Color.black
+	
 	if Vars.selectedGamemode == "quick2v2":
 		$"GamemodePanel/HBoxContainer/1v1Toggle".pressed = false
 		$"GamemodePanel/HBoxContainer/2v2Toggle".pressed = true

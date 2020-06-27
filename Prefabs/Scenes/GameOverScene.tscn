@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Sprites/UI/Backgrounds/background1.jpg" type="Texture" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -52,6 +53,17 @@ func _on_MainMenuButton_pressed():
 
 [node name="Main" type="Node2D"]
 script = SubResource( 1 )
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color( 0.6, 0.6, 0.6, 1 )
+margin_right = 1920.0
+margin_bottom = 936.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
 
 [node name="Title" type="Label" parent="."]
 margin_right = 1920.0
