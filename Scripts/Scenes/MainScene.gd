@@ -45,7 +45,9 @@ func readyConnected ():
 				get_tree().root.get_node("Main").rpc_id(1,"loginAccount",Client.selfPeerID,Vars.username,Vars.accountInfo["password"])
 	else:
 		logged()
-	get_tree().root.get_node("Main").rpc_id(1,"confirmBuild",Client.selfPeerID,Vars.build)
+	if !Vars.buildConfirmed:
+		get_tree().root.get_node("Main").rpc_id(1,"confirmBuild",Client.selfPeerID,Vars.build)
+		Vars.buildConfirmed = true
 func _process (delta):
 	pass
 

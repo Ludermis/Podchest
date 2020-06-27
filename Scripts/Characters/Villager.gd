@@ -13,12 +13,13 @@ var animation = "" setget setAnimation
 var animationPlaying = false setget setAnimationPlaying
 var scytheActive = false setget setScytheActive
 var scytheRotation = 0 setget setScytheRotation
+var playerName = "Guest" setget setPlayerName
 
 var skills = 	{1:
 					{
 						"effect": null, "casting": false, "lastCasted": -1000,
-						"indicating": false, "maxRange": 1000, "area": 5, 
-						"castTime": 1, "castStarted": -1000, "cooldown": 5, "castLocation": Vector2.ZERO
+						"indicating": false, "maxRange": 1000, "area": 9, 
+						"castTime": 0.5, "castStarted": -1000, "cooldown": 5, "castLocation": Vector2.ZERO
 					},
 				2:
 					{
@@ -32,6 +33,10 @@ var skills = 	{1:
 						"castTime": 1, "castStarted": -1000, "cooldown": 25
 					}
 				}
+
+func setPlayerName (pName):
+	playerName = pName
+	$NameLabel.text = playerName
 
 func setAnimation (anim):
 	animation = anim

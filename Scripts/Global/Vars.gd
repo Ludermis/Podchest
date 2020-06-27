@@ -17,6 +17,7 @@ var objects = {}
 var roomMaster = -1
 var ping = 9999
 var build = "3"
+var buildConfirmed = false
 var newBuildIfMineWrong
 
 var mapSizeX = 50
