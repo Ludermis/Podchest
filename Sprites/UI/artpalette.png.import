@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shuriken.png-8902c030762b23309f65cdfbb18c831e.stex"
+path="res://.import/artpalette.png-3f426b4d806f8549a6a5ab7a98c9e5af.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/shuriken.png"
-dest_files=[ "res://.import/shuriken.png-8902c030762b23309f65cdfbb18c831e.stex" ]
+source_file="res://Sprites/UI/artpalette.png"
+dest_files=[ "res://.import/artpalette.png-3f426b4d806f8549a6a5ab7a98c9e5af.stex" ]
 
 [params]
 

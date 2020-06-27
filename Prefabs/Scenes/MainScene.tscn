@@ -9,7 +9,7 @@
 [ext_resource path="res://Sprites/UI/gear.png" type="Texture" id=7]
 [ext_resource path="res://Fonts/arial.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://Sprites/UI/goldcoin.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/UI/shuriken.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/UI/artpalette.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/UI/buffrunning.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/UI/book.png" type="Texture" id=12]
 
@@ -83,13 +83,13 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="AtlasTexture" id=914]
+[sub_resource type="AtlasTexture" id=955]
 atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 34, 34 )
+region = Rect2( 0, 0, 85, 70 )
 
 [sub_resource type="SpriteFrames" id=915]
 animations = [ {
-"frames": [ SubResource( 914 ) ],
+"frames": [ SubResource( 955 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -425,12 +425,12 @@ __meta__ = {
 position = Vector2( 411.598, 34.8854 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 913 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="ShurikenSprite" type="AnimatedSprite" parent="AccountPanel"]
-position = Vector2( 409.764, 107.264 )
-scale = Vector2( 1.5, 1.5 )
+position = Vector2( 415.531, 112.682 )
+scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 915 )
 playing = true
 
