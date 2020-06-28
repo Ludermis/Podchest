@@ -90,7 +90,7 @@ region = Rect2( 0, 0, 85, 70 )
 [sub_resource type="SpriteFrames" id=14]
 animations = [ {
 "frames": [ SubResource( 13 ) ],
-"loop": true,
+"loop": false,
 "name": "default",
 "speed": 5.0
 } ]
@@ -422,14 +422,13 @@ __meta__ = {
 position = Vector2( 411.598, 34.8854 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 12 )
-frame = 6
+frame = 2
 playing = true
 
-[node name="ShurikenSprite" type="AnimatedSprite" parent="AccountPanel"]
+[node name="APSprite" type="AnimatedSprite" parent="AccountPanel"]
 position = Vector2( 415.531, 112.682 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 14 )
-playing = true
 
 [node name="CoinLabel" type="Label" parent="AccountPanel"]
 margin_left = 160.0
