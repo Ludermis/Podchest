@@ -1,0 +1,129 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/Scenes/CharacterSelectionScene.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/UI/Backgrounds/background1.jpg" type="Texture" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 43
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 115
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Fonts/orange juice 2.0.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 101
+use_filter = true
+font_data = SubResource( 3 )
+
+[sub_resource type="InputEventKey" id=5]
+pressed = true
+scancode = 16777221
+
+[sub_resource type="ShortCut" id=6]
+shortcut = SubResource( 5 )
+
+[sub_resource type="GDScript" id=8]
+script/source = "extends Button
+
+
+func _ready():
+	pass
+
+func _on_SelectButton_pressed():
+	get_tree().root.get_node(\"Main\").rpc_id(1,\"selectCharacter\",Client.selfPeerID,\"res://Prefabs/Characters/\" + get_tree().root.get_node(\"Main\").buttonGroup.get_pressed_button().name + \".tscn\")
+	disabled = true
+"
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0, 0, 0.666667 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color( 0.6, 0.6, 0.6, 1 )
+margin_right = 1920.0
+margin_bottom = 936.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="Label" parent="."]
+margin_top = 128.0
+margin_right = 1920.0
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 1 )
+text = "Time"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_left = 520.0
+margin_right = 1361.0
+margin_bottom = 116.0
+custom_fonts/font = SubResource( 2 )
+text = "Select Character"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SelectButton" type="Button" parent="."]
+margin_left = 768.0
+margin_top = 704.0
+margin_right = 1152.0
+margin_bottom = 832.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_disabled = Color( 0.364706, 0.364706, 0.364706, 1 )
+custom_colors/font_color = Color( 0, 1, 0.976471, 1 )
+shortcut = SubResource( 6 )
+text = "Select"
+flat = true
+script = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 1664.0
+margin_bottom = 648.0
+custom_styles/panel = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+margin_right = 1408.0
+margin_bottom = 128.0
+custom_constants/separation = 128
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FPSTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+[connection signal="pressed" from="SelectButton" to="SelectButton" method="_on_SelectButton_pressed"]
+[connection signal="timeout" from="FPSTimer" to="." method="_on_FPSTimer_timeout"]
