@@ -22,7 +22,7 @@ region = Rect2( 96, 0, 32, 32 )
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
-"loop": true,
+"loop": false,
 "name": "default",
 "speed": 5.0
 } ]
@@ -30,7 +30,7 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=6]
 
 [node name="BearTrap" type="Node2D"]
-scale = Vector2( 3, 3 )
+scale = Vector2( 4, 4 )
 z_index = -1
 script = ExtResource( 2 )
 
