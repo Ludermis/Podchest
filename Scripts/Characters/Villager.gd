@@ -14,6 +14,8 @@ var animationPlaying = false setget setAnimationPlaying
 var scytheActive = false setget setScytheActive
 var scytheRotation = 0 setget setScytheRotation
 var playerName = "Guest" setget setPlayerName
+var skin = "" setget setSkin
+var characterName = "Villager"
 
 var skills = 	{1:
 					{
@@ -33,6 +35,13 @@ var skills = 	{1:
 						"castTime": 1, "castStarted": -1000, "cooldown": 25
 					}
 				}
+
+func setSkin (newSkin):
+	skin = newSkin
+	if skin != "":
+		$Sprite.frames = load("res://SavedResources/SpriteFrames/" + skin + ".tres")
+	else:
+		$Sprite.frames = load("res://SavedResources/SpriteFrames/" + characterName + ".tres")
 
 func setPlayerName (pName):
 	playerName = pName
