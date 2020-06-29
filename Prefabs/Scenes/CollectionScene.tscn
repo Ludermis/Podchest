@@ -89,6 +89,27 @@ margin_top = 64.0
 margin_right = -4.0
 margin_bottom = -4.0
 
+[node name="LeftBox" type="VBoxContainer" parent="TabContainer/Skins"]
+margin_left = -4.0
+margin_top = -8.0
+margin_right = 316.0
+margin_bottom = 874.0
+rect_min_size = Vector2( 320, 882 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="HBoxContainer" parent="TabContainer/Skins"]
+margin_left = 316.0
+margin_top = -8.0
+margin_right = 1916.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 1600, 128 )
+custom_constants/separation = 128
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CancelButton" type="Button" parent="."]
 margin_top = 856.0
 margin_right = 285.0

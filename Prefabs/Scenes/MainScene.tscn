@@ -367,7 +367,6 @@ margin_bottom = 936.0
 texture = ExtResource( 6 )
 expand = true
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -422,7 +421,7 @@ __meta__ = {
 position = Vector2( 411.598, 34.8854 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 12 )
-frame = 7
+frame = 3
 playing = true
 
 [node name="APSprite" type="AnimatedSprite" parent="AccountPanel"]

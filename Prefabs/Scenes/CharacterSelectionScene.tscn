@@ -33,7 +33,7 @@ scancode = 16777221
 [sub_resource type="ShortCut" id=6]
 shortcut = SubResource( 5 )
 
-[sub_resource type="GDScript" id=8]
+[sub_resource type="GDScript" id=7]
 script/source = "extends Button
 
 
@@ -45,7 +45,7 @@ func _on_SelectButton_pressed():
 	disabled = true
 "
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0, 0, 0, 0.666667 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
@@ -99,7 +99,7 @@ custom_colors/font_color = Color( 0, 1, 0.976471, 1 )
 shortcut = SubResource( 6 )
 text = "Select"
 flat = true
-script = SubResource( 8 )
+script = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -109,7 +109,7 @@ margin_left = 256.0
 margin_top = 192.0
 margin_right = 1664.0
 margin_bottom = 648.0
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

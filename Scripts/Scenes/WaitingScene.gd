@@ -14,6 +14,8 @@ remote func selectionStarted ():
 remote func playerCountUpdated (count, mx):
 	$Players.text = str(count) + " / " + str(mx)
 
+remote func gameStarted ():
+	get_tree().change_scene("res://Prefabs/Scenes/GameScene.tscn")
 
 func _on_CancelButton_pressed():
 	rpc_id(1,"leaveRoom",Client.selfPeerID)
