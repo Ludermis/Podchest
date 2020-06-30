@@ -23,6 +23,7 @@ var newBuildIfMineWrong
 var mapSizeX = 50
 var mapSizeY = 50
 var selectedGamemode = "quick1v1"
+var store
 
 func clearVars():
 	roomMaster = -1
