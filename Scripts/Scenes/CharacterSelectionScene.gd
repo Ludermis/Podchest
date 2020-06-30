@@ -1,6 +1,8 @@
 extends Node2D
 
 var buttonGroup
+var characterSelected = false
+var selectedCharacter = ""
 
 func _ready():
 	buttonGroup = ButtonGroup.new()

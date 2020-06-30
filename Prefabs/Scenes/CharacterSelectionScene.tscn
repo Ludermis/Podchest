@@ -36,13 +36,47 @@ shortcut = SubResource( 5 )
 [sub_resource type="GDScript" id=7]
 script/source = "extends Button
 
+var main
 
 func _ready():
-	pass
+	 main = get_tree().root.get_node(\"Main\")
 
 func _on_SelectButton_pressed():
-	get_tree().root.get_node(\"Main\").rpc_id(1,\"selectCharacter\",Client.selfPeerID,\"res://Prefabs/Characters/\" + get_tree().root.get_node(\"Main\").buttonGroup.get_pressed_button().name + \".tscn\", \"\")
-	disabled = true
+	if !main.characterSelected:
+		main.characterSelected = true
+		text = \"Select Skin\"
+		$\"../Title\".text = \"Select Skin\"
+		main.selectedCharacter = main.buttonGroup.get_pressed_button().get_node(\"Label\").text
+		main.rpc_id(1,\"selectCharacter\",Client.selfPeerID,\"res://Prefabs/Characters/\" + main.selectedCharacter + \".tscn\", \"\")
+		prepareSkins()
+	else:
+		var skinName = main.buttonGroup.get_pressed_button().get_node(\"Label\").text
+		if skinName == \"Default\":
+			skinName = \"\"
+		main.rpc_id(1,\"selectCharacter\",Client.selfPeerID,\"res://Prefabs/Characters/\" + main.selectedCharacter + \".tscn\", skinName)
+
+func prepareSkins ():
+	for child in main.get_node(\"Panel/HBoxContainer\").get_children():
+		child.queue_free()
+	
+	main.buttonGroup = ButtonGroup.new()
+	
+	var node = preload(\"res://Prefabs/UI/CharacterButton.tscn\").instance()
+	node.name = main.selectedCharacter 
+	node.pressed = true
+	node.get_node(\"TextureRect\").texture = load(\"res://Sprites/UI/Characters/\" + main.selectedCharacter + \".png\")
+	node.get_node(\"Label\").text = \"Default\"
+	node.group = main.buttonGroup
+	$\"../Panel/HBoxContainer\".add_child(node)
+	
+	if Vars.loggedIn:
+		for i in Vars.accountInfo[\"ownedSkins\"][main.selectedCharacter]:
+			node = preload(\"res://Prefabs/UI/CharacterButton.tscn\").instance()
+			node.name = i
+			node.get_node(\"TextureRect\").texture = load(\"res://Sprites/UI/Characters/\" + i + \".png\")
+			node.get_node(\"Label\").text = i
+			node.group = main.buttonGroup
+			$\"../Panel/HBoxContainer\".add_child(node)
 "
 
 [sub_resource type="StyleBoxFlat" id=8]
@@ -79,25 +113,26 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="."]
-margin_left = 520.0
-margin_right = 1361.0
-margin_bottom = 116.0
+margin_right = 1920.0
+margin_bottom = 128.0
 custom_fonts/font = SubResource( 2 )
 text = "Select Character"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SelectButton" type="Button" parent="."]
-margin_left = 768.0
+margin_left = 256.0
 margin_top = 704.0
-margin_right = 1152.0
+margin_right = 1664.0
 margin_bottom = 832.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_disabled = Color( 0.364706, 0.364706, 0.364706, 1 )
 custom_colors/font_color = Color( 0, 1, 0.976471, 1 )
 shortcut = SubResource( 6 )
-text = "Select"
+text = "Select Character"
 flat = true
 script = SubResource( 7 )
 __meta__ = {
