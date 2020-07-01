@@ -8,9 +8,10 @@ var id
 var team = -1
 var canMove = true
 var arrowEffect : Node2D
+var limbs = {"hand1": {},"hand2": {},"leg1": {},"leg2": {},"head": {},"body": {}}
 
-var animation = "" setget setAnimation
-var animationPlaying = false setget setAnimationPlaying
+var animation = "idle" setget setAnimation
+var direction = "down" setget setDirection
 var scytheActive = false setget setScytheActive
 var scytheRotation = 0 setget setScytheRotation
 var playerName = "Guest" setget setPlayerName
@@ -38,10 +39,9 @@ var skills = 	{1:
 
 func setSkin (newSkin):
 	skin = newSkin
-	if skin != "":
-		$Sprite.frames = load("res://SavedResources/SpriteFrames/" + skin + ".tres")
-	else:
-		$Sprite.frames = load("res://SavedResources/SpriteFrames/" + characterName + ".tres")
+
+func setDirection (dir):
+	direction = dir
 
 func setPlayerName (pName):
 	playerName = pName
@@ -49,13 +49,6 @@ func setPlayerName (pName):
 
 func setAnimation (anim):
 	animation = anim
-	$Sprite.animation = anim
-
-func setAnimationPlaying (playing):
-	animationPlaying = playing
-	$Sprite.playing = playing
-	if playing == false:
-		$Sprite.frame = 5
 
 func setScytheActive (isActive):
 	scytheActive = isActive
@@ -74,12 +67,106 @@ func setScytheRotation (rot):
 func _ready():
 	set_physics_process(true)
 	$DirtTimer.start()
+	
+	limbs["hand1"]["origin"] = $Hand1.position
+	limbs["hand1"]["originRight"] = $Hand1.position - Vector2(7.5,0)
+	limbs["hand1"]["originLeft"] = $Hand1.position - Vector2(4,0)
+	limbs["hand2"]["origin"] = $Hand2.position
+	limbs["leg1"]["origin"] = $Leg1.position
+	limbs["leg1"]["originRight"] = $Leg1.position + Vector2(3,0)
+	limbs["leg1"]["originLeft"] = $Leg1.position + Vector2(3,0)
+	limbs["leg2"]["origin"] = $Leg2.position
+	limbs["body"]["origin"] = $Body.position
+	limbs["head"]["origin"] = $Head.position
 
 func anySkillCasting ():
 	return (skills[1]["casting"] || skills[2]["casting"] || skills[3]["casting"])
 
 func anySkillIndicating ():
 	return (skills[1]["indicating"] || skills[2]["indicating"])
+
+func animationHandler ():
+	if animation == "idle":
+		if direction == "down" || direction == "up":
+			$Hand1.position = limbs["hand1"]["origin"]
+			$Hand2.position = limbs["hand2"]["origin"]
+			$Leg1.position = limbs["leg1"]["origin"]
+			$Leg2.position = limbs["leg2"]["origin"]
+	elif animation == "walk":
+		if direction == "down":
+			$Hand1.position = limbs["hand1"]["origin"]
+			$Hand2.position = limbs["hand2"]["origin"]
+			$Leg1.position = limbs["leg1"]["origin"]
+			$Leg2.position = limbs["leg2"]["origin"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = true
+			
+			$Head.texture.region.position.y = 0
+			$Body.texture.region.position.y = 0
+			
+			$Hand1.z_index = 0
+			$Hand2.z_index = 0
+			
+			$Hand1.position.y = limbs["hand1"]["origin"].y + sin(Vars.time * 10)
+			$Hand2.position.y = limbs["hand2"]["origin"].y - sin(Vars.time * 10)
+			$Leg1.position.y = limbs["leg1"]["origin"].y + sin(Vars.time * 10)
+			$Leg2.position.y = limbs["leg2"]["origin"].y - sin(Vars.time * 10)
+		if direction == "up":
+			$Hand1.position = limbs["hand1"]["origin"]
+			$Hand2.position = limbs["hand2"]["origin"]
+			$Leg1.position = limbs["leg1"]["origin"]
+			$Leg2.position = limbs["leg2"]["origin"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = true
+			
+			$Head.texture.region.position.y = 64
+			$Body.texture.region.position.y = 64
+			
+			$Hand1.z_index = -1
+			$Hand2.z_index = -1
+			
+			$Hand1.position.y = limbs["hand1"]["origin"].y + sin(Vars.time * 10)
+			$Hand2.position.y = limbs["hand2"]["origin"].y - sin(Vars.time * 10)
+			$Leg1.position.y = limbs["leg1"]["origin"].y + sin(Vars.time * 10)
+			$Leg2.position.y = limbs["leg2"]["origin"].y - sin(Vars.time * 10)
+		if direction == "right":
+			$Head.flip_h = false
+			$Body.flip_h = false
+			
+			$Hand1.position = limbs["hand1"]["originRight"]
+			$Leg1.position = limbs["leg1"]["originRight"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = false
+			
+			$Head.texture.region.position.y = 128
+			$Body.texture.region.position.y = 128
+			
+			$Hand1.z_index = 0
+			
+			$Hand1.position.y = limbs["hand1"]["originRight"].y + sin(Vars.time * 10)
+			$Leg1.position.y = limbs["leg1"]["originRight"].y - sin(Vars.time * 10)
+			$Head.position.y = limbs["head"]["origin"].y + sin(Vars.time * 10) / 6.0
+		if direction == "left":
+			$Head.flip_h = true
+			$Body.flip_h = true
+			
+			$Hand1.position = limbs["hand1"]["originLeft"]
+			$Leg1.position = limbs["leg1"]["originLeft"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = false
+			
+			$Head.texture.region.position.y = 128
+			$Body.texture.region.position.y = 128
+			
+			$Hand1.z_index = 0
+			
+			$Hand1.position.y = limbs["hand1"]["originLeft"].y + sin(Vars.time * 10)
+			$Leg1.position.y = limbs["leg1"]["originLeft"].y - sin(Vars.time * 10)
+			$Head.position.y = limbs["head"]["origin"].y + sin(Vars.time * 10) / 6.0
 
 func skillSystem ():
 	# SKILL 1
@@ -125,7 +212,6 @@ func skillSystem ():
 			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").modulate = Color.blue
 			skills[1]["castLocation"] = get_global_mouse_position()
 			canMove = false
-			$Sprite.play("cast")
 			skills[1]["castStarted"] = Vars.time
 			skills[1]["effect"].queue_free()
 			arrowEffect.queue_free()
@@ -136,9 +222,6 @@ func skillSystem ():
 		if skills[1]["castStarted"] + skills[1]["castTime"] <= Vars.time:
 			get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/Seed.tscn",{"whoSummoned": Client.selfPeerID, "position": position, "endPosition": skills[1]["castLocation"], "area": skills[1]["area"]})
 			canMove = true
-			$Sprite.stop()
-			$Sprite.animation = "down"
-			$Sprite.frame = 5
 			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
 			skills[1]["casting"] = false
 			skills[1]["lastCasted"] = Vars.time
@@ -185,7 +268,6 @@ func skillSystem ():
 			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").modulate = Color.blue
 			skills[2]["castLocation"] = get_global_mouse_position()
 			canMove = false
-			$Sprite.play("cast")
 			skills[2]["castStarted"] = Vars.time
 			skills[2]["effect"].queue_free()
 			arrowEffect.queue_free()
@@ -196,9 +278,6 @@ func skillSystem ():
 		if skills[2]["castStarted"] + skills[2]["castTime"] <= Vars.time:
 			get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/BearTrap.tscn",{"whoSummoned": Client.selfPeerID, "position": position, "endPosition": skills[2]["castLocation"]})
 			canMove = true
-			$Sprite.stop()
-			$Sprite.animation = "down"
-			$Sprite.frame = 5
 			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
 			skills[2]["casting"] = false
 			skills[2]["lastCasted"] = Vars.time
@@ -227,7 +306,6 @@ func skillSystem ():
 		skills[3]["casting"] = true
 		get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").modulate = Color.blue
 		canMove = false
-		$Sprite.play("cast")
 		skills[3]["castStarted"] = Vars.time
 	
 	# CASTING UPDATE
@@ -237,9 +315,6 @@ func skillSystem ():
 			setScytheActive(true)
 			get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"scytheActive": true})
 			canMove = true
-			$Sprite.stop()
-			$Sprite.animation = "down"
-			$Sprite.frame = 5
 			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
 			skills[3]["casting"] = false
 			skills[3]["lastCasted"] = Vars.time
@@ -254,28 +329,31 @@ func _physics_process(delta):
 	
 	skillSystem()
 	
+	# Animation
+	
 	if canMove:
-		if Input.is_action_pressed('up'):
-			if !$Sprite.playing || $Sprite.animation != "up":
-				$Sprite.play("up")
-		elif Input.is_action_pressed('down'):
-			if !$Sprite.playing || $Sprite.animation != "down":
-				$Sprite.play("down")
-		elif Input.is_action_pressed('right'):
-			if !$Sprite.playing || $Sprite.animation != "right":
-				$Sprite.play("right")
-		elif Input.is_action_pressed('left'):
-			if !$Sprite.playing || $Sprite.animation != "left":
-				$Sprite.play("left")
+		if Input.is_action_pressed('down') && !Input.is_action_pressed('right') && !Input.is_action_pressed('left'):
+			animation = "walk"
+			direction = "down"
+		elif Input.is_action_pressed('up') && !Input.is_action_pressed('right') && !Input.is_action_pressed('left'):
+			animation = "walk"
+			direction = "up"
+		elif Input.is_action_pressed('right') && !Input.is_action_pressed('up') && !Input.is_action_pressed('down'):
+			animation = "walk"
+			direction = "right"
+		elif Input.is_action_pressed('left') && !Input.is_action_pressed('up') && !Input.is_action_pressed('down'):
+			animation = "walk"
+			direction = "left"
 		else:
-			if $Sprite.playing:
-				$Sprite.stop()
-				$Sprite.frame = 5
+			animation = "idle"
+		
+	animationHandler()
 	
 	if Input.is_action_just_released('wheeldown'):
 		$Camera2D.zoomLevel = min($Camera2D.zoomLevel + 1,4)
 	if Input.is_action_just_released('wheelup'):
 		$Camera2D.zoomLevel = max($Camera2D.zoomLevel - 1,1)
+	
 	if canMove:
 		if Input.is_action_pressed('right'):
 			velocity.x = min(velocity.x + acceleration, maxSpeed)
@@ -293,7 +371,7 @@ func _physics_process(delta):
 		velocity.y = lerp(velocity.y,0,Vars.friction)
 		velocity.x = lerp(velocity.x,0,Vars.friction)
 	velocity = move_and_slide(velocity,Vector2.UP)
-	var sendingDict = {"position": position, "animation": $Sprite.animation, "animationPlaying": $Sprite.playing}
+	var sendingDict = {"position": position, "animation": animation, "direction": direction}
 	if scytheActive:
 		sendingDict["scytheRotation"] = $Schyte.rotation
 	get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,sendingDict)
