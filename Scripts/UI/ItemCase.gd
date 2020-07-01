@@ -8,4 +8,9 @@ func _ready():
 	pass
 
 func _on_ItemCase_pressed():
-	get_tree().root.get_node("Main").rpc_id(1,"buyFromStore",Client.selfPeerID,{"type": itemType, "item": item, "character": character})
+	var node = preload("res://Prefabs/Scenes/ShopConfirmationScene.tscn").instance()
+	node.item = item
+	node.character = character
+	node.itemType = itemType
+	node.texture = $TextureRect.texture
+	get_tree().root.add_child(node)

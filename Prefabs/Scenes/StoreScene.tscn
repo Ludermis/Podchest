@@ -10,69 +10,69 @@
 bg_color = Color( 1, 1, 1, 1 )
 corner_radius_bottom_left = 24
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
 region = Rect2( 128, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
 region = Rect2( 160, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
 region = Rect2( 192, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
 region = Rect2( 224, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=12]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
 } ]
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 85, 70 )
 
-[sub_resource type="SpriteFrames" id=14]
+[sub_resource type="SpriteFrames" id=12]
 animations = [ {
-"frames": [ SubResource( 13 ) ],
+"frames": [ SubResource( 11 ) ],
 "loop": false,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=13]
 size = 32
 use_filter = true
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=15]
+[sub_resource type="DynamicFont" id=14]
 size = 40
 use_filter = true
 font_data = ExtResource( 6 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0, 0, 0, 0.54902 )
 
 [node name="Main" type="Node2D"]
@@ -101,19 +101,19 @@ __meta__ = {
 [node name="CoinSprite" type="AnimatedSprite" parent="MoneyPanel"]
 position = Vector2( 152.555, 30.6574 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 12 )
-frame = 1
+frames = SubResource( 10 )
+frame = 5
 playing = true
 
 [node name="APSprite" type="AnimatedSprite" parent="MoneyPanel"]
 position = Vector2( 302.156, 19.6883 )
 scale = Vector2( 0.6, 0.6 )
-frames = SubResource( 14 )
+frames = SubResource( 12 )
 
 [node name="CoinLabel" type="Label" parent="MoneyPanel"]
 margin_right = 128.0
 margin_bottom = 40.0
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "-1"
 align = 2
@@ -126,7 +126,7 @@ __meta__ = {
 margin_left = 164.0
 margin_right = 272.0
 margin_bottom = 40.0
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "-1"
 align = 2
@@ -138,7 +138,7 @@ __meta__ = {
 [node name="TabContainer" type="TabContainer" parent="."]
 margin_right = 1920.0
 margin_bottom = 936.0
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -166,7 +166,7 @@ margin_left = 380.0
 margin_top = 64.0
 margin_right = 1916.0
 margin_bottom = 872.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -209,7 +209,7 @@ margin_left = 380.0
 margin_top = 64.0
 margin_right = 1916.0
 margin_bottom = 872.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -3,7 +3,15 @@ extends Node2D
 func _ready():
 	rpc_id(1,"demandStore",Client.selfPeerID)
 
+remote func buySuccessful():
+	refreshStore()
+
+remote func accountInfoRefreshed (info):
+	Vars.accountInfo = info
+
 func refreshStore ():
+	for child in $"TabContainer/Skins/Panel/ScrollContainer/VBoxContainer/HBoxContainer".get_children():
+		child.queue_free()
 	$MoneyPanel/CoinLabel.text = str(Vars.accountInfo["gold"])
 	$MoneyPanel/APLabel.text = str(Vars.accountInfo["AP"])
 	for i in Vars.store["skins"]:
@@ -17,6 +25,9 @@ func refreshStore ():
 			node.get_node("Label").text = j
 			node.get_node("TextureRect").texture = load("res://Sprites/UI/Characters/" + j + ".png")
 			node.get_node("MoneyLabel").text = str(Vars.store["skins"][i][j]["price"])
+			if Vars.accountInfo[Vars.store["skins"][i][j]["priceType"]] < Vars.store["skins"][i][j]["price"]:
+				node.disabled = true
+				node.self_modulate = Color.darkred
 			if Vars.store["skins"][i][j]["priceType"] == "AP":
 				node.get_node("CoinSprite").play("AP")
 				node.get_node("CoinSprite").scale = Vector2(0.4,0.4)
