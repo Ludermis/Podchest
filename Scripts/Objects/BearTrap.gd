@@ -20,10 +20,7 @@ func _ready():
 		modulate = Vars.teams[Vars.objects[whoSummoned]["team"]]["color"].blend(Color(1,1,1,0.3))
 func _process(delta):
 	if trappedPlayer == Client.selfPeerID:
-		if Vars.objects[Client.selfPeerID].get_node("Sprite").animation != "rooted":
-			Vars.objects[Client.selfPeerID].get_node("Sprite").play("rooted")
 		Vars.objects[Client.selfPeerID].canMove = false
-		Vars.objects[Client.selfPeerID].animationPlaying = false
 	if Vars.roomMaster == Client.selfPeerID:
 		if !planted:
 			position = position.move_toward(endPosition,delta * speed)

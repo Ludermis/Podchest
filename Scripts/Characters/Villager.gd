@@ -11,12 +11,15 @@ var arrowEffect : Node2D
 var limbs = {"hand1": {},"hand2": {},"leg1": {},"leg2": {},"head": {},"body": {}}
 
 var animation = "idle" setget setAnimation
+var desiredDirection = "down"
 var direction = "down" setget setDirection
 var scytheActive = false setget setScytheActive
 var scytheRotation = 0 setget setScytheRotation
 var playerName = "Guest" setget setPlayerName
 var skin = "" setget setSkin
 var characterName = "Villager"
+var directionsInt = {1: "down", 2: "downright", 3: "right", 4: "upright", 5: "up", 6: "upleft", 7: "left", 8: "downleft"}
+var directionsString = {"down": 1,"downright": 2,"right": 3,"upright": 4,"up": 5,"upleft": 6,"left": 7,"downleft": 8}
 
 var skills = 	{1:
 					{
@@ -69,14 +72,25 @@ func _ready():
 	$DirtTimer.start()
 	
 	limbs["hand1"]["origin"] = $Hand1.position
-	limbs["hand1"]["originRight"] = $Hand1.position - Vector2(7.5,0)
-	limbs["hand1"]["originLeft"] = $Hand1.position - Vector2(4,0)
+	limbs["hand1"]["originRight"] = $Hand1.position + Vector2(4,0)
+	limbs["hand1"]["originLeft"] = $Hand1.position + Vector2(8,0)
+	limbs["hand1"]["originUpRight"] = $Hand1.position + Vector2(1,0)
+	
 	limbs["hand2"]["origin"] = $Hand2.position
+	limbs["hand2"]["originUpRight"] = $Hand2.position - Vector2(1,0)
+	
 	limbs["leg1"]["origin"] = $Leg1.position
-	limbs["leg1"]["originRight"] = $Leg1.position + Vector2(3,0)
-	limbs["leg1"]["originLeft"] = $Leg1.position + Vector2(3,0)
+	limbs["leg1"]["originRight"] = $Leg1.position + Vector2(1.5,0)
+	limbs["leg1"]["originLeft"] = $Leg1.position + Vector2(1.5,0)
+	limbs["leg1"]["originUpRight"] = $Leg1.position + Vector2(1,0)
+	
 	limbs["leg2"]["origin"] = $Leg2.position
+	limbs["leg2"]["originRight"] = $Leg2.position - Vector2(1.5,0)
+	limbs["leg2"]["originLeft"] = $Leg2.position - Vector2(1.5,0)
+	limbs["leg2"]["originUpRight"] = $Leg2.position - Vector2(1,0)
+	
 	limbs["body"]["origin"] = $Body.position
+	
 	limbs["head"]["origin"] = $Head.position
 
 func anySkillCasting ():
@@ -85,13 +99,126 @@ func anySkillCasting ():
 func anySkillIndicating ():
 	return (skills[1]["indicating"] || skills[2]["indicating"])
 
+func findNextDirection ():
+	if desiredDirection == direction:
+		return
+	if directionsString[direction] < directionsString[desiredDirection]:
+		direction = directionsInt[directionsString[direction] + 1]
+	else:
+		direction = directionsInt[directionsString[direction] - 1]
+
 func animationHandler ():
 	if animation == "idle":
-		if direction == "down" || direction == "up":
+		if direction == "down":
 			$Hand1.position = limbs["hand1"]["origin"]
 			$Hand2.position = limbs["hand2"]["origin"]
 			$Leg1.position = limbs["leg1"]["origin"]
 			$Leg2.position = limbs["leg2"]["origin"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = true
+			
+			$Head.texture.region.position.y = 0
+			$Body.texture.region.position.y = 0
+			
+			$Hand1.z_index = 0
+			$Hand2.z_index = 0
+		if direction == "up":
+			$Hand1.position = limbs["hand1"]["origin"]
+			$Hand2.position = limbs["hand2"]["origin"]
+			$Leg1.position = limbs["leg1"]["origin"]
+			$Leg2.position = limbs["leg2"]["origin"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = true
+			
+			$Head.texture.region.position.y = 64
+			$Body.texture.region.position.y = 64
+			
+			$Hand1.z_index = -1
+			$Hand2.z_index = -1
+		if direction == "right":
+			$Hand1.position = limbs["hand1"]["originRight"]
+			$Leg1.position = limbs["leg1"]["originRight"]
+			$Leg2.position = limbs["leg2"]["originRight"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = false
+			
+			$Head.texture.region.position.y = 128
+			$Body.texture.region.position.y = 128
+			
+			$Hand1.z_index = 0
+			$Leg2.z_index = -1
+		if direction == "left":
+			$Hand1.position = limbs["hand1"]["originLeft"]
+			$Leg1.position = limbs["leg1"]["originLeft"]
+			$Leg2.position = limbs["leg2"]["originLeft"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = false
+			
+			$Head.texture.region.position.y = 192
+			$Body.texture.region.position.y = 192
+			
+			$Hand1.z_index = 0
+			$Leg2.z_index = 0
+		if direction == "upright":
+			$Hand1.position = limbs["hand1"]["originUpRight"]
+			$Hand2.position = limbs["hand2"]["originUpRight"]
+			$Leg1.position = limbs["leg1"]["originUpRight"]
+			$Leg2.position = limbs["leg2"]["originUpRight"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = true
+			
+			$Head.texture.region.position.y = 64 * 5
+			$Body.texture.region.position.y = 64 * 5
+			
+			$Hand1.z_index = -1
+			$Hand2.z_index = 0
+		if direction == "upleft":
+			$Hand1.position = limbs["hand1"]["originUpRight"]
+			$Hand2.position = limbs["hand2"]["originUpRight"]
+			$Leg1.position = limbs["leg1"]["originUpRight"]
+			$Leg2.position = limbs["leg2"]["originUpRight"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = true
+			
+			$Head.texture.region.position.y = 64 * 6
+			$Body.texture.region.position.y = 64 * 6
+			
+			$Hand1.z_index = 0
+			$Hand2.z_index = -1
+		if direction == "downright":
+			$Hand1.position = limbs["hand1"]["origin"]
+			$Hand2.position = limbs["hand2"]["origin"]
+			$Leg1.position = limbs["leg1"]["originUpRight"]
+			$Leg2.position = limbs["leg2"]["originUpRight"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = true
+			
+			$Head.texture.region.position.y = 64 * 4
+			$Body.texture.region.position.y = 64 * 4
+			
+			$Hand1.z_index = 0
+			$Hand2.z_index = -1
+		if direction == "downleft":
+			$Hand1.position = limbs["hand1"]["origin"]
+			$Hand2.position = limbs["hand2"]["origin"]
+			$Leg1.position = limbs["leg1"]["originUpRight"]
+			$Leg2.position = limbs["leg2"]["originUpRight"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = true
+			
+			$Head.texture.region.position.y = 64 * 7
+			$Body.texture.region.position.y = 64 * 7
+			
+			$Hand1.z_index = -1
+			$Hand2.z_index = 0
 	elif animation == "walk":
 		if direction == "down":
 			$Hand1.position = limbs["hand1"]["origin"]
@@ -108,10 +235,11 @@ func animationHandler ():
 			$Hand1.z_index = 0
 			$Hand2.z_index = 0
 			
-			$Hand1.position.y = limbs["hand1"]["origin"].y + sin(Vars.time * 10)
-			$Hand2.position.y = limbs["hand2"]["origin"].y - sin(Vars.time * 10)
-			$Leg1.position.y = limbs["leg1"]["origin"].y + sin(Vars.time * 10)
-			$Leg2.position.y = limbs["leg2"]["origin"].y - sin(Vars.time * 10)
+			$Hand1.position.y = limbs["hand1"]["origin"].y + sin(Vars.time * 20)
+			$Hand2.position.y = limbs["hand2"]["origin"].y - sin(Vars.time * 20)
+			$Leg1.position.y = limbs["leg1"]["origin"].y + sin(Vars.time * 20)
+			$Leg2.position.y = limbs["leg2"]["origin"].y - sin(Vars.time * 20)
+			$Head.position.y = limbs["head"]["origin"].y + sin(Vars.time * 10) / 6.0
 		if direction == "up":
 			$Hand1.position = limbs["hand1"]["origin"]
 			$Hand2.position = limbs["hand2"]["origin"]
@@ -127,16 +255,15 @@ func animationHandler ():
 			$Hand1.z_index = -1
 			$Hand2.z_index = -1
 			
-			$Hand1.position.y = limbs["hand1"]["origin"].y + sin(Vars.time * 10)
-			$Hand2.position.y = limbs["hand2"]["origin"].y - sin(Vars.time * 10)
-			$Leg1.position.y = limbs["leg1"]["origin"].y + sin(Vars.time * 10)
-			$Leg2.position.y = limbs["leg2"]["origin"].y - sin(Vars.time * 10)
+			$Hand1.position.y = limbs["hand1"]["origin"].y + sin(Vars.time * 20)
+			$Hand2.position.y = limbs["hand2"]["origin"].y - sin(Vars.time * 20)
+			$Leg1.position.y = limbs["leg1"]["origin"].y + sin(Vars.time * 20)
+			$Leg2.position.y = limbs["leg2"]["origin"].y - sin(Vars.time * 20)
+			$Head.position.y = limbs["head"]["origin"].y + sin(Vars.time * 10) / 6.0
 		if direction == "right":
-			$Head.flip_h = false
-			$Body.flip_h = false
-			
 			$Hand1.position = limbs["hand1"]["originRight"]
 			$Leg1.position = limbs["leg1"]["originRight"]
+			$Leg2.position = limbs["leg2"]["originRight"]
 			
 			$Hand1.visible = true
 			$Hand2.visible = false
@@ -145,29 +272,123 @@ func animationHandler ():
 			$Body.texture.region.position.y = 128
 			
 			$Hand1.z_index = 0
+			$Leg2.z_index = -1
 			
-			$Hand1.position.y = limbs["hand1"]["originRight"].y + sin(Vars.time * 10)
-			$Leg1.position.y = limbs["leg1"]["originRight"].y - sin(Vars.time * 10)
+			$Hand1.position.x = limbs["hand1"]["originRight"].x + sin(Vars.time * 20)
+			$Leg1.position.y = limbs["leg1"]["originRight"].y - sin(Vars.time * 20)
+			$Leg2.position.y = limbs["leg2"]["originRight"].y + sin(Vars.time * 20)
+			$Leg1.position.x = limbs["leg1"]["originLeft"].x - sin(Vars.time * 20) / 4
+			$Leg2.position.x = limbs["leg2"]["originLeft"].x + sin(Vars.time * 20) / 4
 			$Head.position.y = limbs["head"]["origin"].y + sin(Vars.time * 10) / 6.0
 		if direction == "left":
-			$Head.flip_h = true
-			$Body.flip_h = true
-			
 			$Hand1.position = limbs["hand1"]["originLeft"]
 			$Leg1.position = limbs["leg1"]["originLeft"]
+			$Leg2.position = limbs["leg2"]["originLeft"]
 			
 			$Hand1.visible = true
 			$Hand2.visible = false
 			
-			$Head.texture.region.position.y = 128
-			$Body.texture.region.position.y = 128
+			$Head.texture.region.position.y = 192
+			$Body.texture.region.position.y = 192
 			
 			$Hand1.z_index = 0
+			$Leg2.z_index = 0
 			
-			$Hand1.position.y = limbs["hand1"]["originLeft"].y + sin(Vars.time * 10)
-			$Leg1.position.y = limbs["leg1"]["originLeft"].y - sin(Vars.time * 10)
+			$Hand1.position.x = limbs["hand1"]["originLeft"].x - sin(Vars.time * 20)
+			$Leg1.position.y = limbs["leg1"]["originLeft"].y - sin(Vars.time * 20)
+			$Leg2.position.y = limbs["leg2"]["originLeft"].y + sin(Vars.time * 20)
+			$Leg1.position.x = limbs["leg1"]["originLeft"].x - sin(Vars.time * 20) / 4
+			$Leg2.position.x = limbs["leg2"]["originLeft"].x + sin(Vars.time * 20) / 4
 			$Head.position.y = limbs["head"]["origin"].y + sin(Vars.time * 10) / 6.0
-
+		if direction == "upright":
+			$Hand1.position = limbs["hand1"]["originUpRight"]
+			$Hand2.position = limbs["hand2"]["originUpRight"]
+			$Leg1.position = limbs["leg1"]["originUpRight"]
+			$Leg2.position = limbs["leg2"]["originUpRight"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = true
+			
+			$Head.texture.region.position.y = 64 * 5
+			$Body.texture.region.position.y = 64 * 5
+			
+			$Hand1.z_index = -1
+			$Hand2.z_index = 0
+			
+			$Hand1.position.y = limbs["hand1"]["originUpRight"].y + sin(Vars.time * 20)
+			$Hand2.position.y = limbs["hand2"]["originUpRight"].y - sin(Vars.time * 20)
+			$Leg1.position.y = limbs["leg1"]["originUpRight"].y + sin(Vars.time * 20)
+			$Leg2.position.y = limbs["leg2"]["originUpRight"].y - sin(Vars.time * 20)
+			$Leg1.position.x = limbs["leg1"]["originUpRight"].x - sin(Vars.time * 20) / 4
+			$Leg2.position.x = limbs["leg2"]["originUpRight"].x + sin(Vars.time * 20) / 4
+			$Head.position.y = limbs["head"]["origin"].y + sin(Vars.time * 10) / 6.0
+		if direction == "upleft":
+			$Hand1.position = limbs["hand1"]["originUpRight"]
+			$Hand2.position = limbs["hand2"]["originUpRight"]
+			$Leg1.position = limbs["leg1"]["originUpRight"]
+			$Leg2.position = limbs["leg2"]["originUpRight"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = true
+			
+			$Head.texture.region.position.y = 64 * 6
+			$Body.texture.region.position.y = 64 * 6
+			
+			$Hand1.z_index = 0
+			$Hand2.z_index = -1
+			
+			$Hand1.position.y = limbs["hand1"]["originUpRight"].y + sin(Vars.time * 20)
+			$Hand2.position.y = limbs["hand2"]["originUpRight"].y - sin(Vars.time * 20)
+			$Leg1.position.y = limbs["leg1"]["originUpRight"].y + sin(Vars.time * 20)
+			$Leg2.position.y = limbs["leg2"]["originUpRight"].y - sin(Vars.time * 20)
+			$Leg1.position.x = limbs["leg1"]["originUpRight"].x - sin(Vars.time * 20) / 4
+			$Leg2.position.x = limbs["leg2"]["originUpRight"].x + sin(Vars.time * 20) / 4
+			$Head.position.y = limbs["head"]["origin"].y + sin(Vars.time * 10) / 6.0
+		if direction == "downright":
+			$Hand1.position = limbs["hand1"]["origin"]
+			$Hand2.position = limbs["hand2"]["origin"]
+			$Leg1.position = limbs["leg1"]["originUpRight"]
+			$Leg2.position = limbs["leg2"]["originUpRight"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = true
+			
+			$Head.texture.region.position.y = 64 * 4
+			$Body.texture.region.position.y = 64 * 4
+			
+			$Hand1.z_index = 0
+			$Hand2.z_index = -1
+			
+			$Hand1.position.y = limbs["hand1"]["origin"].y + sin(Vars.time * 20)
+			$Hand2.position.y = limbs["hand2"]["origin"].y - sin(Vars.time * 20)
+			$Leg1.position.y = limbs["leg1"]["originUpRight"].y + sin(Vars.time * 20)
+			$Leg2.position.y = limbs["leg2"]["originUpRight"].y - sin(Vars.time * 20)
+			$Leg1.position.x = limbs["leg1"]["originUpRight"].x - sin(Vars.time * 20) / 4
+			$Leg2.position.x = limbs["leg2"]["originUpRight"].x + sin(Vars.time * 20) / 4
+			$Head.position.y = limbs["head"]["origin"].y + sin(Vars.time * 10) / 6.0
+		if direction == "downleft":
+			$Hand1.position = limbs["hand1"]["origin"]
+			$Hand2.position = limbs["hand2"]["origin"]
+			$Leg1.position = limbs["leg1"]["originUpRight"]
+			$Leg2.position = limbs["leg2"]["originUpRight"]
+			
+			$Hand1.visible = true
+			$Hand2.visible = true
+			
+			$Head.texture.region.position.y = 64 * 7
+			$Body.texture.region.position.y = 64 * 7
+			
+			$Hand1.z_index = -1
+			$Hand2.z_index = 0
+			
+			$Hand1.position.y = limbs["hand1"]["origin"].y + sin(Vars.time * 20)
+			$Hand2.position.y = limbs["hand2"]["origin"].y - sin(Vars.time * 20)
+			$Leg1.position.y = limbs["leg1"]["originUpRight"].y + sin(Vars.time * 20)
+			$Leg2.position.y = limbs["leg2"]["originUpRight"].y - sin(Vars.time * 20)
+			$Leg1.position.x = limbs["leg1"]["originUpRight"].x - sin(Vars.time * 20) / 4
+			$Leg2.position.x = limbs["leg2"]["originUpRight"].x + sin(Vars.time * 20) / 4
+			$Head.position.y = limbs["head"]["origin"].y + sin(Vars.time * 10) / 6.0
+	
 func skillSystem ():
 	# SKILL 1
 	if !skills[1]["casting"]:
@@ -323,6 +544,8 @@ func skillSystem ():
 		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"scytheActive": false})
 
 func _physics_process(delta):
+	animationHandler()
+	
 	if id != Client.selfPeerID:
 		return
 	# Skill System
@@ -334,20 +557,30 @@ func _physics_process(delta):
 	if canMove:
 		if Input.is_action_pressed('down') && !Input.is_action_pressed('right') && !Input.is_action_pressed('left'):
 			animation = "walk"
-			direction = "down"
+			desiredDirection = "down"
 		elif Input.is_action_pressed('up') && !Input.is_action_pressed('right') && !Input.is_action_pressed('left'):
 			animation = "walk"
-			direction = "up"
+			desiredDirection = "up"
 		elif Input.is_action_pressed('right') && !Input.is_action_pressed('up') && !Input.is_action_pressed('down'):
 			animation = "walk"
-			direction = "right"
+			desiredDirection = "right"
 		elif Input.is_action_pressed('left') && !Input.is_action_pressed('up') && !Input.is_action_pressed('down'):
 			animation = "walk"
-			direction = "left"
+			desiredDirection = "left"
+		elif Input.is_action_pressed('right') && Input.is_action_pressed('up'):
+			animation = "walk"
+			desiredDirection = "upright"
+		elif Input.is_action_pressed('left') && Input.is_action_pressed('up'):
+			animation = "walk"
+			desiredDirection = "upleft"
+		elif Input.is_action_pressed('right') && Input.is_action_pressed('down'):
+			animation = "walk"
+			desiredDirection = "downright"
+		elif Input.is_action_pressed('left') && Input.is_action_pressed('down'):
+			animation = "walk"
+			desiredDirection = "downleft"
 		else:
 			animation = "idle"
-		
-	animationHandler()
 	
 	if Input.is_action_just_released('wheeldown'):
 		$Camera2D.zoomLevel = min($Camera2D.zoomLevel + 1,4)
@@ -383,3 +616,7 @@ func _on_DirtTimer_timeout():
 			Vars.tryPlaceDirt(Client.selfPeerID,vec,team)
 		elif Vars.dirts[vec].team != team:
 			Vars.tryChangeDirt(Client.selfPeerID,vec,team)
+
+
+func _on_DirectionTimer_timeout():
+	findNextDirection()
