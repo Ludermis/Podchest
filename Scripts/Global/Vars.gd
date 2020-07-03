@@ -1,7 +1,7 @@
 extends Node
 
 var friction = 0.2
-var serverIP = "176.41.149.112"
+var serverIP = "176.41.150.154"
 var serverPort = 27015
 var dirtCount = 0
 var dirts = {}

@@ -11,8 +11,8 @@ var arrowEffect : Node2D
 var limbs = {"hand1": {},"hand2": {},"leg1": {},"leg2": {},"head": {},"body": {}}
 
 var animation = "idle" setget setAnimation
-var desiredDirection = "down"
-var direction = "down" setget setDirection
+var desiredDirection = "down" setget setDesiredDirection
+var direction = "down"
 var scytheActive = false setget setScytheActive
 var scytheRotation = 0 setget setScytheRotation
 var playerName = "Guest" setget setPlayerName
@@ -43,8 +43,8 @@ var skills = 	{1:
 func setSkin (newSkin):
 	skin = newSkin
 
-func setDirection (dir):
-	direction = dir
+func setDesiredDirection (dir):
+	desiredDirection = dir
 
 func setPlayerName (pName):
 	playerName = pName
@@ -102,10 +102,21 @@ func anySkillIndicating ():
 func findNextDirection ():
 	if desiredDirection == direction:
 		return
+	var dir = 1
 	if directionsString[direction] < directionsString[desiredDirection]:
-		direction = directionsInt[directionsString[direction] + 1]
+		dir = 1
+		if abs(directionsString[direction] - directionsString[desiredDirection]) > 4:
+			dir = -1
 	else:
-		direction = directionsInt[directionsString[direction] - 1]
+		dir = -1
+		if abs(directionsString[direction] - directionsString[desiredDirection]) > 4:
+			dir = 1
+	var next = directionsString[direction] + dir
+	if next == 9:
+		next = 1
+	elif next == 0:
+		next = 8
+	direction = directionsInt[next]
 
 func animationHandler ():
 	if animation == "idle":
@@ -604,7 +615,7 @@ func _physics_process(delta):
 		velocity.y = lerp(velocity.y,0,Vars.friction)
 		velocity.x = lerp(velocity.x,0,Vars.friction)
 	velocity = move_and_slide(velocity,Vector2.UP)
-	var sendingDict = {"position": position, "animation": animation, "direction": direction}
+	var sendingDict = {"position": position, "animation": animation, "desiredDirection": desiredDirection}
 	if scytheActive:
 		sendingDict["scytheRotation"] = $Schyte.rotation
 	get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,sendingDict)
