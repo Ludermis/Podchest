@@ -42,6 +42,13 @@ var skills = 	{1:
 
 func setSkin (newSkin):
 	skin = newSkin
+	if skin != "":
+		$Body.texture.atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
+		$Head.texture.atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
+		$Leg1.texture.atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
+		$Leg2.texture.atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
+		$Hand1.texture.atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
+		$Hand2.texture.atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
 
 func setDesiredDirection (dir):
 	desiredDirection = dir
