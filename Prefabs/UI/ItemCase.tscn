@@ -7,7 +7,7 @@
 [ext_resource path="res://Sprites/UI/artpalette.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/UI/ItemCase.gd" type="Script" id=6]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
 size = 40
 use_filter = true
 font_data = ExtResource( 2 )
@@ -21,7 +21,7 @@ font_data = ExtResource( 2 )
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 4 )
 region = Rect2( 32, 0, 32, 32 )
 
@@ -55,7 +55,7 @@ region = Rect2( 0, 0, 85, 70 )
 
 [sub_resource type="SpriteFrames" id=12]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 13 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
@@ -94,7 +94,7 @@ margin_left = -128.0
 margin_top = 109.0
 margin_right = 384.0
 margin_bottom = 157.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Villager"
 align = 1
@@ -121,6 +121,6 @@ __meta__ = {
 position = Vector2( 232, 168 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 12 )
-frame = 6
+frame = 7
 playing = true
 [connection signal="pressed" from="." to="." method="_on_ItemCase_pressed"]
