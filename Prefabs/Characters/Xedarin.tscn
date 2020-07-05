@@ -16,12 +16,12 @@ resource_local_to_scene = true
 atlas = ExtResource( 3 )
 region = Rect2( 64, 512, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 resource_local_to_scene = true
 atlas = ExtResource( 3 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=4]
 resource_local_to_scene = true
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 64, 64 )
@@ -66,11 +66,11 @@ texture = SubResource( 2 )
 
 [node name="Body" type="Sprite" parent="."]
 position = Vector2( 0, -7.25 )
-texture = SubResource( 4 )
+texture = SubResource( 3 )
 
 [node name="Head" type="Sprite" parent="."]
-position = Vector2( 0, -13.25 )
-texture = SubResource( 3 )
+position = Vector2( 0, -12.25 )
+texture = SubResource( 4 )
 
 [node name="Hand1" type="Sprite" parent="."]
 position = Vector2( -5.94999, -8.25 )

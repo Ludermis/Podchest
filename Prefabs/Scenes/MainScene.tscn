@@ -446,7 +446,6 @@ __meta__ = {
 position = Vector2( 411.598, 34.8854 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 12 )
-frame = 1
 playing = true
 
 [node name="APSprite" type="AnimatedSprite" parent="AccountPanel"]
