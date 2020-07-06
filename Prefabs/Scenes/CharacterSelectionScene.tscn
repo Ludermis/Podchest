@@ -69,7 +69,7 @@ func prepareSkins ():
 	node.group = main.buttonGroup
 	$\"../Panel/HBoxContainer\".add_child(node)
 	
-	if Vars.loggedIn:
+	if Vars.loggedIn && Vars.accountInfo[\"ownedSkins\"].has(main.selectedCharacter):
 		for i in Vars.accountInfo[\"ownedSkins\"][main.selectedCharacter]:
 			node = preload(\"res://Prefabs/UI/CharacterButton.tscn\").instance()
 			node.name = i

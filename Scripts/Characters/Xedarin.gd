@@ -13,11 +13,9 @@ var limbs = {"hand1": {},"hand2": {},"leg1": {},"leg2": {},"head": {},"body": {}
 var animation = "idle" setget setAnimation
 var desiredDirection = "down" setget setDesiredDirection
 var direction = "down"
-var scytheActive = false setget setScytheActive
-var scytheRotation = 0 setget setScytheRotation
 var playerName = "Guest" setget setPlayerName
 var skin = "" setget setSkin
-var characterName = "Villager"
+var characterName = "Xedarin"
 var directionsInt = {1: "down", 2: "downright", 3: "right", 4: "upright", 5: "up", 6: "upleft", 7: "left", 8: "downleft"}
 var directionsString = {"down": 1,"downright": 2,"right": 3,"upright": 4,"up": 5,"upleft": 6,"left": 7,"downleft": 8}
 
@@ -60,23 +58,12 @@ func setPlayerName (pName):
 func setAnimation (anim):
 	animation = anim
 
-func setScytheActive (isActive):
-	scytheActive = isActive
-	if isActive:
-		$DirtTimerScythe.start()
-		$Schyte.visible = true
-	else:
-		$DirtTimerScythe.stop()
-		$Schyte.visible = false
-
-func setScytheRotation (rot):
-	scytheRotation = rot
-	if id != Client.selfPeerID:
-		$Schyte.rotation = rot
-
 func _ready():
 	set_physics_process(true)
 	$DirtTimer.start()
+	
+	if id == Client.selfPeerID:
+		get_tree().root.get_node("Main/CanvasLayer").add_child(load("res://Prefabs/UI/CharacterSkills/" + characterName + ".tscn").instance())
 	
 	limbs["hand1"]["origin"] = $Hand1.position
 	limbs["hand1"]["originRight"] = $Hand1.position + Vector2(4,0)
@@ -408,158 +395,7 @@ func animationHandler ():
 			$Head.position.y = limbs["head"]["origin"].y + sin(Vars.time * 10) / 6.0
 	
 func skillSystem ():
-	# SKILL 1
-	if !skills[1]["casting"]:
-		if skills[1]["lastCasted"] + skills[1]["cooldown"] > Vars.time:
-			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").get_material().set_shader_param("value",(Vars.time - skills[1]["lastCasted"]) / skills[1]["cooldown"] * 100)
-			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").modulate = Color.red
-		else:
-			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").get_material().set_shader_param("value",101)
-			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").modulate = Color.lime
-	
-	# INDICATING START
-	if Input.is_action_just_pressed('skill1') && skills[1]["lastCasted"] + skills[1]["cooldown"] <= Vars.time && !anySkillCasting() && !skills[1]["indicating"]:
-		if skills[2]["indicating"]:
-			skills[2]["indicating"] = false
-			skills[2]["effect"].queue_free()
-			arrowEffect.queue_free()
-		skills[1]["indicating"] = true
-		skills[1]["effect"] = preload("res://Prefabs/Effects/SeedEffect.tscn").instance()
-		arrowEffect = preload("res://Prefabs/Effects/ArrowEffect.tscn").instance()
-		skills[1]["effect"].drawArea = true
-		skills[1]["effect"].areaOfEffect = skills[1]["area"]
-		get_tree().root.get_node("Main").add_child(skills[1]["effect"])
-		get_tree().root.get_node("Main").add_child(arrowEffect)
-	elif Input.is_action_just_pressed('skill1') && skills[1]["indicating"] == true:
-		skills[1]["indicating"] = false
-		skills[1]["effect"].queue_free()
-		arrowEffect.queue_free()
-	
-	# INDICATING UPDATE
-	if skills[1]["indicating"]:
-		skills[1]["effect"].position = get_global_mouse_position()
-		arrowEffect.points = PoolVector2Array([position,get_global_mouse_position()])
-		var canCast = position.distance_to(get_global_mouse_position()) <= skills[1]["maxRange"]
-		if !canCast:
-			arrowEffect.default_color = Color.red
-		else:
-			arrowEffect.default_color = Color.cyan
-		if Input.is_action_just_pressed("leftclick") && canCast:
-			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
-			skills[1]["indicating"] = false
-			skills[1]["casting"] = true
-			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").modulate = Color.blue
-			skills[1]["castLocation"] = get_global_mouse_position()
-			canMove = false
-			skills[1]["castStarted"] = Vars.time
-			skills[1]["effect"].queue_free()
-			arrowEffect.queue_free()
-	
-	# CASTING UPDATE
-	if skills[1]["casting"]:
-		get_tree().root.get_node("Main/CanvasLayer/ProgressBar").value = (Vars.time - skills[1]["castStarted"]) / skills[1]["castTime"] * 100
-		if skills[1]["castStarted"] + skills[1]["castTime"] <= Vars.time:
-			get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/Seed.tscn",{"whoSummoned": Client.selfPeerID, "position": position, "endPosition": skills[1]["castLocation"], "area": skills[1]["area"]})
-			canMove = true
-			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
-			skills[1]["casting"] = false
-			skills[1]["lastCasted"] = Vars.time
-	
-	# SKILL 2
-	
-	if !skills[2]["casting"]:
-		if skills[2]["lastCasted"] + skills[2]["cooldown"] > Vars.time:
-			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").get_material().set_shader_param("value",(Vars.time - skills[2]["lastCasted"]) / skills[2]["cooldown"] * 100)
-			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").modulate = Color.red
-		else:
-			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").get_material().set_shader_param("value",101)
-			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").modulate = Color.lime
-	
-	# INDICATING START
-	if Input.is_action_just_pressed('skill2') && skills[2]["lastCasted"] + skills[2]["cooldown"] <= Vars.time && !anySkillCasting() && !skills[2]["indicating"]:
-		if skills[1]["indicating"]:
-			skills[1]["indicating"] = false
-			skills[1]["effect"].queue_free()
-			arrowEffect.queue_free()
-		skills[2]["indicating"] = true
-		skills[2]["effect"] = preload("res://Prefabs/Effects/BearTrapEffect.tscn").instance()
-		arrowEffect = preload("res://Prefabs/Effects/ArrowEffect.tscn").instance()
-		get_tree().root.get_node("Main").add_child(skills[2]["effect"])
-		get_tree().root.get_node("Main").add_child(arrowEffect)
-	elif Input.is_action_just_pressed('skill2') && skills[2]["indicating"] == true:
-		skills[2]["indicating"] = false
-		skills[2]["effect"].queue_free()
-		arrowEffect.queue_free()
-	
-	# INDICATING UPDATE
-	if skills[2]["indicating"]:
-		skills[2]["effect"].position = get_global_mouse_position()
-		arrowEffect.points = PoolVector2Array([position,get_global_mouse_position()])
-		var canCast = position.distance_to(get_global_mouse_position()) <= skills[2]["maxRange"]
-		if !canCast:
-			arrowEffect.default_color = Color.red
-		else:
-			arrowEffect.default_color = Color.cyan
-		if Input.is_action_just_pressed("leftclick") && canCast:
-			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
-			skills[2]["indicating"] = false
-			skills[2]["casting"] = true
-			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").modulate = Color.blue
-			skills[2]["castLocation"] = get_global_mouse_position()
-			canMove = false
-			skills[2]["castStarted"] = Vars.time
-			skills[2]["effect"].queue_free()
-			arrowEffect.queue_free()
-	
-	# CASTING UPDATE
-	if skills[2]["casting"]:
-		get_tree().root.get_node("Main/CanvasLayer/ProgressBar").value = (Vars.time - skills[2]["castStarted"]) / skills[2]["castTime"] * 100
-		if skills[2]["castStarted"] + skills[2]["castTime"] <= Vars.time:
-			get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/BearTrap.tscn",{"whoSummoned": Client.selfPeerID, "position": position, "endPosition": skills[2]["castLocation"]})
-			canMove = true
-			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
-			skills[2]["casting"] = false
-			skills[2]["lastCasted"] = Vars.time
-	
-	# SKILL 3
-	
-	if !skills[3]["casting"]:
-		if skills[3]["lastCasted"] + skills[3]["cooldown"] > Vars.time:
-			get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").get_material().set_shader_param("value",(Vars.time - skills[3]["lastCasted"]) / skills[3]["cooldown"] * 100.0)
-			get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").modulate = Color.red
-		else:
-			get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").get_material().set_shader_param("value",101.0)
-			get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").modulate = Color.lime
-	
-	# INDICATING START
-	if Input.is_action_just_pressed('skill3') && skills[3]["lastCasted"] + skills[3]["cooldown"] <= Vars.time && !anySkillCasting():
-		if skills[1]["indicating"]:
-			skills[1]["indicating"] = false
-			skills[1]["effect"].queue_free()
-			arrowEffect.queue_free()
-		if skills[2]["indicating"]:
-			skills[2]["indicating"] = false
-			skills[2]["effect"].queue_free()
-			arrowEffect.queue_free()
-		get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
-		skills[3]["casting"] = true
-		get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").modulate = Color.blue
-		canMove = false
-		skills[3]["castStarted"] = Vars.time
-	
-	# CASTING UPDATE
-	if skills[3]["casting"]:
-		get_tree().root.get_node("Main/CanvasLayer/ProgressBar").value = (Vars.time - skills[3]["castStarted"]) / skills[3]["castTime"] * 100
-		if skills[3]["castStarted"] + skills[3]["castTime"] <= Vars.time:
-			setScytheActive(true)
-			get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"scytheActive": true})
-			canMove = true
-			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
-			skills[3]["casting"] = false
-			skills[3]["lastCasted"] = Vars.time
-	if Vars.time - skills[3]["lastCasted"] >= skills[3]["activeTime"]:
-		setScytheActive(false)
-		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"scytheActive": false})
+	pass
 
 func _physics_process(delta):
 	animationHandler()
@@ -623,8 +459,6 @@ func _physics_process(delta):
 		velocity.x = lerp(velocity.x,0,Vars.friction)
 	velocity = move_and_slide(velocity,Vector2.UP)
 	var sendingDict = {"position": position, "animation": animation, "desiredDirection": desiredDirection}
-	if scytheActive:
-		sendingDict["scytheRotation"] = $Schyte.rotation
 	get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,sendingDict)
 
 func _on_DirtTimer_timeout():

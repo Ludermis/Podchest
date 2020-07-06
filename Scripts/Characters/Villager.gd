@@ -78,6 +78,9 @@ func _ready():
 	set_physics_process(true)
 	$DirtTimer.start()
 	
+	if id == Client.selfPeerID:
+		get_tree().root.get_node("Main/CanvasLayer").add_child(load("res://Prefabs/UI/CharacterSkills/" + characterName + ".tscn").instance())
+	
 	limbs["hand1"]["origin"] = $Hand1.position
 	limbs["hand1"]["originRight"] = $Hand1.position + Vector2(4,0)
 	limbs["hand1"]["originLeft"] = $Hand1.position + Vector2(8,0)
@@ -411,11 +414,11 @@ func skillSystem ():
 	# SKILL 1
 	if !skills[1]["casting"]:
 		if skills[1]["lastCasted"] + skills[1]["cooldown"] > Vars.time:
-			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").get_material().set_shader_param("value",(Vars.time - skills[1]["lastCasted"]) / skills[1]["cooldown"] * 100)
-			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").modulate = Color.red
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill1/Progress").get_material().set_shader_param("value",(Vars.time - skills[1]["lastCasted"]) / skills[1]["cooldown"] * 100)
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill1/Progress").modulate = Color.red
 		else:
-			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").get_material().set_shader_param("value",101)
-			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").modulate = Color.lime
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill1/Progress").get_material().set_shader_param("value",101)
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill1/Progress").modulate = Color.lime
 	
 	# INDICATING START
 	if Input.is_action_just_pressed('skill1') && skills[1]["lastCasted"] + skills[1]["cooldown"] <= Vars.time && !anySkillCasting() && !skills[1]["indicating"]:
@@ -448,7 +451,7 @@ func skillSystem ():
 			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
 			skills[1]["indicating"] = false
 			skills[1]["casting"] = true
-			get_tree().root.get_node("Main/CanvasLayer/Skill1/Progress").modulate = Color.blue
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill1/Progress").modulate = Color.blue
 			skills[1]["castLocation"] = get_global_mouse_position()
 			canMove = false
 			skills[1]["castStarted"] = Vars.time
@@ -469,11 +472,11 @@ func skillSystem ():
 	
 	if !skills[2]["casting"]:
 		if skills[2]["lastCasted"] + skills[2]["cooldown"] > Vars.time:
-			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").get_material().set_shader_param("value",(Vars.time - skills[2]["lastCasted"]) / skills[2]["cooldown"] * 100)
-			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").modulate = Color.red
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill2/Progress").get_material().set_shader_param("value",(Vars.time - skills[2]["lastCasted"]) / skills[2]["cooldown"] * 100)
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill2/Progress").modulate = Color.red
 		else:
-			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").get_material().set_shader_param("value",101)
-			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").modulate = Color.lime
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill2/Progress").get_material().set_shader_param("value",101)
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill2/Progress").modulate = Color.lime
 	
 	# INDICATING START
 	if Input.is_action_just_pressed('skill2') && skills[2]["lastCasted"] + skills[2]["cooldown"] <= Vars.time && !anySkillCasting() && !skills[2]["indicating"]:
@@ -504,7 +507,7 @@ func skillSystem ():
 			get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
 			skills[2]["indicating"] = false
 			skills[2]["casting"] = true
-			get_tree().root.get_node("Main/CanvasLayer/Skill2/Progress").modulate = Color.blue
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill2/Progress").modulate = Color.blue
 			skills[2]["castLocation"] = get_global_mouse_position()
 			canMove = false
 			skills[2]["castStarted"] = Vars.time
@@ -525,11 +528,11 @@ func skillSystem ():
 	
 	if !skills[3]["casting"]:
 		if skills[3]["lastCasted"] + skills[3]["cooldown"] > Vars.time:
-			get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").get_material().set_shader_param("value",(Vars.time - skills[3]["lastCasted"]) / skills[3]["cooldown"] * 100.0)
-			get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").modulate = Color.red
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill3/Progress").get_material().set_shader_param("value",(Vars.time - skills[3]["lastCasted"]) / skills[3]["cooldown"] * 100.0)
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill3/Progress").modulate = Color.red
 		else:
-			get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").get_material().set_shader_param("value",101.0)
-			get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").modulate = Color.lime
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill3/Progress").get_material().set_shader_param("value",101.0)
+			get_tree().root.get_node("Main/CanvasLayer/Skills/Skill3/Progress").modulate = Color.lime
 	
 	# INDICATING START
 	if Input.is_action_just_pressed('skill3') && skills[3]["lastCasted"] + skills[3]["cooldown"] <= Vars.time && !anySkillCasting():
@@ -543,7 +546,7 @@ func skillSystem ():
 			arrowEffect.queue_free()
 		get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
 		skills[3]["casting"] = true
-		get_tree().root.get_node("Main/CanvasLayer/Skill3/Progress").modulate = Color.blue
+		get_tree().root.get_node("Main/CanvasLayer/Skills/Skill3/Progress").modulate = Color.blue
 		canMove = false
 		skills[3]["castStarted"] = Vars.time
 	
