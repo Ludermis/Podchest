@@ -387,6 +387,23 @@ func animationHandler ():
 			$Leg1.position.x = limbs["leg1"]["originUpRight"].x - sin(Vars.time * 20) / 4
 			$Leg2.position.x = limbs["leg2"]["originUpRight"].x + sin(Vars.time * 20) / 4
 			$Head.position.y = limbs["head"]["origin"].y + sin(Vars.time * 10) / 6.0
+	elif animation == "cast":
+		$Hand1.position = limbs["hand1"]["origin"]
+		$Hand2.position = limbs["hand2"]["origin"]
+		$Leg1.position = limbs["leg1"]["origin"]
+		$Leg2.position = limbs["leg2"]["origin"]
+		
+		$Hand1.visible = true
+		$Hand2.visible = true
+		
+		$Head.texture.region.position.y = 0
+		$Body.texture.region.position.y = 0
+		
+		$Hand1.z_index = 0
+		$Hand2.z_index = 0
+		
+		$Hand1.position = Vars.rotatePoint(limbs["hand1"]["origin"] + Vector2(2,0),limbs["hand1"]["origin"],Vars.time * 10)
+		$Hand2.position = Vars.rotatePoint(limbs["hand2"]["origin"] + Vector2(2,0),limbs["hand2"]["origin"],-Vars.time * 10)
 
 func findNextDirection ():
 	if desiredDirection == direction:
@@ -438,7 +455,8 @@ func _on_DirtTimer_timeout():
 			Vars.tryChangeDirt(Client.selfPeerID,vec,team)
 
 func _on_DirectionTimer_timeout():
-	findNextDirection()
+	if animation == "walk" || animation == "idle":
+		findNextDirection()
 
 func _ready():
 	set_physics_process(true)

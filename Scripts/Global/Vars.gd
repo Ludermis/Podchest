@@ -41,6 +41,11 @@ func getTime() -> float:
 func _ready():
 	pass
 
+func rotatePoint(point,center,angle) -> Vector2:
+	var newX = cos(angle) * (point.x - center.x) - sin(angle) * (point.y - center.y) + center.x
+	var newY = sin(angle) * (point.x - center.x) + cos(angle) * (point.y - center.y) + center.y
+	return Vector2(newX,newY)
+
 func timeToString (t):
 	var rtn = ""
 	var minutes = int(t / 60)

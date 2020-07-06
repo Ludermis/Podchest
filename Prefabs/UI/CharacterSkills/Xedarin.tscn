@@ -58,9 +58,10 @@ margin_left = 704.0
 margin_top = 768.0
 margin_right = 832.0
 margin_bottom = 896.0
-hint_tooltip = "(5 seconds cooldown)
-Cast to throw a blooming flower.
-Blooms after 5 seconds."
+hint_tooltip = "(15 seconds cooldown)
+Cast to spawn 3 clocks.
+Clocks roam the map to paint the surface.
+Clocks die if they touch an enemy."
 theme = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

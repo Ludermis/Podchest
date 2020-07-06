@@ -37,6 +37,7 @@ func indicate ():
 		characterNode.get_tree().root.get_node("Main").add_child(arrowEffect)
 
 func cast ():
+	characterNode.animation = "cast"
 	characterNode.get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
 	indicating = false
 	casting = true

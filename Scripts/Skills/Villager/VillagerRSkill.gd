@@ -15,11 +15,13 @@ func _init():
 	type = "cast"
 
 func cast ():
-	characterNode.get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
-	casting = true
-	characterNode.get_tree().root.get_node("Main/CanvasLayer/Skills/Skill3/Progress").modulate = Color.blue
-	characterNode.canMove = false
-	castStarted = Vars.time
+	if lastCasted + cooldown <= Vars.time && !characterNode.anySkillCasting():
+		characterNode.animation = "cast"
+		characterNode.get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
+		casting = true
+		characterNode.get_tree().root.get_node("Main/CanvasLayer/Skills/Skill3/Progress").modulate = Color.blue
+		characterNode.canMove = false
+		castStarted = Vars.time
 
 func castEnd():
 	characterNode.setScytheActive(true)
