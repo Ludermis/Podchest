@@ -1,7 +1,7 @@
 extends Node
 
 var friction = 0.2
-var serverIP = "176.41.150.154"
+var serverIP = "localhost"
 var serverPort = 27015
 var dirtCount = 0
 var dirts = {}
@@ -16,7 +16,7 @@ var time : float = 0 setget ,getTime
 var objects = {}
 var roomMaster = -1
 var ping = 9999
-var build = "5"
+var build = "6"
 var buildConfirmed = false
 var newBuildIfMineWrong
 
