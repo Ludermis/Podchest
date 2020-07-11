@@ -19,6 +19,9 @@ func _ready():
 func _init():
 	type = "skillshot"
 
+func use ():
+	indicate()
+
 func indicate ():
 	if indicating:
 		indicating = false

@@ -5,9 +5,11 @@ var clocks = []
 func inputHandler():
 	.inputHandler()
 	if Input.is_action_just_pressed('skill1'):
-		skills[0].cast()
+		skills[0].use()
 	if Input.is_action_just_pressed('skill2'):
-		skills[1].cast()
+		skills[1].use()
+	if Input.is_action_just_pressed('skill3'):
+		skills[2].use()
 
 func _init():
 	characterName = "Xedarin"
@@ -18,6 +20,10 @@ func _init():
 	var skill2 = preload("res://Scripts/Skills/Xedarin/XedarinESkill.gd").new()
 	skill2.characterNode = self
 	skills.append(skill2)
+	
+	var skill3 = preload("res://Scripts/Skills/Xedarin/XedarinRSkill.gd").new()
+	skill3.characterNode = self
+	skills.append(skill3)
 
 func _physics_process(delta):
 	animationHandler()

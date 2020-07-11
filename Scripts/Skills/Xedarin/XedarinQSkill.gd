@@ -13,6 +13,9 @@ func _ready():
 func _init():
 	type = "cast"
 
+func use ():
+	cast()
+
 func cast ():
 	if lastCasted + cooldown <= Vars.time && !characterNode.anySkillCasting():
 		characterNode.animation = "cast"

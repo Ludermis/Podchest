@@ -20,11 +20,11 @@ func setScytheRotation (rot):
 func inputHandler():
 	.inputHandler()
 	if Input.is_action_just_pressed('skill1'):
-		skills[0].indicate()
+		skills[0].use()
 	if Input.is_action_just_pressed('skill2'):
-		skills[1].indicate()
+		skills[1].use()
 	if Input.is_action_just_pressed('skill3'):
-		skills[2].cast()
+		skills[2].use()
 
 func _init():
 	characterName = "Villager"
