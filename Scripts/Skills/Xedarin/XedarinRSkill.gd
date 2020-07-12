@@ -6,7 +6,7 @@ var castTime = 1.0
 var castStarted = -1000
 var cooldown = 20
 var characterNode : Node2D
-var area = 21
+var area = 35
 
 func _ready():
 	pass

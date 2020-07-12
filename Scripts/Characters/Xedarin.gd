@@ -1,6 +1,10 @@
 extends "res://Scripts/Base/Character.gd"
 
 var clocks = []
+var reduceQCooldown setget setReduceQCooldown
+
+func setReduceQCooldown(rdc):
+	skills[0].lastCasted -= rdc
 
 func inputHandler():
 	.inputHandler()

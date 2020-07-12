@@ -6,11 +6,16 @@ var id
 var dir = Vector2(0,0)
 var lifeRemaining = 15.0
 var returnMode = false setget setReturnMode
+var animation = "default" setget setAnimation
 
 func setReturnMode (rtnMode):
 	if returnMode == false && rtnMode == true:
 		returnMode = rtnMode
 		$PaintTimer.wait_time = 0.01
+
+func setAnimation (anim):
+	animation = anim
+	$AnimatedSprite.play(anim)
 
 func _ready():
 	dir = Vector2(rand_range(-1,1),rand_range(-1,1))
@@ -29,6 +34,7 @@ func _process(delta):
 				if collision != null:
 					dir = dir.bounce(collision.normal)
 			if lifeRemaining <= 0:
+				get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position, "modulate": modulate})
 				get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
 				queue_free()
 				return
@@ -54,18 +60,27 @@ func _on_ChangeDirectionTimer_timeout():
 
 
 func _on_Area2D_body_entered(body):
-	if Client.selfPeerID == Vars.roomMaster:
-		if returnMode == false:
-			if body.is_in_group("Player") && Vars.objects[body.id]["team"] != Vars.objects[whoSummoned]["team"]:
-				get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
-				queue_free()
-		else:
-			if body.is_in_group("Player") && body.id == whoSummoned:
-				body.skills[0].lastCasted -= 4
-				get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
-				queue_free()
+	pass
 
 
 func _on_Clock_tree_exited():
 	if Vars.objects.has(id):
 		Vars.objects.erase(id)
+
+
+func _on_Area2D_area_entered(area):
+	if Client.selfPeerID == Vars.roomMaster:
+		if area.get_node("..").is_in_group("Player"):
+			var body = area.get_node("..")
+			if returnMode == false:
+				if body.is_in_group("Player") && Vars.objects[body.id]["team"] != Vars.objects[whoSummoned]["team"]:
+					get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position, "modulate": modulate})
+					get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+					queue_free()
+			else:
+				if body.is_in_group("Player") && body.id == whoSummoned:
+					body.reduceQCooldown = 4
+					get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,body.id,{"reduceQCooldown": 4})
+					get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position, "modulate": modulate})
+					get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+					queue_free()
