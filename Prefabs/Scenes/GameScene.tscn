@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Fonts/Magic Dreams.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Scenes/GameScene.gd" type="Script" id=3]
 [ext_resource path="res://Fonts/arial.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Sprites/Misc/emptybox.png" type="Texture" id=8]
@@ -17,14 +17,14 @@ size = 67
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 2 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 43
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 2 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 24

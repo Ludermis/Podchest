@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/Magic Dreams.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="DynamicFont" id=1]
 size = 96
@@ -28,7 +28,7 @@ margin_top = 192.0
 margin_right = 1920.0
 margin_bottom = 390.0
 custom_fonts/font = SubResource( 2 )
-text = "Click to URL bar.
+text = "Click to URL bar,
 then press CTRL + F5
 this could work :)"
 align = 1

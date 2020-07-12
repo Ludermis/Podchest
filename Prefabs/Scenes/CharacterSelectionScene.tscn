@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/Magic Dreams.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Scenes/CharacterSelectionScene.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/UI/Backgrounds/background1.jpg" type="Texture" id=3]
+[ext_resource path="res://Sprites/Misc/box.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 43
@@ -18,22 +18,19 @@ outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFontData" id=3]
-font_path = "res://Fonts/orange juice 2.0.ttf"
-
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 101
 use_filter = true
-font_data = SubResource( 3 )
+font_data = ExtResource( 1 )
 
-[sub_resource type="InputEventKey" id=5]
+[sub_resource type="InputEventKey" id=4]
 pressed = true
 scancode = 16777221
 
-[sub_resource type="ShortCut" id=6]
-shortcut = SubResource( 5 )
+[sub_resource type="ShortCut" id=5]
+shortcut = SubResource( 4 )
 
-[sub_resource type="GDScript" id=7]
+[sub_resource type="GDScript" id=6]
 script/source = "extends Button
 
 var main
@@ -79,7 +76,7 @@ func prepareSkins ():
 			$\"../Panel/HBoxContainer\".add_child(node)
 "
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0, 0, 0, 0.666667 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
@@ -90,13 +87,12 @@ corner_radius_bottom_left = 16
 script = ExtResource( 2 )
 
 [node name="Background" type="TextureRect" parent="."]
-modulate = Color( 0.6, 0.6, 0.6, 1 )
+modulate = Color( 0, 0.117, 0.13, 1 )
 margin_right = 1920.0
 margin_bottom = 936.0
 texture = ExtResource( 3 )
 expand = true
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -128,13 +124,14 @@ margin_left = 256.0
 margin_top = 704.0
 margin_right = 1664.0
 margin_bottom = 832.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_disabled = Color( 0.364706, 0.364706, 0.364706, 1 )
-custom_colors/font_color = Color( 0, 1, 0.976471, 1 )
-shortcut = SubResource( 6 )
+custom_colors/font_color = Color( 0.945098, 0.713726, 0, 1 )
+custom_colors/font_color_hover = Color( 0.5, 0.375, 0, 1 )
+shortcut = SubResource( 5 )
 text = "Select Character"
 flat = true
-script = SubResource( 7 )
+script = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -144,7 +141,7 @@ margin_left = 256.0
 margin_top = 192.0
 margin_right = 1664.0
 margin_bottom = 648.0
-custom_styles/panel = SubResource( 8 )
+custom_styles/panel = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

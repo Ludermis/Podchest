@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/Magic Dreams.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -62,8 +62,8 @@ margin_top = 584.0
 margin_right = 1920.0
 margin_bottom = 782.0
 custom_fonts/font = SubResource( 3 )
-text = "URL Barına tıklayın.
-\"CTRL + F5\" yapın."
+text = "URL BarIna tıklayın.
+\"CTRL + F5\" yapIn."
 align = 1
 valign = 1
 __meta__ = {
