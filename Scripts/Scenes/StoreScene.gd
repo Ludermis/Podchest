@@ -27,11 +27,11 @@ func refreshStore (which):
 				node.character = i
 				node.item = j
 				node.get_node("Label").text = j
-				node.get_node("TextureRect").texture = load("res://Sprites/UI/Characters/" + j + ".png")
+				node.texture_normal = load("res://Sprites/UI/Characters/" + j + ".png")
 				node.get_node("MoneyLabel").text = str(Vars.store["skins"][i][j]["price"])
 				if Vars.accountInfo[Vars.store["skins"][i][j]["priceType"]] < Vars.store["skins"][i][j]["price"]:
 					node.disabled = true
-					node.self_modulate = Color.darkred
+					node.self_modulate = Color.gray
 				if Vars.store["skins"][i][j]["priceType"] == "AP":
 					node.get_node("CoinSprite").play("AP")
 					node.get_node("CoinSprite").scale = Vector2(0.4,0.4)
@@ -45,11 +45,11 @@ func refreshStore (which):
 			node.character = i
 			node.item = i
 			node.get_node("Label").text = i
-			node.get_node("TextureRect").texture = load("res://Sprites/UI/Characters/" + i + ".png")
+			node.texture_normal = load("res://Sprites/UI/Characters/" + i + ".png")
 			node.get_node("MoneyLabel").text = str(Vars.store["characters"][i]["priceGold"])
 			if Vars.accountInfo["gold"] < Vars.store["characters"][i]["priceGold"]:
 				node.disabled = true
-				node.self_modulate = Color.darkred
+				node.self_modulate = Color.gray
 			$"Panel/ScrollContainer/VBoxContainer/HBoxContainer".add_child(node)
 
 remote func updateStore (store):

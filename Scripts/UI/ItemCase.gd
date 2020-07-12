@@ -12,5 +12,5 @@ func _on_ItemCase_pressed():
 	node.item = item
 	node.character = character
 	node.itemType = itemType
-	node.texture = $TextureRect.texture
+	node.texture = texture_normal
 	get_tree().root.add_child(node)
