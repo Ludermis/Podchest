@@ -44,13 +44,13 @@ func _on_SelectButton_pressed():
 		text = \"Select Skin\"
 		$\"../Title\".text = \"Select Skin\"
 		main.selectedCharacter = main.buttonGroup.get_pressed_button().get_node(\"Label\").text
-		main.rpc_id(1,\"selectCharacter\",Client.selfPeerID,\"res://Prefabs/Characters/\" + main.selectedCharacter + \".tscn\", \"\")
+		main.rpc_id(1,\"selectCharacter\",Client.selfPeerID,\"res://Prefabs/Characters/\" + main.selectedCharacter + \".tscn\", main.selectedCharacter, \"\")
 		prepareSkins()
 	else:
 		var skinName = main.buttonGroup.get_pressed_button().get_node(\"Label\").text
 		if skinName == \"Default\":
 			skinName = \"\"
-		main.rpc_id(1,\"selectCharacter\",Client.selfPeerID,\"res://Prefabs/Characters/\" + main.selectedCharacter + \".tscn\", skinName)
+		main.rpc_id(1,\"selectCharacter\",Client.selfPeerID,\"res://Prefabs/Characters/\" + main.selectedCharacter + \".tscn\", main.selectedCharacter, skinName)
 
 func prepareSkins ():
 	for child in main.get_node(\"Panel/HBoxContainer\").get_children():
