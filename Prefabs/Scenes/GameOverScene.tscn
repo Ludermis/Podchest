@@ -26,10 +26,12 @@ func _ready():
 	$Score1.text = str(Vars.endGameStats[\"scores\"][1])
 	$Score2.modulate = Vars.teams[2][\"color\"]
 	$Score2.text = str(Vars.endGameStats[\"scores\"][2])
+	$Team1Players.text = \"\"
+	$Team2Players.text = \"\"
 	for i in Vars.endGameStats[\"playerNames\"][1]:
-		$Team1Players.text = str(i) + \"\\n\"
+		$Team1Players.text = $Team1Players.text + str(i) + \"\\n\"
 	for i in Vars.endGameStats[\"playerNames\"][2]:
-		$Team2Players.text = str(i) + \"\\n\"
+		$Team2Players.text = $Team2Players.text + str(i) + \"\\n\"
 	$PlayerRect.texture = load(\"res://Sprites/UI/Characters/\" + str(Vars.endGameStats[\"yourCharacter\"]) + \".png\")
 	if Vars.endGameStats[\"goldEarned\"] == -1:
 		$CoinLabel.text = \"You did not play.\"
@@ -235,7 +237,9 @@ margin_right = 576.0
 margin_bottom = 872.0
 custom_fonts/font = SubResource( 6 )
 text = "Player 3
-Player 4"
+Player 4
+
+"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -256,7 +260,7 @@ __meta__ = {
 position = Vector2( 1770, 568 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 17 )
-frame = 6
+frame = 5
 playing = true
 
 [node name="CoinLabel" type="Label" parent="."]

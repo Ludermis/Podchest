@@ -7,8 +7,8 @@ func _ready():
 		Client.connectToServer()
 		Client.connect("connection_ok",self,"connection_ok")
 		Client.connect("connection_failed",self,"connection_failed")
-	else:
-		readyConnected()
+	elif Vars.loggedIn:
+		rpc_id(1,"demandAccountInfo",Client.selfPeerID)
 
 func logged():
 	Vars.loggedIn = true
@@ -22,6 +22,10 @@ func logged():
 	$PlayPanel/LoginButton.visible = false
 	$PlayPanel/RegisterButton.visible = false
 	$PlayPanel/LogoutButton.visible = true
+
+remote func accountInfoRefreshed (info):
+	Vars.accountInfo = info
+	readyConnected()
 
 remote func wrongBuild (newBuild):
 	Vars.newBuildIfMineWrong = newBuild
