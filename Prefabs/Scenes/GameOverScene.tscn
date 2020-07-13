@@ -256,6 +256,7 @@ __meta__ = {
 position = Vector2( 1770, 568 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 17 )
+frame = 6
 playing = true
 
 [node name="CoinLabel" type="Label" parent="."]
