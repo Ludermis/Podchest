@@ -35,4 +35,4 @@ remote func gameStarted ():
 
 
 func _on_FPSTimer_timeout():
-	rpc_id(1,"demandGameTime",Client.selfPeerID,OS.get_ticks_msec(),Vars.ping)
+	rpc_id(1,"demandGameTime",Client.selfPeerID,OS.get_ticks_msec())

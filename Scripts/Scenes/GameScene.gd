@@ -112,7 +112,7 @@ remote func gotGameTime (time, ping):
 
 func _on_FPSTimer_timeout():
 	$"CanvasLayer/FPS".set_text(str(Engine.get_frames_per_second()))
-	rpc_id(1,"demandGameTime",Client.selfPeerID,OS.get_ticks_msec(),Vars.ping)
+	rpc_id(1,"demandGameTime",Client.selfPeerID,OS.get_ticks_msec())
 
 func _on_EndTimer_timeout():
 	get_tree().paused = false

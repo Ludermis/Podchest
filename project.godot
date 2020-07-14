@@ -93,14 +93,6 @@ skill3={
  ]
 }
 
-[network]
-
-limits/webrtc/max_channel_in_buffer_kb=640
-limits/websocket_client/max_in_buffer_kb=640
-limits/websocket_client/max_in_packets=10240
-limits/websocket_client/max_out_buffer_kb=640
-limits/websocket_client/max_out_packets=10240
-
 [rendering]
 
 quality/intended_usage/framebuffer_allocation=0
