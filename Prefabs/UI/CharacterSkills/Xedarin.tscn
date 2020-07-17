@@ -107,9 +107,8 @@ margin_left = 896.0
 margin_top = 768.0
 margin_right = 1024.0
 margin_bottom = 896.0
-hint_tooltip = "(7 seconds cooldown)
-Cast to throw a bear trap.
-Roots for 2 seconds"
+hint_tooltip = "(5 seconds cooldown)
+Call your clocks back, each clock returned reduces Q's cooldown 4 seconds."
 theme = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -154,9 +153,8 @@ margin_left = 1088.0
 margin_top = 768.0
 margin_right = 1216.0
 margin_bottom = 896.0
-hint_tooltip = "(25 seconds cooldown)
-Cast to summon a scythe for 10 seconds.
-Scythe paints the surface."
+hint_tooltip = "(20 seconds cooldown)
+Inverse all colors of grids in an area."
 theme = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
