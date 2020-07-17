@@ -73,7 +73,7 @@ position = Vector2( 0, -3.5 )
 texture = SubResource( 3 )
 
 [node name="Head" type="Sprite" parent="."]
-position = Vector2( 0, -15.5 )
+position = Vector2( 0, -14.5 )
 texture = SubResource( 4 )
 
 [node name="Hand1" type="Sprite" parent="."]
@@ -97,6 +97,7 @@ position = Vector2( 0, 1.25 )
 shape = SubResource( 6 )
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0.25, 6.75 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
