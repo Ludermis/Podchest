@@ -26,15 +26,13 @@ func refreshStore (which):
 				node.itemType = "skin"
 				node.character = i
 				node.item = j
-				node.get_node("Label").text = j
+				if Vars.store["skins"][i][j].has("gold"):
+					node.goldEnabled = true
+					node.gold = Vars.store["skins"][i][j]["gold"]
+				if Vars.store["skins"][i][j].has("AP"):
+					node.APEnabled = true
+					node.AP = Vars.store["skins"][i][j]["AP"]
 				node.texture_normal = load("res://Sprites/UI/Characters/" + j + ".png")
-				node.get_node("MoneyLabel").text = str(Vars.store["skins"][i][j]["price"])
-				if Vars.accountInfo[Vars.store["skins"][i][j]["priceType"]] < Vars.store["skins"][i][j]["price"]:
-					node.disabled = true
-					node.self_modulate = Color.gray
-				if Vars.store["skins"][i][j]["priceType"] == "AP":
-					node.get_node("CoinSprite").play("AP")
-					node.get_node("CoinSprite").scale = Vector2(0.4,0.4)
 				$"Panel/ScrollContainer/VBoxContainer/HBoxContainer".add_child(node)
 	elif which == "characters":
 		for i in Vars.store["characters"]:
@@ -44,12 +42,13 @@ func refreshStore (which):
 			node.itemType = "character"
 			node.character = i
 			node.item = i
-			node.get_node("Label").text = i
 			node.texture_normal = load("res://Sprites/UI/Characters/" + i + ".png")
-			node.get_node("MoneyLabel").text = str(Vars.store["characters"][i]["priceGold"])
-			if Vars.accountInfo["gold"] < Vars.store["characters"][i]["priceGold"]:
-				node.disabled = true
-				node.self_modulate = Color.gray
+			if Vars.store["characters"][i].has("gold"):
+					node.goldEnabled = true
+					node.gold = Vars.store["characters"][i]["gold"]
+			if Vars.store["characters"][i].has("AP"):
+					node.APEnabled = true
+					node.AP = Vars.store["characters"][i]["AP"]
 			$"Panel/ScrollContainer/VBoxContainer/HBoxContainer".add_child(node)
 
 remote func updateStore (store):

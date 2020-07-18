@@ -1,14 +1,13 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Sprites/UI/Characters/Villager.png" type="Texture" id=1]
-[ext_resource path="res://Fonts/arial.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Sprites/UI/vintage.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/UI/goldcoin.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/UI/artpalette.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/UI/ItemCase.gd" type="Script" id=6]
 [ext_resource path="res://Fonts/Vintage Avalanche.otf" type="DynamicFontData" id=7]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=17]
 size = 32
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -16,59 +15,55 @@ use_filter = true
 extra_spacing_char = 1
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=2]
-size = 18
+[sub_resource type="DynamicFont" id=18]
+size = 20
 use_filter = true
-font_data = ExtResource( 2 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 4 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 4 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 4 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 4 )
-region = Rect2( 128, 0, 32, 32 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 4 )
-region = Rect2( 160, 0, 32, 32 )
+region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 4 )
-region = Rect2( 192, 0, 32, 32 )
+region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 4 )
-region = Rect2( 224, 0, 32, 32 )
+region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 85, 70 )
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=12]
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 224, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=16]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
-}, {
-"frames": [ SubResource( 11 ) ],
-"loop": true,
-"name": "AP",
-"speed": 5.0
 } ]
+
+[sub_resource type="DynamicFont" id=19]
+size = 20
+use_filter = true
+font_data = ExtResource( 7 )
 
 [node name="ItemCase" type="TextureButton"]
 margin_right = 192.0
@@ -95,7 +90,7 @@ __meta__ = {
 margin_top = 116.0
 margin_right = 192.0
 margin_bottom = 170.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Villager"
 align = 1
@@ -104,23 +99,75 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoneyLabel" type="Label" parent="."]
-margin_left = 32.0
-margin_top = 168.0
-margin_right = 160.0
-margin_bottom = 196.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "1324234"
-align = 2
-valign = 1
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 1.0
+margin_top = 157.0
+margin_right = 192.0
+margin_bottom = 193.0
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CoinSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 176, 184 )
-frames = SubResource( 12 )
-frame = 7
+[node name="APContainer" type="HBoxContainer" parent="HBoxContainer"]
+margin_left = 6.0
+margin_right = 93.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/APContainer"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="HBoxContainer/APContainer"]
+margin_left = 40.0
+margin_top = 6.0
+margin_right = 87.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 18 )
+text = "6300"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoldContainer" type="HBoxContainer" parent="HBoxContainer"]
+margin_left = 97.0
+margin_right = 184.0
+margin_bottom = 36.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="HBoxContainer/GoldContainer"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+mouse_filter = 1
+
+[node name="CoinSprite" type="AnimatedSprite" parent="HBoxContainer/GoldContainer/Control"]
+position = Vector2( 17, 25 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 16 )
+frame = 5
 playing = true
+
+[node name="Label" type="Label" parent="HBoxContainer/GoldContainer"]
+margin_left = 40.0
+margin_top = 6.0
+margin_right = 87.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 19 )
+text = "6300"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="." to="." method="_on_ItemCase_pressed"]
