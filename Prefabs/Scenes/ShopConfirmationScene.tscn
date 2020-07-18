@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Sprites/Misc/box.png" type="Texture" id=1]
 [ext_resource path="res://Fonts/Vintage Avalanche.otf" type="DynamicFontData" id=2]
@@ -130,6 +130,11 @@ animations = [ {
 "name": "default",
 "speed": 8.0
 } ]
+
+[sub_resource type="DynamicFont" id=30]
+size = 20
+use_filter = true
+font_data = ExtResource( 2 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
@@ -284,7 +289,7 @@ mouse_filter = 1
 position = Vector2( 23, 37 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 29 )
-frame = 7
+frame = 2
 playing = true
 
 [node name="Label" type="Label" parent="Panel/GoldButton/HBoxContainer"]
@@ -294,6 +299,31 @@ margin_right = 166.0
 margin_bottom = 45.0
 custom_fonts/font = SubResource( 20 )
 text = "6300"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewAP" type="Label" parent="Panel"]
+margin_left = 408.0
+margin_top = 384.0
+margin_right = 616.0
+margin_bottom = 416.0
+custom_fonts/font = SubResource( 30 )
+text = "New AP : 200"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="NewGold" type="Label" parent="Panel"]
+margin_left = 664.0
+margin_top = 384.0
+margin_right = 872.0
+margin_bottom = 416.0
+custom_fonts/font = SubResource( 30 )
+text = "New Gold : 200"
+align = 1
+valign = 1
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
