@@ -12,6 +12,8 @@ func _ready():
 
 func logged():
 	Vars.loggedIn = true
+	if Vars.accountInfo["auth"] >= 100:
+		$AdminButton.visible = true
 	$AccountPanel/CoinLabel.text = str(Vars.accountInfo["gold"])
 	$AccountPanel/APLabel.text = str(Vars.accountInfo["AP"])
 	$MiscPanel/CollectionButton.disabled = false

@@ -1,6 +1,7 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://Sprites/UI/frame.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/UI/admin.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/ProfilePictures/blank.png" type="Texture" id=3]
 [ext_resource path="res://SavedResources/UI/PurplePanel.tres" type="StyleBox" id=4]
 [ext_resource path="res://Scripts/Scenes/MainScene.gd" type="Script" id=5]
@@ -13,6 +14,18 @@
 [ext_resource path="res://Sprites/UI/book.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/UI/storecart.png" type="Texture" id=13]
 [ext_resource path="res://Fonts/Magic Dreams.ttf" type="DynamicFontData" id=15]
+
+[sub_resource type="GDScript" id=56]
+script/source = "extends TextureButton
+
+
+func _ready():
+	pass
+
+
+func _on_AdminButton_pressed():
+	get_tree().change_scene(\"res://Prefabs/Scenes/AdminPanelScene.tscn\")
+"
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -240,7 +253,7 @@ animations = [ {
 } ]
 
 [sub_resource type="StyleBoxFlat" id=41]
-bg_color = Color( 1, 1, 1, 1 )
+bg_color = Color( 0, 0.18, 0.2, 1 )
 border_width_left = 8
 border_width_top = 4
 border_width_right = 8
@@ -394,6 +407,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AdminButton" type="TextureButton" parent="."]
+visible = false
+margin_left = 192.0
+margin_right = 320.0
+margin_bottom = 128.0
+texture_normal = ExtResource( 2 )
+expand = true
+script = SubResource( 56 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="AccountPanel" type="Panel" parent="."]
 margin_left = 184.0
 margin_top = 136.0
@@ -445,7 +470,7 @@ __meta__ = {
 position = Vector2( 411.598, 34.8854 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 12 )
-frame = 5
+frame = 7
 playing = true
 
 [node name="APSprite" type="AnimatedSprite" parent="AccountPanel"]
@@ -920,6 +945,7 @@ __meta__ = {
 
 [node name="DemandOnlineTimer" type="Timer" parent="."]
 autostart = true
+[connection signal="pressed" from="AdminButton" to="AdminButton" method="_on_AdminButton_pressed"]
 [connection signal="mouse_entered" from="MiscPanel/CollectionButton" to="MiscPanel/CollectionButton" method="_on_CollectionButton_mouse_entered"]
 [connection signal="mouse_exited" from="MiscPanel/CollectionButton" to="MiscPanel/CollectionButton" method="_on_CollectionButton_mouse_exited"]
 [connection signal="pressed" from="MiscPanel/CollectionButton" to="MiscPanel/CollectionButton" method="_on_CollectionButton_pressed"]
