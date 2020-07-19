@@ -17,7 +17,7 @@ var time : float = 0 setget ,getTime
 var objects = {}
 var roomMaster = -1
 var ping = 9999
-var build = "13"
+var build = "14"
 var buildConfirmed = false
 var newBuildIfMineWrong
 
@@ -41,6 +41,11 @@ func getTime() -> float:
 
 func _ready():
 	pass
+
+func logBBCode (txt):
+	txt = txt.replace("[ERROR]","[color=red][ERROR][/color]")
+	txt = txt.replace("[INFO]","[color=blue][INFO][/color]")
+	return txt
 
 func rotatePoint(point,center,angle) -> Vector2:
 	var newX = cos(angle) * (point.x - center.x) - sin(angle) * (point.y - center.y) + center.x
