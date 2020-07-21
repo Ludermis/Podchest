@@ -32,16 +32,16 @@ func castEnd():
 		for y in range (-area / 2 + (x - 1),area / 2 + 1 - (x - 1)):
 			var pos = Vars.optimizeVector(characterNode.position + Vector2(32,32),64) + Vector2(y * 64, (x - 1) * 64)
 			if Vars.dirts.has(pos) && Vars.dirts[pos].team == 1:
-				Vars.tryChangeDirt(Client.selfPeerID,pos,2)
+				Vars.tryChangeDirt(Client.selfPeerID,characterNode.id,pos,2)
 			elif Vars.dirts.has(pos):
-				Vars.tryChangeDirt(Client.selfPeerID,pos,1)
+				Vars.tryChangeDirt(Client.selfPeerID,characterNode.id,pos,1)
 	for x in range(1,area / 2 + 1):
 		for y in range (-area / 2 + x,area / 2 + 1 - x):
 			var pos = Vars.optimizeVector(characterNode.position + Vector2(32,32),64) + Vector2(y * 64, -x * 64)
 			if Vars.dirts.has(pos) && Vars.dirts[pos].team == 1:
-				Vars.tryChangeDirt(Client.selfPeerID,pos,2)
+				Vars.tryChangeDirt(Client.selfPeerID,characterNode.id,pos,2)
 			elif Vars.dirts.has(pos):
-				Vars.tryChangeDirt(Client.selfPeerID,pos,1)
+				Vars.tryChangeDirt(Client.selfPeerID,characterNode.id,pos,1)
 	
 	characterNode.canMove = true
 	characterNode.get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false

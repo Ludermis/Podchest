@@ -17,7 +17,7 @@ var time : float = 0 setget ,getTime
 var objects = {}
 var roomMaster = -1
 var ping = 9999
-var build = "14"
+var build = "15"
 var buildConfirmed = false
 var newBuildIfMineWrong
 
@@ -45,6 +45,8 @@ func _ready():
 func logBBCode (txt):
 	txt = txt.replace("[ERROR]","[color=red][ERROR][/color]")
 	txt = txt.replace("[INFO]","[color=blue][INFO][/color]")
+	txt = txt.replace("Lynext","[wave amp=25 freq=2] [color=#5D00FF]L[/color][color=#6B00FF]y[/color][color=#7A01FF]n[/color][color=#8802FF]e[/color][color=#9703FF]x[/color][color=#A504FF]t[/color] [/wave]")
+	txt = txt.replace("Flycoder","[wave amp=25 freq=2] [color=#0AB6FF]F[/color][color=#15A7FF]l[/color][color=#2199FF]y[/color][color=#2D8AFF]c[/color][color=#397CFF]o[/color][color=#446DFF]d[/color][color=#505FFF]e[/color][color=#5C50FF]r[/color] [/wave]")
 	return txt
 
 func rotatePoint(point,center,angle) -> Vector2:
@@ -65,15 +67,15 @@ func timeToString (t):
 	rtn += str(seconds)
 	return rtn
 
-func tryPlaceDirt (id, pos, team):
+func tryPlaceDirt (id, painter, pos, team):
 	if pos.x < 0 || pos.y < -(mapSizeY - 1) * 64 || pos.x > (mapSizeX - 1) * 64 || pos.y > 0:
 		return
-	get_tree().root.get_node("Main").rpc_id(1,"dirtCreated",id,pos,team)
+	get_tree().root.get_node("Main").rpc_id(1,"dirtCreated", id, painter, pos, team)
 
-func tryChangeDirt (id, pos, team):
+func tryChangeDirt (id, painter, pos, team):
 	if pos.x < 0 || pos.y < -(mapSizeY - 1) * 64 || pos.x > (mapSizeX - 1) * 64 || pos.y > 0:
 		return
-	get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",id,pos,team)
+	get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",id, painter, pos, team)
 
 func optimizeVector(pos, opt):
 	var newv = Vector2.ZERO;

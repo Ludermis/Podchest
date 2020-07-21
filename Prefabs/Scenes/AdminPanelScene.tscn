@@ -5,20 +5,20 @@
 [ext_resource path="res://Sprites/Misc/box.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/arial.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 64
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.34902 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 20
 use_filter = true
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=4]
 size = 24
 use_filter = true
 font_data = ExtResource( 4 )
@@ -41,7 +41,7 @@ __meta__ = {
 margin_top = 856.0
 margin_right = 285.0
 margin_bottom = 936.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.407843, 0, 1, 1 )
 text = "Main Menu"
 flat = true
@@ -54,8 +54,8 @@ margin_left = 320.0
 margin_top = 64.0
 margin_right = 1600.0
 margin_bottom = 704.0
-custom_styles/normal = SubResource( 5 )
-custom_fonts/normal_font = SubResource( 4 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
 bbcode_text = "
 "
@@ -71,7 +71,7 @@ margin_left = 72.0
 margin_top = 64.0
 margin_right = 312.0
 margin_bottom = 320.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

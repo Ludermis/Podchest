@@ -450,9 +450,9 @@ func _on_DirtTimer_timeout():
 	if Client.selfPeerID == Vars.roomMaster:
 		var vec = Vars.optimizeVector(position + Vector2(32,32),64)
 		if !Vars.dirts.has(vec):
-			Vars.tryPlaceDirt(Client.selfPeerID,vec,team)
+			Vars.tryPlaceDirt(Client.selfPeerID,id,vec,team)
 		elif Vars.dirts[vec].team != team:
-			Vars.tryChangeDirt(Client.selfPeerID,vec,team)
+			Vars.tryChangeDirt(Client.selfPeerID,id,vec,team)
 
 func _on_DirectionTimer_timeout():
 	if animation == "walk" || animation == "idle":

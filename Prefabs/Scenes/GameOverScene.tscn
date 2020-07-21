@@ -6,42 +6,7 @@
 [ext_resource path="res://Shaders/cutcircle.shader" type="Shader" id=4]
 [ext_resource path="res://Fonts/arial.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Sprites/UI/goldcoin.png" type="Texture" id=6]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends Node2D
-
-
-func _ready():
-	rpc_id(1,\"leaveRoom\",Client.selfPeerID)
-	if Vars.endGameStats[\"winner\"] == Vars.myTeam:
-		$\"Title\".text = \"VICTORY\"
-		$\"Title\".modulate = Color.lime
-	elif Vars.endGameStats[\"winner\"] != -1:
-		$\"Title\".text = \"DEFEAT\"
-		$\"Title\".modulate = Color.red
-	else:
-		$\"Title\".text = \"DRAW\"
-		$\"Title\".modulate = Color.blue
-	$Score1.modulate = Vars.teams[1][\"color\"]
-	$Score1.text = str(Vars.endGameStats[\"scores\"][1])
-	$Score2.modulate = Vars.teams[2][\"color\"]
-	$Score2.text = str(Vars.endGameStats[\"scores\"][2])
-	$Team1Players.text = \"\"
-	$Team2Players.text = \"\"
-	for i in Vars.endGameStats[\"playerNames\"][1]:
-		$Team1Players.text = $Team1Players.text + str(i) + \"\\n\"
-	for i in Vars.endGameStats[\"playerNames\"][2]:
-		$Team2Players.text = $Team2Players.text + str(i) + \"\\n\"
-	$PlayerRect.texture = load(\"res://Sprites/UI/Characters/\" + str(Vars.endGameStats[\"yourCharacter\"]) + \".png\")
-	if Vars.endGameStats[\"goldEarned\"] == -1:
-		$CoinLabel.text = \"You did not play.\"
-	elif Vars.endGameStats[\"goldEarned\"] == 0:
-		$CoinLabel.text = \"Login to earn gold.\"
-	else:
-		$CoinLabel.text = \"+\" + str(Vars.endGameStats[\"goldEarned\"])
-	
-	Vars.clearVars()
-"
+[ext_resource path="res://Scripts/Scenes/GameOverScene.gd" type="Script" id=7]
 
 [sub_resource type="DynamicFont" id=2]
 size = 96
@@ -70,57 +35,57 @@ func _on_MainMenuButton_pressed():
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 4 )
 shader_param/amt = 1.0
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 6 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 6 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 6 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 6 )
 region = Rect2( 128, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 6 )
 region = Rect2( 160, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 6 )
 region = Rect2( 192, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 6 )
 region = Rect2( 224, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=17]
+[sub_resource type="SpriteFrames" id=16]
 animations = [ {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
 } ]
 
-[sub_resource type="DynamicFont" id=18]
+[sub_resource type="DynamicFont" id=17]
 size = 49
 use_filter = true
 font_data = ExtResource( 5 )
 
 [node name="Main" type="Node2D"]
-script = SubResource( 1 )
+script = ExtResource( 7 )
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color( 0, 0.117647, 0.129412, 1 )
@@ -209,11 +174,38 @@ __meta__ = {
 [node name="Team1Players" type="Label" parent="."]
 margin_left = 64.0
 margin_top = 336.0
-margin_right = 576.0
+margin_right = 384.0
 margin_bottom = 552.0
 custom_fonts/font = SubResource( 6 )
 text = "Player 1
 Player 2"
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Team1PlayerScores" type="Label" parent="."]
+margin_left = 384.0
+margin_top = 336.0
+margin_right = 544.0
+margin_bottom = 552.0
+custom_fonts/font = SubResource( 6 )
+text = "100
+100"
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Team2PlayerScores" type="Label" parent="."]
+margin_left = 384.0
+margin_top = 656.0
+margin_right = 544.0
+margin_bottom = 872.0
+custom_fonts/font = SubResource( 6 )
+text = "100
+100"
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -233,8 +225,8 @@ __meta__ = {
 [node name="Team2Players" type="Label" parent="."]
 margin_left = 64.0
 margin_top = 656.0
-margin_right = 576.0
-margin_bottom = 872.0
+margin_right = 384.0
+margin_bottom = 881.0
 custom_fonts/font = SubResource( 6 )
 text = "Player 3
 Player 4
@@ -245,7 +237,7 @@ __meta__ = {
 }
 
 [node name="PlayerRect" type="TextureRect" parent="."]
-material = SubResource( 8 )
+material = SubResource( 7 )
 margin_left = 1600.0
 margin_top = 256.0
 margin_right = 1856.0
@@ -259,8 +251,8 @@ __meta__ = {
 [node name="CoinSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 1770, 568 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
-frame = 5
+frames = SubResource( 16 )
+frame = 2
 playing = true
 
 [node name="CoinLabel" type="Label" parent="."]
@@ -268,7 +260,7 @@ margin_left = 960.0
 margin_top = 528.0
 margin_right = 1728.0
 margin_bottom = 584.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "+Money"
 align = 2

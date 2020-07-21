@@ -60,6 +60,7 @@ region_enabled = true
 region_rect = Rect2( -1, -1, 3202, 3202 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PoolVector2Array( -32, 48, -48, 48, -48, -3184, -32, -3184, -32, 48 )

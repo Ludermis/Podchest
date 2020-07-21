@@ -37,6 +37,6 @@ func _process(delta):
 
 func dirtToPos (pos):
 	if !Vars.dirts.has(pos):
-		Vars.tryPlaceDirt(Client.selfPeerID,pos,Vars.objects[whoSummoned]["team"])
+		Vars.tryPlaceDirt(Client.selfPeerID,Vars.objects[whoSummoned]["id"],pos,Vars.objects[whoSummoned]["team"])
 	elif Vars.dirts[pos].team != Vars.objects[whoSummoned]["team"]:
-		Vars.tryChangeDirt(Client.selfPeerID,pos,Vars.objects[whoSummoned]["team"])
+		Vars.tryChangeDirt(Client.selfPeerID,Vars.objects[whoSummoned]["id"],pos,Vars.objects[whoSummoned]["team"])
