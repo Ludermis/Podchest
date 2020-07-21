@@ -46,7 +46,7 @@ func dirtToPos (pos):
 	if !Vars.dirts.has(pos):
 		Vars.tryPlaceDirt(Client.selfPeerID,Vars.objects[whoSummoned]["id"],pos,Vars.objects[whoSummoned]["team"])
 	elif Vars.dirts[pos].team != Vars.objects[whoSummoned]["team"]:
-		Vars.tryChangeDirt(Client.selfPeerID,pos,Vars.objects[whoSummoned]["id"],Vars.objects[whoSummoned]["team"])
+		Vars.tryChangeDirt(Client.selfPeerID,Vars.objects[whoSummoned]["id"],pos,Vars.objects[whoSummoned]["team"])
 
 func _on_PaintTimer_timeout():
 	if Client.selfPeerID == Vars.roomMaster:
