@@ -11,7 +11,7 @@ var animation = "default" setget setAnimation
 func setReturnMode (rtnMode):
 	if returnMode == false && rtnMode == true:
 		returnMode = rtnMode
-		$PaintTimer.wait_time = 0.01
+		$PaintTimer.wait_time = 0.05
 
 func setAnimation (anim):
 	animation = anim

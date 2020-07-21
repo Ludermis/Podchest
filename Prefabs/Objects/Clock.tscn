@@ -4,10 +4,10 @@
 [ext_resource path="res://Scripts/Objects/Clock.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 26.3549
+radius = 28.9385
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 24.4991
+radius = 17.2722
 
 [node name="Clock" type="KinematicBody2D" groups=[
 "Clock",
