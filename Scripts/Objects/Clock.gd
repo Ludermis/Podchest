@@ -69,18 +69,18 @@ func _on_Clock_tree_exited():
 
 
 func _on_Area2D_area_entered(area):
+	if returnMode == true && Client.selfPeerID == whoSummoned:
+		var body = area.get_node("..")
+		if body.is_in_group("Player") && body.id == whoSummoned:
+			body.reduceQCooldown = 4
+			get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position, "modulate": modulate})
+			get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+			queue_free()
 	if Client.selfPeerID == Vars.roomMaster:
-		if area.get_node("..").is_in_group("Player"):
-			var body = area.get_node("..")
+		var body = area.get_node("..")
+		if body.is_in_group("Player"):
 			if returnMode == false:
 				if body.is_in_group("Player") && Vars.objects[body.id]["team"] != Vars.objects[whoSummoned]["team"]:
-					get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position, "modulate": modulate})
-					get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
-					queue_free()
-			else:
-				if body.is_in_group("Player") && body.id == whoSummoned:
-					body.reduceQCooldown = 4
-					get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,body.id,{"reduceQCooldown": 4})
 					get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position, "modulate": modulate})
 					get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
 					queue_free()
