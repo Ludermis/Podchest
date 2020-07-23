@@ -1,10 +1,15 @@
 extends "res://Scripts/Base/Character.gd"
 
-var clocks = []
-var reduceQCooldown setget setReduceQCooldown
+var disguised setget setDisguised
 
-func setReduceQCooldown(rdc):
-	skills[0].lastCasted -= rdc
+func setDisguised (who):
+	disguised = who
+	if disguised == id:
+		$NameLabel.text = playerName
+		$NameLabel.modulate = Vars.teams[team]["color"]
+	elif disguised != id:
+		$NameLabel.text = Vars.objects[disguised].playerName
+		$NameLabel.modulate = Vars.teams[Vars.objects[disguised]["team"]]["color"]
 
 func inputHandler():
 	.inputHandler()
@@ -16,16 +21,17 @@ func inputHandler():
 		skills[2].use()
 
 func _init():
+	disguised = id
 	characterName = "Mold"
-	var skill1 = preload("res://Scripts/Skills/Xedarin/XedarinQSkill.gd").new()
+	var skill1 = preload("res://Scripts/Skills/Villager/VillagerQSkill.gd").new()
 	skill1.characterNode = self
 	skills.append(skill1)
 	
-	var skill2 = preload("res://Scripts/Skills/Xedarin/XedarinESkill.gd").new()
+	var skill2 = preload("res://Scripts/Skills/Villager/VillagerQSkill.gd").new()
 	skill2.characterNode = self
 	skills.append(skill2)
 	
-	var skill3 = preload("res://Scripts/Skills/Xedarin/XedarinRSkill.gd").new()
+	var skill3 = preload("res://Scripts/Skills/Mold/MoldRSkill.gd").new()
 	skill3.characterNode = self
 	skills.append(skill3)
 

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Sprites/Objects/clock.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/UI/Skills/Grab.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/UI/Skills/Yingyang.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/UI/buffrunning.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/orange juice 2.0.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Fonts/arial.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Shaders/circular-progress.shader" type="Shader" id=6]
@@ -56,6 +56,7 @@ __meta__ = {
 }
 
 [node name="Skill1" type="Control" parent="."]
+visible = false
 margin_left = 704.0
 margin_top = 768.0
 margin_right = 832.0
@@ -103,6 +104,7 @@ __meta__ = {
 }
 
 [node name="Skill2" type="Control" parent="."]
+visible = false
 margin_left = 896.0
 margin_top = 768.0
 margin_right = 1024.0
@@ -160,11 +162,66 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Texture6" type="TextureRect" parent="Skill3"]
+margin_left = 5.0
+margin_top = 53.0
+margin_right = 78.9997
+margin_bottom = 123.001
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Texture" type="TextureRect" parent="Skill3"]
 margin_left = 28.1813
 margin_top = 78.3275
 margin_right = 102.181
 margin_bottom = 148.328
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture2" type="TextureRect" parent="Skill3"]
+margin_left = 38.0
+margin_top = 67.0
+margin_right = 112.0
+margin_bottom = 137.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture3" type="TextureRect" parent="Skill3"]
+margin_left = -6.99998
+margin_top = 75.0
+margin_right = 66.9997
+margin_bottom = 145.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture4" type="TextureRect" parent="Skill3"]
+margin_left = 41.0
+margin_top = 85.0
+margin_right = 115.0
+margin_bottom = 155.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture5" type="TextureRect" parent="Skill3"]
+margin_left = 12.0
+margin_top = 79.0
+margin_right = 85.9997
+margin_bottom = 149.0
 texture = ExtResource( 3 )
 expand = true
 __meta__ = {

@@ -23,25 +23,25 @@ resource_local_to_scene = true
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 4 )
 shader_param/glowColor = Color( 1, 1, 1, 0 )
 shader_param/emissionTexture = ExtResource( 3 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=5]
 resource_local_to_scene = true
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=6]
 resource_local_to_scene = true
 atlas = ExtResource( 1 )
 region = Rect2( 0, 512, 64, 64 )
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=7]
 radius = 6.50481
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 8.25, 14.75 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -80,17 +80,17 @@ position = Vector2( 0, -3.5 )
 texture = SubResource( 3 )
 
 [node name="Head" type="Sprite" parent="."]
-material = SubResource( 9 )
+material = SubResource( 4 )
 position = Vector2( 0, -14.5 )
-texture = SubResource( 4 )
+texture = SubResource( 5 )
 
 [node name="Hand1" type="Sprite" parent="."]
 position = Vector2( -6, -5.5 )
-texture = SubResource( 5 )
+texture = SubResource( 6 )
 
 [node name="Hand2" type="Sprite" parent="."]
 position = Vector2( 6, -5.5 )
-texture = SubResource( 5 )
+texture = SubResource( 6 )
 
 [node name="DirtTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -102,7 +102,7 @@ autostart = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, 1.25 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
@@ -110,6 +110,6 @@ position = Vector2( 0.25, 6.75 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -0.25, -14.25 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 [connection signal="timeout" from="DirtTimer" to="." method="_on_DirtTimer_timeout"]
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_DirectionTimer_timeout"]

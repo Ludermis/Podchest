@@ -465,6 +465,7 @@ func tree_exited():
 func _ready():
 	connect("tree_exited", self, "tree_exited")
 	set_physics_process(true)
+	$NameLabel.modulate = Vars.teams[team]["color"].blend(Color(1,1,1,0.5))
 	$DirtTimer.start()
 	if id == Client.selfPeerID:
 		get_tree().root.get_node("Main/CanvasLayer").add_child(load("res://Prefabs/UI/CharacterSkills/" + characterName + ".tscn").instance())

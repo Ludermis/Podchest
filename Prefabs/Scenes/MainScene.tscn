@@ -481,7 +481,7 @@ __meta__ = {
 position = Vector2( 411.432, 42.1931 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 13 )
-frame = 7
+frame = 6
 playing = true
 
 [node name="APSprite" type="AnimatedSprite" parent="AccountPanel"]
@@ -982,9 +982,9 @@ __meta__ = {
 }
 
 [node name="PlayButton" type="Button" parent="PlayPanel"]
-margin_left = 128.0
+margin_left = 136.0
 margin_top = 104.0
-margin_right = 448.0
+margin_right = 464.0
 margin_bottom = 216.0
 custom_fonts/font = SubResource( 51 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -998,9 +998,9 @@ __meta__ = {
 }
 
 [node name="RegisterButton" type="Button" parent="PlayPanel"]
-margin_left = 152.0
+margin_left = 144.0
 margin_top = 256.0
-margin_right = 304.0
+margin_right = 296.0
 margin_bottom = 344.0
 custom_fonts/font = SubResource( 53 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -1033,7 +1033,7 @@ __meta__ = {
 visible = false
 margin_left = 144.0
 margin_top = 256.0
-margin_right = 448.0
+margin_right = 456.0
 margin_bottom = 344.0
 custom_fonts/font = SubResource( 53 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )

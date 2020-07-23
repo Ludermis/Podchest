@@ -97,6 +97,6 @@ func _on_Area2D_area_entered(area):
 		if body.is_in_group("Player"):
 			if returnMode == false:
 				if body.is_in_group("Player") && Vars.objects[body.id]["team"] != Vars.objects[whoSummoned]["team"]:
-					get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position})
+					get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position, "team": Vars.objects[whoSummoned]["team"]})
 					get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
 					queue_free()
