@@ -41,4 +41,3 @@ frames = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 6 )
-[connection signal="tree_exited" from="." to="." method="_on_BearTrap_tree_exited"]

@@ -16,6 +16,7 @@ remote func gotAdminInfo (demand, dict):
 		_on_LogsList_item_selected(0)
 	elif demand["type"] == "getLog":
 		$RichTextLabel.bbcode_text += Vars.logBBCode(dict["log"])
+		$RichTextLabel.scroll_to_line($RichTextLabel.get_line_count() - 1)
 
 
 func _on_LogsList_item_selected(index):

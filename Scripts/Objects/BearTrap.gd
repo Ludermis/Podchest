@@ -16,6 +16,8 @@ func setAnimationPlayed (v):
 		$AnimatedSprite.play("default")
 
 func tree_exited():
+	if trappedPlayer == Client.selfPeerID && !Vars.objects[Client.selfPeerID].anySkillCasting():
+		Vars.objects[Client.selfPeerID].canMove = true
 	if Vars.objects.has(id):
 		Vars.objects.erase(id)
 
@@ -28,24 +30,29 @@ func _process(delta):
 	if trappedPlayer == Client.selfPeerID:
 		Vars.objects[Client.selfPeerID].canMove = false
 	if Vars.roomMaster == Client.selfPeerID:
+		var dict = {}
 		if !Vars.objects.has(whoSummoned):
 			get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
 			queue_free()
 			return
 		if !planted:
 			position = position.move_toward(endPosition,delta * speed)
+			dict["position"] = position
 		if planted == false && position.distance_to(endPosition) < 0.1:
 			planted = true
+			dict["planted"] = planted
 		if planted && trappedPlayer == -1:
 			var arr = $Area2D.get_overlapping_bodies()
 			for i in arr:
 				_on_Area2D_body_entered(i)
 		if planted && trappedPlayer != -1:
 			trapTimeRemaining -= delta
+			dict["trapTimeRemaining"] = trapTimeRemaining
 			if trapTimeRemaining < 0:
 				get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
 				queue_free()
-		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"position": position,"planted": planted, "trapTimeRemaining": trapTimeRemaining, "trappedPlayer": trappedPlayer})
+				return
+		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,dict)
 		
 
 func _on_Area2D_body_entered(body):
@@ -54,10 +61,6 @@ func _on_Area2D_body_entered(body):
 			return
 		if body.is_in_group("Player") && Vars.objects[body.id]["team"] != Vars.objects[whoSummoned]["team"]:
 			trapTimeRemaining = 2
-			get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"animationPlayed": true})
 			$AnimatedSprite.play("default")
 			trappedPlayer = body.id
-
-func _on_BearTrap_tree_exited():
-	if trappedPlayer == Client.selfPeerID:
-		Vars.objects[Client.selfPeerID].canMove = true
+			get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"animationPlayed": true, "trappedPlayer": trappedPlayer})

@@ -21,6 +21,7 @@ func _ready():
 func _process(delta):
 	$Particles2D.process_material.scale = materialScale
 	if Client.selfPeerID == Vars.roomMaster:
+		var dict = {}
 		if !Vars.objects.has(whoSummoned):
 			get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
 			queue_free()
@@ -37,12 +38,16 @@ func _process(delta):
 			return
 		if planted:
 			timeToExplode -= delta
+			dict["timeToExplode"] = timeToExplode
 		else:
 			position = position.move_toward(endPosition,delta * speed)
+			dict["position"] = position
 		materialScale += delta
-		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"position": position, "materialScale": materialScale, "planted": planted, "timeToExplode": timeToExplode})
+		dict["materialScale"] = materialScale
 		if planted == false && position.distance_to(endPosition) < 0.1:
 			planted = true
+			dict["planted"] = true
+		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,dict)
 
 func dirtToPos (pos):
 	if !Vars.dirts.has(pos):

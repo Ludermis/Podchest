@@ -46,8 +46,9 @@ func readyConnected ():
 	$MiscPanel/StoreButton.modulate = Color.black
 	
 	if Vars.selectedGamemode == "quick2v2":
-		$"GamemodePanel/HBoxContainer/1v1Toggle".pressed = false
 		$"GamemodePanel/HBoxContainer/2v2Toggle".pressed = true
+	if Vars.selectedGamemode == "quick3v3":
+		$"GamemodePanel/HBoxContainer/3v3Toggle".pressed = true
 	if !Vars.loggedIn:
 		var save = File.new()
 		if save.file_exists("user://account.txt"):

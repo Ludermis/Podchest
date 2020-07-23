@@ -54,6 +54,7 @@ margin_left = 320.0
 margin_top = 64.0
 margin_right = 1600.0
 margin_bottom = 704.0
+focus_mode = 2
 custom_styles/normal = SubResource( 2 )
 custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
@@ -61,7 +62,7 @@ bbcode_text = "
 "
 text = "
 "
-scroll_following = true
+selection_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
