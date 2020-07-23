@@ -458,7 +458,12 @@ func _on_DirectionTimer_timeout():
 	if animation == "walk" || animation == "idle":
 		findNextDirection()
 
+func tree_exited():
+	if Vars.objects.has(id):
+		Vars.objects.erase(id)
+
 func _ready():
+	connect("tree_exited", self, "tree_exited")
 	set_physics_process(true)
 	$DirtTimer.start()
 	if id == Client.selfPeerID:

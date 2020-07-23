@@ -15,13 +15,23 @@ func setAnimationPlayed (v):
 	if animationPlayed:
 		$AnimatedSprite.play("default")
 
+func tree_exited():
+	if Vars.objects.has(id):
+		Vars.objects.erase(id)
+
 func _ready():
+	connect("tree_exited", self, "tree_exited")
 	if Vars.myTeam != Vars.objects[whoSummoned]["team"]:
 		modulate = Vars.teams[Vars.objects[whoSummoned]["team"]]["color"].blend(Color(1,1,1,0.3))
+
 func _process(delta):
 	if trappedPlayer == Client.selfPeerID:
 		Vars.objects[Client.selfPeerID].canMove = false
 	if Vars.roomMaster == Client.selfPeerID:
+		if !Vars.objects.has(whoSummoned):
+			get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+			queue_free()
+			return
 		if !planted:
 			position = position.move_toward(endPosition,delta * speed)
 		if planted == false && position.distance_to(endPosition) < 0.1:

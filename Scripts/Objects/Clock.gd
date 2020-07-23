@@ -17,7 +17,13 @@ func setAnimation (anim):
 	animation = anim
 	$AnimatedSprite.play(anim)
 
+
+func tree_exited():
+	if Vars.objects.has(id):
+		Vars.objects.erase(id)
+
 func _ready():
+	connect("tree_exited", self, "tree_exited")
 	dir = Vector2(rand_range(-1,1),rand_range(-1,1))
 	dir = dir.normalized()
 	Vars.objects[whoSummoned].clocks.append(id)
@@ -26,6 +32,11 @@ func _ready():
 
 func _process(delta):
 	if Client.selfPeerID == Vars.roomMaster:
+		if !Vars.objects.has(whoSummoned):
+			get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position})
+			get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+			queue_free()
+			return
 		if returnMode == false:
 			lifeRemaining -= delta
 			move_and_slide(speed * dir,Vector2.UP)
@@ -34,12 +45,19 @@ func _process(delta):
 				if collision != null:
 					dir = dir.bounce(collision.normal)
 			if lifeRemaining <= 0:
-				get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position, "modulate": modulate})
+				get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position})
 				get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
 				queue_free()
 				return
 		else:
 			move_and_slide(speed * 5 * (Vars.objects[whoSummoned].position - position).normalized(),Vector2.UP)
+			if $Area2D.overlaps_area(Vars.objects[whoSummoned].get_node("Area2D")):
+				Vars.objects[whoSummoned].reduceQCooldown = 4
+				get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,whoSummoned,{"reduceQCooldown": 4})
+				get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position})
+				get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+				queue_free()
+				return
 		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"position": position, "lifeRemaining": lifeRemaining, "returnMode": returnMode})
 
 func dirtToPos (pos):
@@ -50,6 +68,11 @@ func dirtToPos (pos):
 
 func _on_PaintTimer_timeout():
 	if Client.selfPeerID == Vars.roomMaster:
+		if !Vars.objects.has(whoSummoned):
+			get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position})
+			get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+			queue_free()
+			return
 		dirtToPos(Vars.optimizeVector(position + Vector2(32,32),64))
 
 
@@ -59,28 +82,22 @@ func _on_ChangeDirectionTimer_timeout():
 		dir = dir.normalized()
 
 
-func _on_Area2D_body_entered(body):
-	pass
-
-
 func _on_Clock_tree_exited():
 	if Vars.objects.has(id):
 		Vars.objects.erase(id)
 
 
 func _on_Area2D_area_entered(area):
+	if !Vars.objects.has(whoSummoned):
+		get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position})
+		get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+		queue_free()
+		return
 	if Client.selfPeerID == Vars.roomMaster:
 		var body = area.get_node("..")
 		if body.is_in_group("Player"):
 			if returnMode == false:
 				if body.is_in_group("Player") && Vars.objects[body.id]["team"] != Vars.objects[whoSummoned]["team"]:
-					get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position, "modulate": modulate})
-					get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
-					queue_free()
-			else:
-				if body.is_in_group("Player") && body.id == whoSummoned:
-					body.reduceQCooldown = 4
-					get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,body.id,{"reduceQCooldown": 4})
-					get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position, "modulate": modulate})
+					get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position})
 					get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
 					queue_free()

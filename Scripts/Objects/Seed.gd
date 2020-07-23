@@ -9,13 +9,22 @@ var id
 var materialScale = 1.0
 var timeToExplode = 5
 
+func tree_exited():
+	if Vars.objects.has(id):
+		Vars.objects.erase(id)
+
 func _ready():
+	connect("tree_exited", self, "tree_exited")
 	if Vars.myTeam != Vars.objects[whoSummoned]["team"]:
 		modulate = Vars.teams[Vars.objects[whoSummoned]["team"]]["color"].blend(Color(1,1,1,0.3))
 
 func _process(delta):
 	$Particles2D.process_material.scale = materialScale
 	if Client.selfPeerID == Vars.roomMaster:
+		if !Vars.objects.has(whoSummoned):
+			get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+			queue_free()
+			return
 		if timeToExplode < 0:
 			for x in range(1,area / 2 + 2):
 				for y in range (-area / 2 + (x - 1),area / 2 + 1 - (x - 1)):

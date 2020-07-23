@@ -15,8 +15,9 @@ remote func gotAdminInfo (demand, dict):
 		$LogsList.select(0)
 		_on_LogsList_item_selected(0)
 	elif demand["type"] == "getLog":
-		$RichTextLabel.bbcode_text = Vars.logBBCode(dict["log"])
+		$RichTextLabel.bbcode_text += Vars.logBBCode(dict["log"])
 
 
 func _on_LogsList_item_selected(index):
+	$RichTextLabel.bbcode_text = ""
 	rpc_id(1,"demandAdminInfo",Client.selfPeerID,{"type": "getLog", "which": $LogsList.get_item_text(index)})

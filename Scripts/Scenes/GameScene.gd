@@ -91,7 +91,7 @@ remote func objectRemoved (who, obj):
 		print("We got objectRemoved but that object doesn't exists ?")
 		return
 	Vars.objects[obj].queue_free()
-	Vars.objects.erase(obj)
+	# Bilerek objects'den freelemiyorum, tree exited eventte freelenmesi gerek.
 
 remote func updateTeams (d):
 	Vars.teams = d
