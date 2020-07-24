@@ -27,7 +27,7 @@ func cast ():
 
 func castEnd():
 	for i in range(3):
-		characterNode.get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/Clock.tscn",{"whoSummoned": Client.selfPeerID, "position": characterNode.position})
+		characterNode.get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/Clock.tscn",{"whoSummoned": characterNode.id, "position": characterNode.position})
 	characterNode.canMove = true
 	characterNode.get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
 	casting = false

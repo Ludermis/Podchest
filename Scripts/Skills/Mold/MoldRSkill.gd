@@ -4,9 +4,9 @@ var casting = false
 var lastCasted = -1000
 var castTime = 1.0
 var castStarted = -1000
-var cooldown = 4
+var cooldown = 30
 var characterNode : Node2D
-var activeTime = 10
+var activeTime = 15
 
 func _ready():
 	pass
@@ -46,6 +46,9 @@ func castEnd():
 		return
 	characterNode.disguised = foundEnemy
 	characterNode.get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,characterNode.id,{"disguised": foundEnemy})
+	
+	for i in range(10):
+		characterNode.get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/FakePlayer.tscn",{"whoSummoned": characterNode.id, "position": characterNode.position, "disguised": foundEnemy})
 
 func update():
 	if !casting:
@@ -60,6 +63,5 @@ func update():
 		if castStarted + castTime <= Vars.time:
 			castEnd()
 	if characterNode.disguised != characterNode.id && Vars.time - lastCasted >= activeTime:
-		print("sa")
 		characterNode.disguised = characterNode.id
 		characterNode.get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,characterNode.id,{"disguised": characterNode.id})

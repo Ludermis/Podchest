@@ -61,10 +61,12 @@ margin_left = 704.0
 margin_top = 768.0
 margin_right = 832.0
 margin_bottom = 896.0
-hint_tooltip = "(15 seconds cooldown)
-Cast to spawn 3 clocks.
-Clocks roam the map to paint the surface.
-Clocks die if they touch an enemy or is alive for 15 seconds."
+hint_tooltip = "(30 seconds cooldown)
+Cast to shapeshift into a random enemy.
+You also summon 10 clones of that enemy.
+You and your clones paint the surface to the enemies team color.
+After 15 seconds, clones and their paint vanishes.
+Your painted tiles change their colors to your color."
 theme = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -155,8 +157,12 @@ margin_left = 1088.0
 margin_top = 768.0
 margin_right = 1216.0
 margin_bottom = 896.0
-hint_tooltip = "(20 seconds cooldown)
-Inverse all colors of grids in an area."
+hint_tooltip = "(30 seconds cooldown)
+Cast to shapeshift into a random enemy.
+You also summon 10 clones of that enemy.
+You and your clones paint the surface to the enemies team color.
+After 15 seconds, clones and their paint vanishes.
+Your painted tiles change their colors to your color."
 theme = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

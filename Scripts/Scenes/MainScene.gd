@@ -9,6 +9,8 @@ func _ready():
 		Client.connect("connection_failed",self,"connection_failed")
 	elif Vars.loggedIn:
 		rpc_id(1,"demandAccountInfo",Client.selfPeerID)
+	else:
+		readyConnected()
 
 func logged():
 	Vars.loggedIn = true
@@ -45,10 +47,13 @@ func readyConnected ():
 	$MiscPanel/CollectionButton.modulate = Color.black
 	$MiscPanel/StoreButton.modulate = Color.black
 	
-	if Vars.selectedGamemode == "quick2v2":
+	if Vars.selectedGamemode == "quick1v1":
+		$"GamemodePanel/HBoxContainer/1v1Toggle".pressed = true
+	elif Vars.selectedGamemode == "quick2v2":
 		$"GamemodePanel/HBoxContainer/2v2Toggle".pressed = true
-	if Vars.selectedGamemode == "quick3v3":
+	elif Vars.selectedGamemode == "quick3v3":
 		$"GamemodePanel/HBoxContainer/3v3Toggle".pressed = true
+	
 	if !Vars.loggedIn:
 		var save = File.new()
 		if save.file_exists("user://account.txt"):

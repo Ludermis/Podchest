@@ -1,7 +1,7 @@
 extends Node
 
 var friction = 0.2
-var serverIP = "localhost"
+var serverIP = "163.172.223.38"
 var serverPort = 27015
 var dirtCount = 0
 var dirts = {}
@@ -17,7 +17,7 @@ var time : float = 0 setget ,getTime
 var objects = {}
 var roomMaster = -1
 var ping = 9999
-var build = "25"
+var build = "26"
 var buildConfirmed = false
 var newBuildIfMineWrong
 
@@ -40,7 +40,7 @@ func getTime() -> float:
 	return OS.get_ticks_msec() / 1000.0
 
 func _ready():
-	pass
+	randomize()
 
 func logBBCode (txt):
 	txt = txt.replace("[ERROR]","[color=red][ERROR][/color]")

@@ -52,7 +52,7 @@ func cast ():
 	arrowEffect.queue_free()
 
 func castEnd():
-	characterNode.get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/BearTrap.tscn",{"whoSummoned": Client.selfPeerID, "position": characterNode.position, "endPosition": castLocation})
+	characterNode.get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/BearTrap.tscn",{"whoSummoned": characterNode.id, "position": characterNode.position, "endPosition": castLocation})
 	characterNode.canMove = true
 	characterNode.get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
 	casting = false

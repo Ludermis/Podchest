@@ -55,7 +55,7 @@ func cast ():
 	arrowEffect.queue_free()
 
 func castEnd():
-	characterNode.get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/Seed.tscn",{"whoSummoned": Client.selfPeerID, "position": characterNode.position, "endPosition": castLocation, "area": area})
+	characterNode.get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/Seed.tscn",{"whoSummoned": characterNode.id, "position": characterNode.position, "endPosition": castLocation, "area": area})
 	characterNode.canMove = true
 	characterNode.get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
 	casting = false

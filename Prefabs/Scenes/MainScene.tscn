@@ -481,7 +481,7 @@ __meta__ = {
 position = Vector2( 411.432, 42.1931 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 13 )
-frame = 5
+frame = 7
 playing = true
 
 [node name="APSprite" type="AnimatedSprite" parent="AccountPanel"]
@@ -711,7 +711,6 @@ custom_colors/font_color = Color( 0.517647, 0.388235, 0, 1 )
 custom_colors/font_color_hover = Color( 0.517647, 0.388235, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.945098, 0.713726, 0, 1 )
 toggle_mode = true
-pressed = true
 group = SubResource( 46 )
 text = "1v1"
 flat = false
