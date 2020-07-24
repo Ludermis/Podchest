@@ -2,6 +2,8 @@ extends "res://Scripts/Base/Character.gd"
 
 var disguised setget setDisguised
 var fakeDirts = {}
+var remainingClonesToSummon = 0
+var foundEnemy = -1
 
 func setDisguised (who):
 	disguised = who
@@ -42,7 +44,7 @@ func _init():
 
 func _on_DirtTimer_timeout():
 	._on_DirtTimer_timeout()
-	if Client.selfPeerID == Vars.roomMaster && disguised != id:
+	if Client.selfPeerID == Vars.roomMaster && disguised != null && disguised != id:
 		var vec = Vars.optimizeVector(position + Vector2(32,32),64)
 		if !fakeDirts.has(vec) && (!Vars.dirts.has(vec) || Vars.dirts[vec]["team"] == team):
 			fakeDirts[vec] = -1
@@ -51,8 +53,13 @@ func _on_DirtTimer_timeout():
 func _physics_process(delta):
 	animationHandler()
 	if id == Client.selfPeerID:
+		if remainingClonesToSummon > 0:
+			get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/FakePlayer.tscn",{"whoSummoned": id, "position": position, "disguised": foundEnemy})
+			remainingClonesToSummon -= 1
 		inputHandler()
 		movementHandler()
 		skillSystem()
 		var sendingDict = {"position": position, "animation": animation, "desiredDirection": desiredDirection}
+		if disguised != id:
+			sendingDict["remainingClonesToSummon"] = remainingClonesToSummon
 		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,sendingDict)

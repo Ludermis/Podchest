@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Prefabs/Skins/Mold.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Objects/FakePlayer.gd" type="Script" id=2]
 [ext_resource path="res://Fonts/arial.ttf" type="DynamicFontData" id=5]
 
@@ -35,9 +34,6 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Skin" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 3.75 )
 
 [node name="DirtTimer" type="Timer" parent="."]
 wait_time = 0.1

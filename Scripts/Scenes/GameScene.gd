@@ -68,14 +68,23 @@ remote func roomMasterChanged(newMaster):
 	else:
 		$CanvasLayer/RoomMaster.visible = false
 
+var lastLoadedForCreation
+var lastLoadedForCreationName = ""
+
 remote func objectCreated (who, obj, data):
-	if Vars.objects.has(data["id"]):
-		print("We got objectCreated but that object already exists ?")
-		return
-	var node = load(obj).instance()
+#	if Vars.objects.has(data["id"]):
+#		print("We got objectCreated but that object already exists ?")
+#		return
+	var node
+	if obj != lastLoadedForCreationName:
+		lastLoadedForCreationName = obj
+		lastLoadedForCreation = load(obj)
+		node = lastLoadedForCreation.instance()
+	else:
+		node = lastLoadedForCreation.instance()
 	for i in data.keys():
 		node.set(i,data[i])
-	Vars.objects[data["id"]] = node
+	Vars.objects[data.id] = node
 	add_child(node)
 
 remote func objectUpdated (who, obj, data):

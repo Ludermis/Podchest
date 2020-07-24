@@ -20,12 +20,13 @@ var pressed = {"right": false, "left": false, "up": false, "down": false}
 func setSkin (newSkin):
 	skin = newSkin
 	if skin != "":
-		$Skin/Body.texture.atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
-		$Skin/Head.texture.atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
-		$Skin/Leg1.texture.atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
-		$Skin/Leg2.texture.atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
-		$Skin/Hand1.texture.atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
-		$Skin/Hand2.texture.atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
+		var atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
+		$Skin/Body.texture.atlas = atlas
+		$Skin/Head.texture.atlas = atlas
+		$Skin/Leg1.texture.atlas = atlas
+		$Skin/Leg2.texture.atlas = atlas
+		$Skin/Hand1.texture.atlas = atlas
+		$Skin/Hand2.texture.atlas = atlas
 
 func setDesiredDirection (dir):
 	desiredDirection = dir
@@ -66,10 +67,8 @@ func findNextDirection ():
 
 func setDisguised (who):
 	disguised = who
-	
 	$NameLabel.text = Vars.objects[disguised].playerName
 	$NameLabel.modulate = Vars.teams[Vars.objects[disguised]["team"]]["color"].blend(Color(1,1,1,0.5))
-	$Skin.free()
 	add_child(load("res://Prefabs/Skins/" + Vars.objects[disguised]["characterName"] + ".tscn").instance())
 
 func _on_DirectionTimer_timeout():
@@ -140,6 +139,10 @@ func movementHandler ():
 
 func _on_DirtTimer_timeout():
 	if Client.selfPeerID == Vars.roomMaster:
+		if !Vars.objects.has(whoSummoned):
+			get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+			queue_free()
+			return
 		var vec = Vars.optimizeVector(position + Vector2(32,32),64)
 		if !Vars.objects[whoSummoned].fakeDirts.has(vec) && (!Vars.dirts.has(vec) || Vars.dirts[vec]["team"] == Vars.objects[whoSummoned].team):
 			Vars.objects[whoSummoned].fakeDirts[vec] = -1
@@ -164,6 +167,10 @@ func _ready():
 func _physics_process(delta):
 	animationHandler()
 	if Client.selfPeerID == Vars.roomMaster:
+		if !Vars.objects.has(whoSummoned):
+			get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+			queue_free()
+			return
 		if Vars.objects[whoSummoned]["disguised"] == whoSummoned:
 			get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
 			queue_free()

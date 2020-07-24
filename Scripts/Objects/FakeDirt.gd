@@ -6,6 +6,10 @@ var whoSummoned
 var id
 
 func _ready():
+	if !Vars.objects.has(whoSummoned):
+		get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+		queue_free()
+		return
 	Vars.objects[whoSummoned]["fakeDirts"][position] = id
 	connect("tree_exited", self, "tree_exited")
 	maxSize = scale.x
@@ -13,13 +17,18 @@ func _ready():
 	scale.y = 0.4
 
 func tree_exited():
-	if Vars.objects[whoSummoned]["fakeDirts"].has(position):
-		Vars.objects[whoSummoned]["fakeDirts"].erase(position)
+	if Vars.objects.has(whoSummoned):
+		if Vars.objects[whoSummoned]["fakeDirts"].has(position):
+			Vars.objects[whoSummoned]["fakeDirts"].erase(position)
 	if Vars.objects.has(id):
 		Vars.objects.erase(id)
 
 func _process(delta):
 	if Client.selfPeerID == Vars.roomMaster:
+		if !Vars.objects.has(whoSummoned):
+			get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
+			queue_free()
+			return
 		if Vars.objects[whoSummoned].disguised == whoSummoned:
 			get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
 			queue_free()
