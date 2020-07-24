@@ -17,7 +17,7 @@ var time : float = 0 setget ,getTime
 var objects = {}
 var roomMaster = -1
 var ping = 9999
-var build = "24"
+var build = "25"
 var buildConfirmed = false
 var newBuildIfMineWrong
 

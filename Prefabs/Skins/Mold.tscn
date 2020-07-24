@@ -1,25 +1,25 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://Sprites/Characters/villager.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Characters/mold.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
 resource_local_to_scene = true
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 64, 512, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=2]
-resource_local_to_scene = true
-atlas = ExtResource( 1 )
-region = Rect2( 0, 320, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=3]
 resource_local_to_scene = true
-atlas = ExtResource( 1 )
-region = Rect2( 64, 320, 64, 64 )
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+resource_local_to_scene = true
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
 resource_local_to_scene = true
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 512, 64, 64 )
 
 [sub_resource type="Animation" id=5]
@@ -180,7 +180,7 @@ tracks/12/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -2, 0 ) ]
+"values": [ Vector2( -3, 2 ) ]
 }
 tracks/13/type = "value"
 tracks/13/path = NodePath("Leg2:position")
@@ -192,7 +192,7 @@ tracks/13/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, 0 ) ]
+"values": [ Vector2( 3, 2 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -352,7 +352,7 @@ tracks/12/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -3, 0 ) ]
+"values": [ Vector2( -3, 2 ) ]
 }
 tracks/13/type = "value"
 tracks/13/path = NodePath("Leg2:position")
@@ -364,7 +364,7 @@ tracks/13/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 3, 0 ) ]
+"values": [ Vector2( 3, 2 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -405,7 +405,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, 0 ) ]
+"values": [ Vector2( 2, 2 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -417,7 +417,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -2, 0 ) ]
+"values": [ Vector2( -2, 2 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -578,7 +578,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2, 0 ), Vector2( 2, -1 ), Vector2( 2, 0 ), Vector2( 2, -1 ), Vector2( 2, 0 ) ]
+"values": [ Vector2( 2, 3 ), Vector2( 2, 1 ), Vector2( 2, 3 ), Vector2( 2, 1 ), Vector2( 2, 3 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -590,7 +590,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -2, -1 ), Vector2( -2, 0 ), Vector2( -2, -1 ), Vector2( -2, 0 ), Vector2( -2, -1 ) ]
+"values": [ Vector2( -2, 1 ), Vector2( -2, 3 ), Vector2( -2, 1 ), Vector2( -2, 3 ), Vector2( -2, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -751,7 +751,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, 0 ) ]
+"values": [ Vector2( 2, 2 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -763,7 +763,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -2, 0 ) ]
+"values": [ Vector2( -2, 2 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -924,7 +924,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2, 0 ), Vector2( 2, -1 ), Vector2( 2, 0 ), Vector2( 2, -1 ), Vector2( 2, 0 ) ]
+"values": [ Vector2( 2, 3 ), Vector2( 2, 1 ), Vector2( 2, 3 ), Vector2( 2, 1 ), Vector2( 2, 3 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -936,7 +936,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -2, -1 ), Vector2( -2, 0 ), Vector2( -2, -1 ), Vector2( -2, 0 ), Vector2( -2, -1 ) ]
+"values": [ Vector2( -2, 1 ), Vector2( -2, 3 ), Vector2( -2, 1 ), Vector2( -2, 3 ), Vector2( -2, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -1096,7 +1096,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 3, 1 ), Vector2( 3, -1 ), Vector2( 3, 1 ), Vector2( 3, -1 ), Vector2( 3, 1 ) ]
+"values": [ Vector2( 3, 3 ), Vector2( 3, 1 ), Vector2( 3, 3 ), Vector2( 3, 1 ), Vector2( 3, 3 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -1108,7 +1108,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -3, -1 ), Vector2( -3, 1 ), Vector2( -3, -1 ), Vector2( -3, 1 ), Vector2( -3, -1 ) ]
+"values": [ Vector2( -3, 1 ), Vector2( -3, 3 ), Vector2( -3, 1 ), Vector2( -3, 3 ), Vector2( -3, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -1268,7 +1268,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 0 ) ]
+"values": [ Vector2( 1, 3 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -1280,7 +1280,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -1, 0 ) ]
+"values": [ Vector2( -1, 3 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -1440,7 +1440,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2, 0 ), Vector2( 1, -1 ), Vector2( 2, 0 ), Vector2( 1, -1 ), Vector2( 2, 0 ) ]
+"values": [ Vector2( 2, 2 ), Vector2( 1, 1 ), Vector2( 2, 2 ), Vector2( 1, 1 ), Vector2( 2, 2 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -1452,7 +1452,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -2, -1 ), Vector2( -1, 0 ), Vector2( -2, -1 ), Vector2( -1, 0 ), Vector2( -2, -1 ) ]
+"values": [ Vector2( -2, 1 ), Vector2( -1, 2 ), Vector2( -2, 1 ), Vector2( -1, 2 ), Vector2( -2, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -1785,7 +1785,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2, 0 ), Vector2( 1, -1 ), Vector2( 2, 0 ), Vector2( 1, -1 ), Vector2( 2, 0 ) ]
+"values": [ Vector2( 2, 1 ), Vector2( 1, 2 ), Vector2( 2, 1 ), Vector2( 1, 2 ), Vector2( 2, 1 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -1797,7 +1797,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -2, -1 ), Vector2( -1, 0 ), Vector2( -2, -1 ), Vector2( -1, 0 ), Vector2( -2, -1 ) ]
+"values": [ Vector2( -2, 2 ), Vector2( -1, 1 ), Vector2( -2, 2 ), Vector2( -1, 1 ), Vector2( -2, 2 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -2077,7 +2077,7 @@ tracks/12/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -3, 0 ) ]
+"values": [ Vector2( -3, 2 ) ]
 }
 tracks/13/type = "value"
 tracks/13/path = NodePath("Leg2:position")
@@ -2089,7 +2089,7 @@ tracks/13/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 3, 0 ) ]
+"values": [ Vector2( 3, 2 ) ]
 }
 
 [sub_resource type="Animation" id=17]
@@ -2118,7 +2118,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 5, -8 ) ]
+"values": [ Vector2( 6, -8 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Leg2:position")
@@ -2130,7 +2130,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, 0 ) ]
+"values": [ Vector2( 2, 2 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -2142,7 +2142,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -2, 0 ) ]
+"values": [ Vector2( -2, 2 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -2278,7 +2278,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -5, -8 ), Vector2( -5, -9 ), Vector2( -5, -8 ), Vector2( -5, -7 ), Vector2( -5, -8 ) ]
+"values": [ Vector2( -6, -8 ), Vector2( -6, -9 ), Vector2( -6, -8 ), Vector2( -6, -7 ), Vector2( -6, -8 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Hand2:position")
@@ -2290,7 +2290,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 5, -8 ), Vector2( 5, -7 ), Vector2( 5, -8 ), Vector2( 5, -9 ), Vector2( 5, -8 ) ]
+"values": [ Vector2( 6, -8 ), Vector2( 6, -7 ), Vector2( 6, -8 ), Vector2( 6, -9 ), Vector2( 6, -8 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Leg2:position")
@@ -2302,7 +2302,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2, 1 ), Vector2( 2, -1 ), Vector2( 2, 1 ), Vector2( 2, -1 ), Vector2( 2, 1 ) ]
+"values": [ Vector2( 2, 3 ), Vector2( 2, -1 ), Vector2( 2, 3 ), Vector2( 2, 1 ), Vector2( 2, 3 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -2314,7 +2314,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -2, -1 ), Vector2( -2, 1 ), Vector2( -2, -1 ), Vector2( -2, 1 ), Vector2( -2, -1 ) ]
+"values": [ Vector2( -2, 1 ), Vector2( -2, 3 ), Vector2( -2, 1 ), Vector2( -2, 3 ), Vector2( -2, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -2451,7 +2451,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -5, -8 ) ]
+"values": [ Vector2( -6, -8 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Hand2:position")
@@ -2463,7 +2463,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 5, -8 ) ]
+"values": [ Vector2( 6, -8 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Leg2:position")
@@ -2472,10 +2472,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2, 0 ) ]
+"values": [ Vector2( 2, 0 ), Vector2( 2, 2 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -2484,10 +2484,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -2, 0 ) ]
+"values": [ Vector2( -2, 0 ), Vector2( -2, 2 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -2623,7 +2623,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -5, -8 ), Vector2( -5, -9 ), Vector2( -5, -8 ), Vector2( -5, -7 ), Vector2( -5, -8 ) ]
+"values": [ Vector2( -6, -8 ), Vector2( -6, -9 ), Vector2( -6, -8 ), Vector2( -6, -7 ), Vector2( -6, -8 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Hand2:position")
@@ -2635,7 +2635,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 5, -8 ), Vector2( 5, -7 ), Vector2( 5, -8 ), Vector2( 5, -9 ), Vector2( 5, -8 ) ]
+"values": [ Vector2( 6, -8 ), Vector2( 6, -7 ), Vector2( 6, -8 ), Vector2( 6, -9 ), Vector2( 6, -8 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Leg2:position")
@@ -2647,7 +2647,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2, 1 ), Vector2( 2, -1 ), Vector2( 2, 1 ), Vector2( 2, -1 ), Vector2( 2, 1 ) ]
+"values": [ Vector2( 2, 3 ), Vector2( 2, 1 ), Vector2( 2, 3 ), Vector2( 2, 1 ), Vector2( 2, 3 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -2659,7 +2659,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -2, -1 ), Vector2( -2, 1 ), Vector2( -2, -1 ), Vector2( -2, 1 ), Vector2( -2, -1 ) ]
+"values": [ Vector2( -2, 1 ), Vector2( -2, 3 ), Vector2( -2, 1 ), Vector2( -2, 3 ), Vector2( -2, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -2819,7 +2819,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 3, 1 ), Vector2( 3, -1 ), Vector2( 3, 1 ), Vector2( 3, -1 ), Vector2( 3, 1 ) ]
+"values": [ Vector2( 3, 3 ), Vector2( 3, 1 ), Vector2( 3, 3 ), Vector2( 3, 1 ), Vector2( 3, 3 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Leg1:position")
@@ -2831,7 +2831,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -3, -1 ), Vector2( -3, 1 ), Vector2( -3, -1 ), Vector2( -3, 1 ), Vector2( -3, -1 ) ]
+"values": [ Vector2( -3, 1 ), Vector2( -3, 3 ), Vector2( -3, 1 ), Vector2( -3, 3 ), Vector2( -3, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Hand2:z_index")
@@ -2957,30 +2957,29 @@ tracks/13/keys = {
 [node name="Skin" type="Node2D"]
 
 [node name="Leg1" type="Sprite" parent="."]
-position = Vector2( -2, -1 )
+position = Vector2( -3, 2 )
 scale = Vector2( 0.7, 1 )
 texture = SubResource( 1 )
 
 [node name="Leg2" type="Sprite" parent="."]
-position = Vector2( 2, 1 )
+position = Vector2( 3, 2 )
 scale = Vector2( 0.7, 1 )
 texture = SubResource( 1 )
-
-[node name="Head" type="Sprite" parent="."]
-position = Vector2( 0, -20 )
-texture = SubResource( 2 )
 
 [node name="Body" type="Sprite" parent="."]
 position = Vector2( 0, -7 )
 texture = SubResource( 3 )
 
+[node name="Head" type="Sprite" parent="."]
+position = Vector2( 0, -20 )
+texture = SubResource( 2 )
+
 [node name="Hand1" type="Sprite" parent="."]
-position = Vector2( -5, -8 )
-z_index = -1
+position = Vector2( -6, -8 )
 texture = SubResource( 4 )
 
 [node name="Hand2" type="Sprite" parent="."]
-position = Vector2( 5, -8 )
+position = Vector2( 6, -8 )
 texture = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
