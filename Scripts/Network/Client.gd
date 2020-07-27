@@ -2,7 +2,7 @@ extends Node
 
 var client
 var url
-var selfPeerID = 0
+var selfPeerID : int = 0
 var maxTries = 10
 var tries = 0
 

@@ -18,6 +18,7 @@ func setAnimationPlayed (v):
 func tree_exited():
 	if trappedPlayer == Client.selfPeerID && !Vars.objects[Client.selfPeerID].anySkillCasting():
 		Vars.objects[Client.selfPeerID].canMove = true
+		Vars.objects[Client.selfPeerID].animation = "rootedEnd"
 	if Vars.objects.has(id):
 		Vars.objects.erase(id)
 
@@ -27,8 +28,6 @@ func _ready():
 		modulate = Vars.teams[Vars.objects[whoSummoned]["team"]]["color"].blend(Color(1,1,1,0.3))
 
 func _process(delta):
-	if trappedPlayer == Client.selfPeerID:
-		Vars.objects[Client.selfPeerID].canMove = false
 	if Vars.roomMaster == Client.selfPeerID:
 		var dict = {}
 		if !Vars.objects.has(whoSummoned):
@@ -63,4 +62,6 @@ func _on_Area2D_body_entered(body):
 			trapTimeRemaining = 2
 			$AnimatedSprite.play("default")
 			trappedPlayer = body.id
+			body.canMove = false
 			get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"animationPlayed": true, "trappedPlayer": trappedPlayer})
+			get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,body.id,{"canMove": false})

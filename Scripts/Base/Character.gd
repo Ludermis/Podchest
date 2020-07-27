@@ -14,7 +14,7 @@ var skin = "" setget setSkin
 var characterName = "DefaultCharacterName"
 var directionsInt = {1: "down", 2: "downRight", 3: "right", 4: "upRight", 5: "up", 6: "upLeft", 7: "left", 8: "downLeft"}
 var directionsString = {"down": 1,"downRight": 2,"right": 3,"upRight": 4,"up": 5,"upLeft": 6,"left": 7,"downLeft": 8}
-var skills = []
+var skills = {}
 
 func setSkin (newSkin):
 	skin = newSkin
@@ -37,19 +37,29 @@ func setPlayerName (pName):
 func setAnimation (anim):
 	animation = anim
 
-func skillSystem ():
+func skillSystem (delta):
 	for i in skills:
-		i.update()
+		skills[i].update(delta)
+
+func useSkill (which):
+	skills[which].use()
+
+func updateSkillInfo (which, data):
+	for i in data:
+		skills[which].set(i,data[i])
+
+func skillCalled (which, funcName, data):
+	skills[which].callv(funcName,data)
 
 func anySkillCasting ():
 	for i in skills:
-		if "casting" in i && i.casting == true:
+		if "casting" in skills[i] && skills[i].casting == true:
 			return true
 	return false
 
 func anySkillIndicating ():
 	for i in skills:
-		if "indicating" in i && i.indicating == true:
+		if "indicating" in skills[i] && skills[i].indicating == true:
 			return true
 	return false
 
@@ -108,11 +118,14 @@ func inputHandler ():
 
 func animationHandler ():
 	if animation == "idle":
-		$Skin/AnimationPlayer.play(direction + "Idle")
+		if $Skin/AnimationPlayer.assigned_animation != direction + "Idle":
+			$Skin/AnimationPlayer.play(direction + "Idle")
 	elif animation == "walk":
-		$Skin/AnimationPlayer.play(direction + "Walk")
-	elif animation == "cast":
-		$Skin/AnimationPlayer.play("cast")
+		if $Skin/AnimationPlayer.assigned_animation != direction + "Walk":
+			$Skin/AnimationPlayer.play(direction + "Walk")
+	else:
+		if $Skin/AnimationPlayer.assigned_animation != animation:
+			$Skin/AnimationPlayer.play(animation)
 
 func findNextDirection ():
 	if desiredDirection == direction:
@@ -149,13 +162,17 @@ func tree_exited():
 	if Vars.objects.has(id):
 		Vars.objects.erase(id)
 
+func readyCustom():
+	pass
+
 func _ready():
-	connect("tree_exited", self, "tree_exited")
+	connect("tree_exiting", self, "tree_exited")
 	set_physics_process(true)
 	$NameLabel.modulate = Vars.teams[team]["color"].blend(Color(1,1,1,0.5))
 	$DirtTimer.start()
 	if id == Client.selfPeerID:
 		get_tree().root.get_node("Main/CanvasLayer").add_child(load("res://Prefabs/UI/CharacterSkills/" + characterName + ".tscn").instance())
+	readyCustom()
 
 func _physics_process(delta):
 	pass

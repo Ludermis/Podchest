@@ -14,39 +14,46 @@ func setScytheActive (isActive):
 
 func setScytheRotation (rot):
 	scytheRotation = rot
-	if id != Client.selfPeerID:
-		$Schyte.rotation = rot
+	$Schyte.rotation = rot
 
 func inputHandler():
 	.inputHandler()
 	if Input.is_action_just_pressed('skill1'):
-		skills[0].use()
+		useSkill(1)
+		get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,id,"useSkill",[1])
 	if Input.is_action_just_pressed('skill2'):
-		skills[1].use()
+		useSkill(2)
+		get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,id,"useSkill",[2])
 	if Input.is_action_just_pressed('skill3'):
-		skills[2].use()
+		useSkill(3)
+		get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,id,"useSkill",[3])
 
 func _init():
 	characterName = "Villager"
+
+func readyCustom():
 	var skill1 = preload("res://Scripts/Skills/Villager/VillagerQSkill.gd").new()
-	skill1.characterNode = self
+	skill1.id = 1
+	skill1.characterNode = id
 	
 	var skill2 = preload("res://Scripts/Skills/Villager/VillagerESkill.gd").new()
-	skill2.characterNode = self
+	skill2.id = 2
+	skill2.characterNode = id
 	
 	var skill3 = preload("res://Scripts/Skills/Villager/VillagerRSkill.gd").new()
-	skill3.characterNode = self
+	skill3.id = 3
+	skill3.characterNode = id
 	
-	skills.append(skill1)
-	skills.append(skill2)
-	skills.append(skill3)
+	skills[1] = skill1
+	skills[2] = skill2
+	skills[3] = skill3
 
 func _physics_process(delta):
 	animationHandler()
+	skillSystem(delta)
 	if id == Client.selfPeerID:
 		inputHandler()
 		movementHandler()
-		skillSystem()
 		var sendingDict = {"position": position, "animation": animation, "desiredDirection": desiredDirection}
 		if scytheActive:
 			sendingDict["scytheRotation"] = $Schyte.rotation

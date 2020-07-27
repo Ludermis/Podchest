@@ -18,7 +18,7 @@ remote func playerJoined (who, obj, data):
 		return
 	print(str("New user instanced ", who))
 	var node = load(obj).instance()
-	for i in data.keys():
+	for i in data:
 		node.set(i,data[i])
 	if node.id == Client.selfPeerID:
 		print("Camera working.")
@@ -82,7 +82,7 @@ remote func objectCreated (who, obj, data):
 		node = lastLoadedForCreation.instance()
 	else:
 		node = lastLoadedForCreation.instance()
-	for i in data.keys():
+	for i in data:
 		node.set(i,data[i])
 	Vars.objects[data.id] = node
 	add_child(node)
@@ -92,8 +92,15 @@ remote func objectUpdated (who, obj, data):
 		print("We got objectUpdated but that object doesn't exists ?")
 		return
 	var node = Vars.objects[obj]
-	for i in data.keys():
+	for i in data:
 		node.set(i,data[i])
+
+remote func objectCalled (who, obj, funcName, data):
+	if !Vars.objects.has(obj):
+		print("We got objectCalled but that object doesn't exists ?")
+		return
+	var node = Vars.objects[obj]
+	node.callv(funcName,data)
 
 remote func objectRemoved (who, obj):
 	if !Vars.objects.has(obj):

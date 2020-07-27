@@ -26,6 +26,7 @@ func _ready():
 	dir = Vector2(rand_range(-1,1),rand_range(-1,1))
 	dir = dir.normalized()
 	Vars.objects[whoSummoned].clocks.append(id)
+	get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,whoSummoned,{"clocks": Vars.objects[whoSummoned].clocks})
 	if Vars.myTeam != Vars.objects[whoSummoned]["team"]:
 		modulate = Vars.teams[Vars.objects[whoSummoned]["team"]]["color"].blend(Color(1,1,1,0.3))
 
@@ -52,8 +53,8 @@ func _process(delta):
 		else:
 			move_and_slide(speed * 5 * (Vars.objects[whoSummoned].position - position).normalized(),Vector2.UP)
 			if $Area2D.overlaps_area(Vars.objects[whoSummoned].get_node("Area2D")):
-				Vars.objects[whoSummoned].reduceQCooldown = 4
-				get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,whoSummoned,{"reduceQCooldown": 4})
+				Vars.objects[whoSummoned].reduceQCooldown(4)
+				get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,whoSummoned,"reduceQCooldown",[4])
 				get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Effects/ClockDestroyEffect.tscn",{"position": position, "team": Vars.objects[whoSummoned]["team"]})
 				get_tree().root.get_node("Main").rpc_id(1,"objectRemoved",Client.selfPeerID,id)
 				queue_free()
