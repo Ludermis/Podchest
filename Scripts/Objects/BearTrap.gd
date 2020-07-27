@@ -16,10 +16,6 @@ func setAnimationPlayed (v):
 		$AnimatedSprite.play("default")
 
 func tree_exited():
-	if Client.selfPeerID == Vars.roomMaster && trappedPlayer != -1 && Vars.objects.has(trappedPlayer) && !Vars.objects[trappedPlayer].anySkillCasting():
-		Vars.objects[trappedPlayer].canMove = true
-		Vars.objects[trappedPlayer].animation = "rootedEnd"
-		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,trappedPlayer,{"canMove": true, "animation": "rootedEnd"})
 	if Vars.objects.has(id):
 		Vars.objects.erase(id)
 
@@ -63,7 +59,5 @@ func _on_Area2D_body_entered(body):
 			trapTimeRemaining = 2
 			$AnimatedSprite.play("default")
 			trappedPlayer = body.id
-			body.canMove = false
-			body.animation = "rooted"
-			get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,body.id,{"canMove": false, "animation": "rooted"})
+			body.addImpact("RootImpact", {"timeRemaining": trapTimeRemaining, "animStart": "rooted", "animEnd": "rootedEnd"}, -1)
 			get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"animationPlayed": true, "trappedPlayer": trappedPlayer})

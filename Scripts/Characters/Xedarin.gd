@@ -40,6 +40,7 @@ func readyCustom():
 func _physics_process(delta):
 	animationHandler()
 	skillSystem(delta)
+	impactSystem(delta)
 	if id == Client.selfPeerID:
 		inputHandler()
 		movementHandler()

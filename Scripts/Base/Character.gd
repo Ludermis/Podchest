@@ -15,6 +15,30 @@ var characterName = "DefaultCharacterName"
 var directionsInt = {1: "down", 2: "downRight", 3: "right", 4: "upRight", 5: "up", 6: "upLeft", 7: "left", 8: "downLeft"}
 var directionsString = {"down": 1,"downRight": 2,"right": 3,"upRight": 4,"up": 5,"upLeft": 6,"left": 7,"downLeft": 8}
 var skills = {}
+var impacts = {}
+var uniqueImpactID = 0
+
+func newUniqueImpactID ():
+	uniqueImpactID += 1
+	get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"uniqueImpactID": uniqueImpactID})
+
+func addImpact (imp, data, index):
+	var willBeSent = false
+	if index == -1:
+		newUniqueImpactID()
+		willBeSent = true
+		index = uniqueImpactID
+	impacts[index] = load("res://Scripts/Impacts/" + imp + ".gd").new()
+	impacts[index].id = index
+	impacts[index].ownerNode = id
+	for i in data:
+		impacts[index][i] = data[i]
+	if willBeSent:
+		get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID, id, "addImpact",[imp,data,index])
+	return index
+
+func removeImpact (index):
+	impacts.erase(index)
 
 func setSkin (newSkin):
 	skin = newSkin
@@ -26,6 +50,17 @@ func setSkin (newSkin):
 		$Skin/Leg2.texture.atlas = atlas
 		$Skin/Hand1.texture.atlas = atlas
 		$Skin/Hand2.texture.atlas = atlas
+
+func impactSystem (delta):
+	for i in impacts:
+		impacts[i].update(delta)
+
+func updateImpactInfo (which, data):
+	for i in data:
+		impacts[which].set(i,data[i])
+
+func impactCalled (which, funcName, data):
+	impacts[which].callv(funcName,data)
 
 func setDesiredDirection (dir):
 	desiredDirection = dir
@@ -117,6 +152,11 @@ func inputHandler ():
 		$Camera2D.zoomLevel = max($Camera2D.zoomLevel - 1,1)
 
 func animationHandler ():
+	# For animations we cant stop
+	var cantStop = ["rooted","rootedEnd"]
+	var curAnim = $Skin/AnimationPlayer.current_animation
+	if curAnim != null && cantStop.has(curAnim):
+		return
 	if animation == "idle":
 		if $Skin/AnimationPlayer.assigned_animation != direction + "Idle":
 			$Skin/AnimationPlayer.play(direction + "Idle")

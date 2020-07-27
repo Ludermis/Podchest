@@ -65,7 +65,7 @@ func cast ():
 		Vars.objects[characterNode].get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
 		Vars.objects[characterNode].get_tree().root.get_node("Main/CanvasLayer/Skills/Skill2/Progress").modulate = Color.blue
 		castLocation = Vars.objects[characterNode].get_global_mouse_position()
-		Vars.objects[characterNode].canMove = false
+		Vars.objects[characterNode].addImpact("RootImpact", {"timeRemaining": castTime, "animStart": "cast", "animEnd": "downIdle"}, -1)
 		castRemaining = castTime
 		effect.queue_free()
 		arrowEffect.queue_free()
@@ -74,14 +74,11 @@ func cast ():
 func castEnd(castAlready):
 	if Client.selfPeerID == Vars.roomMaster && !castAlready:
 		Vars.objects[characterNode].get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/BearTrap.tscn",{"whoSummoned": characterNode, "position": Vars.objects[characterNode].position, "endPosition": castLocation})
-		Vars.objects[characterNode].canMove = true
-		Vars.objects[characterNode].animation = "downIdle"
 		casting = false
 		cooldownRemaining = cooldown
 		castRemaining = 9999
 		Vars.objects[characterNode].get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,characterNode,"updateSkillInfo",[id,getSharedData()])
 		Vars.objects[characterNode].get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,characterNode,"skillCalled",[id,"castEnd",[true]])
-		Vars.objects[characterNode].get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,characterNode,{"canMove": true})
 	if Client.selfPeerID == characterNode:
 		Vars.objects[characterNode].get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
 

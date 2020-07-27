@@ -65,6 +65,7 @@ func _on_DirtTimer_timeout():
 func _physics_process(delta):
 	animationHandler()
 	skillSystem(delta)
+	impactSystem(delta)
 	if Client.selfPeerID == Vars.roomMaster && remainingClonesToSummon > 0:
 		get_tree().root.get_node("Main").rpc_id(1,"objectCreated",Client.selfPeerID,"res://Prefabs/Objects/FakePlayer.tscn",{"whoSummoned": id, "position": position, "disguised": foundEnemy})
 		remainingClonesToSummon -= 1

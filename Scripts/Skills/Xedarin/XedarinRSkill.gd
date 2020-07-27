@@ -34,7 +34,7 @@ func cast ():
 		casting = true
 		Vars.objects[characterNode].get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
 		Vars.objects[characterNode].get_tree().root.get_node("Main/CanvasLayer/Skills/Skill3/Progress").modulate = Color.blue
-		Vars.objects[characterNode].canMove = false
+		Vars.objects[characterNode].addImpact("RootImpact", {"timeRemaining": castTime, "animStart": "cast", "animEnd": "downIdle"}, -1)
 		castRemaining = castTime
 		Vars.objects[characterNode].get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,characterNode,"updateSkillInfo",[id,getSharedData()])
 
@@ -56,14 +56,11 @@ func castEnd(castAlready):
 				elif Vars.dirts.has(pos):
 					Vars.tryChangeDirt(Client.selfPeerID,Vars.objects[characterNode].id,pos,1)
 		
-		Vars.objects[characterNode].canMove = true
-		Vars.objects[characterNode].animation = "downIdle"
 		casting = false
 		cooldownRemaining = cooldown
 		castRemaining = 9999
 		Vars.objects[characterNode].get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,characterNode,"updateSkillInfo",[id,getSharedData()])
 		Vars.objects[characterNode].get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,characterNode,"skillCalled",[id,"castEnd",[true]])
-		Vars.objects[characterNode].get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,characterNode,{"canMove": true})
 	if Client.selfPeerID == characterNode:
 		Vars.objects[characterNode].get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = false
 
