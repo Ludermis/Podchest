@@ -1,7 +1,6 @@
 extends "res://Scripts/Base/Impact.gd"
 
 var ownerNode
-var began = false
 var timeRemaining
 var impactName = "RootImpact"
 var animStart
@@ -13,30 +12,30 @@ func _init():
 func getSharedData ():
 	var data = {}
 	data["timeRemaining"] = timeRemaining
-	data["began"] = began
 	return data
 
 func begin():
 	if Client.selfPeerID == Vars.roomMaster:
 		Vars.objects[ownerNode].canMove = false
+		var dict = {"canMove": false}
+		Vars.objects[ownerNode].get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,ownerNode,{"canMove": false})
 		if animStart != null:
 			Vars.objects[ownerNode].animation = animStart
-			Vars.objects[ownerNode].get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,ownerNode,{"animation": animStart})
-		began = true
+			dict["animation"] = animStart
+		Vars.objects[ownerNode].get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,ownerNode,dict)
 
 func update(delta):
 	if Client.selfPeerID == Vars.roomMaster:
-		if !began:
-			begin()
 		Vars.objects[ownerNode].canMove = false
+		var dict = {"canMove": false}
 		timeRemaining -= delta
-		if  animEnd != null && timeRemaining <= 0.1:
+		if animEnd != null && timeRemaining <= 0.1:
 			Vars.objects[ownerNode].animation = animEnd
-			Vars.objects[ownerNode].get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,ownerNode,{"animation": animEnd})
+			dict["animation"] = animEnd
 		if timeRemaining <= 0:
 			end()
 			return
-		Vars.objects[ownerNode].get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,ownerNode,{"canMove": false})
+		Vars.objects[ownerNode].get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,ownerNode,dict)
 		Vars.objects[ownerNode].get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,ownerNode,"updateImpactInfo",[id,getSharedData()])
 
 func end():

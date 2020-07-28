@@ -28,7 +28,6 @@ func use ():
 
 func cast ():
 	if Client.selfPeerID == characterNode && cooldownRemaining <= 0 && !Vars.objects[characterNode].anySkillCasting():
-		Vars.objects[characterNode].animation = "cast"
 		casting = true
 		Vars.objects[characterNode].get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
 		Vars.objects[characterNode].get_tree().root.get_node("Main/CanvasLayer/Skills/Skill1/Progress").modulate = Color.blue

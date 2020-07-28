@@ -17,6 +17,7 @@ var directionsString = {"down": 1,"downRight": 2,"right": 3,"upRight": 4,"up": 5
 var skills = {}
 var impacts = {}
 var uniqueImpactID = 0
+var animationsCantStop = ["rooted","rootedEnd"]
 
 func newUniqueImpactID ():
 	uniqueImpactID += 1
@@ -33,6 +34,7 @@ func addImpact (imp, data, index):
 	impacts[index].ownerNode = id
 	for i in data:
 		impacts[index][i] = data[i]
+	impacts[index].begin()
 	if willBeSent:
 		get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID, id, "addImpact",[imp,data,index])
 	return index
@@ -153,9 +155,8 @@ func inputHandler ():
 
 func animationHandler ():
 	# For animations we cant stop
-	var cantStop = ["rooted","rootedEnd"]
 	var curAnim = $Skin/AnimationPlayer.current_animation
-	if curAnim != null && cantStop.has(curAnim):
+	if curAnim != null && animationsCantStop.has(curAnim):
 		return
 	if animation == "idle":
 		if $Skin/AnimationPlayer.assigned_animation != direction + "Idle":

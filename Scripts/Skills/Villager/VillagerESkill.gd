@@ -59,7 +59,6 @@ func indicate ():
 
 func cast ():
 	if Client.selfPeerID == characterNode:
-		Vars.objects[characterNode].animation = "cast"
 		indicating = false
 		casting = true
 		Vars.objects[characterNode].get_tree().root.get_node("Main/CanvasLayer/ProgressBar").visible = true
