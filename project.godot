@@ -26,13 +26,15 @@ config/icon="res://icon.png"
 Vars="*res://Scripts/Global/Vars.gd"
 Client="*res://Scripts/Network/Client.gd"
 
+[debug]
+
+settings/fps/force_fps=60
+
 [display]
 
 window/size/width=1920
 window/size/height=937
-window/size/resizable=false
-window/size/test_width=1280
-window/size/test_height=720
+window/vsync/use_vsync=false
 mouse_cursor/custom_image="res://Sprites/Misc/cursor.png"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"

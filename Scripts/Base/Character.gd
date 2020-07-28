@@ -58,10 +58,14 @@ func impactSystem (delta):
 		impacts[i].update(delta)
 
 func updateImpactInfo (which, data):
+	if !impacts.has(which):
+		return
 	for i in data:
 		impacts[which].set(i,data[i])
 
 func impactCalled (which, funcName, data):
+	if !impacts.has(which):
+		return
 	impacts[which].callv(funcName,data)
 
 func setDesiredDirection (dir):
