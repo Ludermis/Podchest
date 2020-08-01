@@ -1,6 +1,5 @@
 extends Node
 
-var friction = 0.2
 var serverIP = "localhost"
 var serverPort = 27015
 var dirtCount = 0

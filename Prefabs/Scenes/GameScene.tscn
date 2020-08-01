@@ -59,26 +59,6 @@ centered = false
 region_enabled = true
 region_rect = Rect2( -1, -1, 3202, 3202 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PoolVector2Array( -32, 48, -48, 48, -48, -3184, -32, -3184, -32, 48 )
-
-[node name="CollisionShape2D4" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2( 3216, 0 )
-polygon = PoolVector2Array( -32, 48, -48, 48, -48, -3184, -32, -3184, -32, 48 )
-
-[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2( 0, 80 )
-rotation = 1.5708
-polygon = PoolVector2Array( -32, 48, -48, 48, -48, -3184, -32, -3184, -32, 48 )
-
-[node name="CollisionShape2D3" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2( 0, -3136 )
-rotation = 1.5708
-polygon = PoolVector2Array( -32, 48, -48, 48, -48, -3184, -32, -3184, -32, 48 )
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Score1" type="Label" parent="CanvasLayer"]
