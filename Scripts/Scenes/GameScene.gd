@@ -7,10 +7,11 @@ func _process(delta):
 	pass
 
 func _notification(what):
-	if what == MainLoop.NOTIFICATION_WM_FOCUS_IN:
-		rpc_id(1,"playerFocused",Client.selfPeerID)
-	elif what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
-		rpc_id(1,"playerUnfocused",Client.selfPeerID)
+#	if what == MainLoop.NOTIFICATION_WM_FOCUS_IN:
+#		rpc_id(1,"playerFocused",Client.selfPeerID)
+#	elif what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+#		rpc_id(1,"playerUnfocused",Client.selfPeerID)
+	pass
 
 remote func playerJoined (who, obj, data):
 	if Vars.objects.has(who):
@@ -60,13 +61,6 @@ remote func dirtChanged (d):
 	Vars.dirts[d["position"]].set_process(true)
 	$"CanvasLayer/Score1".text = str(Vars.scores[1])
 	$"CanvasLayer/Score2".text = str(Vars.scores[2])
-
-remote func roomMasterChanged(newMaster):
-	Vars.roomMaster = newMaster
-	if Vars.roomMaster == Client.selfPeerID:
-		$CanvasLayer/RoomMaster.visible = true
-	else:
-		$CanvasLayer/RoomMaster.visible = false
 
 var lastLoadedForCreation
 var lastLoadedForCreationName = ""

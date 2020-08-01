@@ -1,7 +1,7 @@
 extends Node
 
 var friction = 0.2
-var serverIP = "163.172.223.38"
+var serverIP = "localhost"
 var serverPort = 27015
 var dirtCount = 0
 var dirts = {}
@@ -15,7 +15,6 @@ var accountInfo = {}
 var adminInfo = {}
 var time : float = 0 setget ,getTime
 var objects = {}
-var roomMaster = -1
 var ping = 9999
 var build = "32"
 var buildConfirmed = false
@@ -27,7 +26,6 @@ var selectedGamemode = "quick1v1"
 var store
 
 func clearVars():
-	roomMaster = -1
 	objects = {}
 	dirtCount = 0
 	dirts = {}

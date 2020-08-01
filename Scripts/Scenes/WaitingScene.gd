@@ -14,9 +14,6 @@ remote func selectionStarted ():
 remote func playerCountUpdated (count, mx):
 	$Players.text = str(count) + " / " + str(mx)
 
-remote func roomMasterChanged(newMaster):
-	Vars.roomMaster = newMaster
-
 remote func gameStarted ():
 	get_tree().change_scene("res://Prefabs/Scenes/GameScene.tscn")
 
