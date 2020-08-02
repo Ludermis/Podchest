@@ -4,6 +4,7 @@ var playerName = "Guest" setget setPlayerName
 var skin = "" setget setSkin
 var characterName = "DefaultCharacterName"
 var team = -1
+var animation setget setAnimation
 var id
 
 func setSkin (newSkin):
@@ -16,6 +17,11 @@ func setSkin (newSkin):
 		$Skin/Leg2.texture.atlas = atlas
 		$Skin/Hand1.texture.atlas = atlas
 		$Skin/Hand2.texture.atlas = atlas
+
+func setAnimation (anim):
+	animation = anim
+	if $Skin/AnimationPlayer.current_animation != anim:
+		$Skin/AnimationPlayer.play(animation)
 
 func setPlayerName (pName):
 	playerName = pName

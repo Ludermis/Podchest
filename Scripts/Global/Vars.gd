@@ -1,6 +1,6 @@
 extends Node
 
-var serverIP = "localhost"
+var serverIP = "163.172.223.38"
 var serverPort = 27015
 var dirtCount = 0
 var dirts = {}
@@ -15,7 +15,7 @@ var adminInfo = {}
 var time : float = 0 setget ,getTime
 var objects = {}
 var ping = 9999
-var build = "32"
+var build = "33"
 var buildConfirmed = false
 var newBuildIfMineWrong
 
@@ -64,16 +64,6 @@ func timeToString (t):
 		rtn += "0"
 	rtn += str(seconds)
 	return rtn
-
-func tryPlaceDirt (id, painter, pos, team):
-	if pos.x < 0 || pos.y < -(mapSizeY - 1) * 64 || pos.x > (mapSizeX - 1) * 64 || pos.y > 0:
-		return
-	get_tree().root.get_node("Main").rpc_id(1,"dirtCreated", id, painter, pos, team)
-
-func tryChangeDirt (id, painter, pos, team):
-	if pos.x < 0 || pos.y < -(mapSizeY - 1) * 64 || pos.x > (mapSizeX - 1) * 64 || pos.y > 0:
-		return
-	get_tree().root.get_node("Main").rpc_id(1,"dirtChanged",id, painter, pos, team)
 
 func optimizeVector(pos, opt):
 	var newv = Vector2.ZERO;
