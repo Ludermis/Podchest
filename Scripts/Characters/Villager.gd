@@ -16,11 +16,11 @@ func setScytheRotation (rot):
 
 func inputHandler():
 	if Input.is_action_just_pressed('skill1'):
-		get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,id,"useSkill",[1])
+		skills[1].use()
 	if Input.is_action_just_pressed('skill2'):
-		get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,id,"useSkill",[2])
+		skills[2].use()
 	if Input.is_action_just_pressed('skill3'):
-		get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,id,"useSkill",[3])
+		skills[3].use()
 	if Input.is_action_just_released('wheeldown'):
 		$Camera2D.zoomLevel = min($Camera2D.zoomLevel + 1,4)
 	if Input.is_action_just_released('wheelup'):
@@ -30,9 +30,14 @@ func _init():
 	characterName = "Villager"
 
 func readyCustom():
-	pass
+	if id == Client.selfPeerID:
+		skills[1] = preload("res://Scripts/Skills/Villager/VillagerQSkill.gd").new()
+		skills[1].id = 1
+		skills[1].characterNode = id
+		skills[1].init()
 
 func _physics_process(delta):
 	if id == Client.selfPeerID:
+		skillSystem(delta)
 		inputHandler()
 		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"pressed": {"left": Input.is_action_pressed('left'), "right": Input.is_action_pressed('right'), "up": Input.is_action_pressed('up'), "down": Input.is_action_pressed('down')}})

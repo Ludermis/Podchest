@@ -6,6 +6,7 @@ var characterName = "DefaultCharacterName"
 var team = -1
 var animation setget setAnimation
 var id
+var skills = {}
 
 func setSkin (newSkin):
 	skin = newSkin
@@ -29,6 +30,23 @@ func setPlayerName (pName):
 
 func readyCustom():
 	pass
+
+func skillSystem (delta):
+	for i in skills:
+		skills[i].update(delta)
+
+func updateSkillInfo (which, info):
+	for i in info:
+		skills[which][i] = info[i]
+
+func skillCalled (which, called, data):
+	skills[which].callv(called, data)
+
+func anySkillCasting ():
+	for i in skills:
+		if "casting" in skills[i] && skills[i].casting == true:
+			return true
+	return false
 
 func _ready():
 	$NameLabel.modulate = Vars.teams[team]["color"].blend(Color(1,1,1,0.5))

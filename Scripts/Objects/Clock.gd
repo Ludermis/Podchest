@@ -82,11 +82,9 @@ func _on_ChangeDirectionTimer_timeout():
 		dir = Vector2(rand_range(-1,1),rand_range(-1,1))
 		dir = dir.normalized()
 
-
 func _on_Clock_tree_exited():
 	if Vars.objects.has(id):
 		Vars.objects.erase(id)
-
 
 func _on_Area2D_area_entered(area):
 	if !Vars.objects.has(whoSummoned):

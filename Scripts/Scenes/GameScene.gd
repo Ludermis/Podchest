@@ -33,7 +33,6 @@ remote func playerDisconnected (who):
 		print("We got playerDisconnected but that player doesn't exist ?")
 		return
 	print(str("A user disconnected ", who))
-	Vars.objects[who].queue_free()
 
 remote func dirtCreated (d):
 	if Vars.dirts.has(d["position"]):
@@ -66,9 +65,6 @@ var lastLoadedForCreation
 var lastLoadedForCreationName = ""
 
 remote func objectCreated (who, obj, data):
-#	if Vars.objects.has(data["id"]):
-#		print("We got objectCreated but that object already exists ?")
-#		return
 	var node
 	if obj != lastLoadedForCreationName:
 		lastLoadedForCreationName = obj
