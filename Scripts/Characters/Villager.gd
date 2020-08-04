@@ -35,6 +35,11 @@ func readyCustom():
 		skills[1].id = 1
 		skills[1].characterNode = id
 		skills[1].init()
+		
+		skills[2] = preload("res://Scripts/Skills/Villager/VillagerESkill.gd").new()
+		skills[2].id = 2
+		skills[2].characterNode = id
+		skills[2].init()
 
 func _physics_process(delta):
 	if id == Client.selfPeerID:

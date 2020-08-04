@@ -7,6 +7,7 @@ var team = -1
 var animation setget setAnimation
 var id
 var skills = {}
+var animationsNeedRotation = ["rooted", "rootedEnd"]
 
 func setSkin (newSkin):
 	skin = newSkin
@@ -21,7 +22,9 @@ func setSkin (newSkin):
 
 func setAnimation (anim):
 	animation = anim
-	if $Skin/AnimationPlayer.current_animation != anim:
+	if !animationsNeedRotation.has(animation):
+		$Skin.rotation = 0
+	if $Skin/AnimationPlayer.assigned_animation != anim:
 		$Skin/AnimationPlayer.play(animation)
 
 func setPlayerName (pName):
