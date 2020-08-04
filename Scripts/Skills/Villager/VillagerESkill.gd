@@ -79,5 +79,3 @@ func update(delta):
 		if Input.is_action_just_pressed("leftclick") && canCast:
 			castLocation = Vars.objects[characterNode].get_global_mouse_position()
 			Vars.objects[characterNode].get_tree().root.get_node("Main").rpc_id(1,"objectCalled",Client.selfPeerID,characterNode,"useSkill",[id,{"castLocation": castLocation}])
-		if casting:
-			Vars.objects[characterNode].get_tree().root.get_node("Main/CanvasLayer/ProgressBar").value = (castTime - castRemaining) / castTime * 100

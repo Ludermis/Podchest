@@ -4,6 +4,8 @@ var scytheActive = false setget setScytheActive
 var scytheRotation = 0 setget setScytheRotation
 
 func setScytheActive (isActive):
+	if scytheActive == isActive:
+		return
 	scytheActive = isActive
 	if isActive:
 		$Schyte.visible = true
@@ -11,8 +13,9 @@ func setScytheActive (isActive):
 		$Schyte.visible = false
 
 func setScytheRotation (rot):
-	scytheRotation = rot
-	$Schyte.rotation = rot
+	if id != Client.selfPeerID:
+		scytheRotation = rot
+		$Schyte.rotation = rot
 
 func inputHandler():
 	if Input.is_action_just_pressed('skill1'):
@@ -40,9 +43,19 @@ func readyCustom():
 		skills[2].id = 2
 		skills[2].characterNode = id
 		skills[2].init()
+		
+		skills[3] = preload("res://Scripts/Skills/Villager/VillagerRSkill.gd").new()
+		skills[3].id = 3
+		skills[3].characterNode = id
+		skills[3].init()
 
 func _physics_process(delta):
 	if id == Client.selfPeerID:
 		skillSystem(delta)
 		inputHandler()
-		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,{"pressed": {"left": Input.is_action_pressed('left'), "right": Input.is_action_pressed('right'), "up": Input.is_action_pressed('up'), "down": Input.is_action_pressed('down')}})
+		var dict = {}
+		dict["pressed"] = {"left": Input.is_action_pressed('left'), "right": Input.is_action_pressed('right'), "up": Input.is_action_pressed('up'), "down": Input.is_action_pressed('down')}
+		if scytheActive:
+			dict["scytheRotation"] = $Schyte.rotation
+			dict["mousePos"] = get_global_mouse_position()
+		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,dict)
