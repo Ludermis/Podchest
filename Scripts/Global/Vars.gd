@@ -1,6 +1,6 @@
 extends Node
 
-var serverIP = "localhost"
+var serverIP = "163.172.223.38"
 var serverPort = 27015
 var dirtCount = 0
 var dirts = {}
@@ -14,8 +14,9 @@ var accountInfo = {}
 var adminInfo = {}
 var time : float = 0 setget ,getTime
 var objects = {}
-var ping = 9999
-var build = "33"
+var pingDownload = 9999
+var pingUpload = 9999
+var build = "35"
 var buildConfirmed = false
 var newBuildIfMineWrong
 
@@ -29,7 +30,6 @@ func clearVars():
 	dirtCount = 0
 	dirts = {}
 	teams = {}
-	ping = 9999
 	myTeam = -1
 	scores = {1: 0, 2: 0}
 

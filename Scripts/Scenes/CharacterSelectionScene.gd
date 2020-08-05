@@ -26,13 +26,11 @@ func _ready():
 				node.group = buttonGroup
 				$"Panel/HBoxContainer".add_child(node)
 
-remote func gotGameTime (time, ping):
-	Vars.ping = OS.get_ticks_msec() - ping
+remote func gotGameTime (time, ping, upload):
 	$"Time".text = Vars.timeToString(time)
 
 remote func gameStarted ():
 	get_tree().change_scene("res://Prefabs/Scenes/GameScene.tscn")
-
 
 func _on_FPSTimer_timeout():
 	rpc_id(1,"demandGameTime",Client.selfPeerID,OS.get_ticks_msec())
