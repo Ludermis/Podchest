@@ -14,9 +14,8 @@ var accountInfo = {}
 var adminInfo = {}
 var time : float = 0 setget ,getTime
 var objects = {}
-var pingDownload = 9999
-var pingUpload = 9999
-var build = "35"
+var ping = 9999
+var build = "36"
 var buildConfirmed = false
 var newBuildIfMineWrong
 

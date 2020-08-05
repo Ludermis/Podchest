@@ -111,16 +111,14 @@ remote func gameEnded (d):
 	$EndTimer.start()
 	get_tree().paused = true
 
-remote func gotGameTime (time, ping, upload):
-	Vars.pingUpload = upload
-	Vars.pingDownload = OS.get_system_time_msecs() - ping
-	$"CanvasLayer/Ping".text = str(Vars.pingDownload) + " ms"
-	$"CanvasLayer/Ping2".text = str(Vars.pingUpload) + " ms"
+remote func gotGameTime (time, ping):
+	Vars.ping = (OS.get_ticks_msec() - ping) / 2
+	$"CanvasLayer/Ping".text = str(Vars.ping) + " ms"
 	$"CanvasLayer/Time".text = Vars.timeToString(time)
 
 func _on_FPSTimer_timeout():
 	$"CanvasLayer/FPS".set_text(str(Engine.get_frames_per_second()))
-	rpc_id(1,"demandGameTime",Client.selfPeerID,OS.get_system_time_msecs())
+	rpc_id(1,"demandGameTime",Client.selfPeerID,OS.get_ticks_msec())
 
 func _on_EndTimer_timeout():
 	get_tree().paused = false

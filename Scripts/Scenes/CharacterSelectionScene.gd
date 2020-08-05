@@ -26,7 +26,7 @@ func _ready():
 				node.group = buttonGroup
 				$"Panel/HBoxContainer".add_child(node)
 
-remote func gotGameTime (time, ping, upload):
+remote func gotGameTime (time, ping):
 	$"Time".text = Vars.timeToString(time)
 
 remote func gameStarted ():
