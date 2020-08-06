@@ -8,16 +8,7 @@ var animation setget setAnimation
 var id
 var skills = {}
 var animationsNeedRotation = ["rooted", "rootedEnd"]
-var pos = Vector2.ZERO setget set_pos
 var pressed = {"right": false, "left": false, "up": false, "down": false}
-var canMove = true
-var velocity = Vector2.ZERO
-var acceleration = 64
-var maxSpeed = 384
-
-func set_pos(value):
-	pos = value
-	position = pos
 
 func setSkin (newSkin):
 	skin = newSkin
@@ -60,26 +51,6 @@ func anySkillCasting ():
 		if "casting" in skills[i] && skills[i].casting == true:
 			return true
 	return false
-
-func movementHandler (delta):
-	if canMove:
-		if pressed["right"]:
-			velocity.x = min(velocity.x + acceleration, maxSpeed)
-		elif pressed["left"]:
-			velocity.x = max(velocity.x - acceleration, -maxSpeed)
-		else:
-			velocity.x = lerp(velocity.x,0,Vars.friction)
-		if pressed["down"]:
-			velocity.y = min(velocity.y + acceleration, maxSpeed)
-		elif pressed["up"]:
-			velocity.y = max(velocity.y - acceleration, -maxSpeed)
-		else:
-			velocity.y = lerp(velocity.y,0,Vars.friction)
-	else:
-		velocity.y = lerp(velocity.y,0,Vars.friction)
-		velocity.x = lerp(velocity.x,0,Vars.friction)
-	print(velocity)
-	position += velocity * delta
 
 func _ready():
 	$NameLabel.modulate = Vars.teams[team]["color"].blend(Color(1,1,1,0.5))

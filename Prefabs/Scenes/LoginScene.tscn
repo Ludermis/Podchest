@@ -69,6 +69,7 @@ margin_bottom = 936.0
 texture = ExtResource( 4 )
 expand = true
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -84,7 +85,6 @@ __meta__ = {
 }
 
 [node name="Message" type="Label" parent="."]
-visible = false
 margin_top = 128.0
 margin_right = 1920.0
 margin_bottom = 256.0
@@ -97,9 +97,9 @@ __meta__ = {
 }
 
 [node name="LoginButton" type="Button" parent="."]
-margin_left = 800.0
+margin_left = 768.0
 margin_top = 512.0
-margin_right = 1184.0
+margin_right = 1152.0
 margin_bottom = 640.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -128,9 +128,9 @@ __meta__ = {
 }
 
 [node name="Container" type="VBoxContainer" parent="."]
-margin_left = 880.0
+margin_left = 832.0
 margin_top = 272.0
-margin_right = 1136.0
+margin_right = 1088.0
 margin_bottom = 464.0
 custom_constants/separation = 62
 __meta__ = {
