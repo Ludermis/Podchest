@@ -15,9 +15,10 @@ var adminInfo = {}
 var time : float = 0 setget ,getTime
 var objects = {}
 var ping = 9999
-var build = "36"
+var build = "39"
 var buildConfirmed = false
 var newBuildIfMineWrong
+var friction = 0.2
 
 var mapSizeX = 50
 var mapSizeY = 50

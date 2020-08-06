@@ -34,8 +34,10 @@ func readyCustom():
 
 func _physics_process(delta):
 	if id == Client.selfPeerID:
+		pressed = {"left": Input.is_action_pressed('left'), "right": Input.is_action_pressed('right'), "up": Input.is_action_pressed('up'), "down": Input.is_action_pressed('down')}
 		skillSystem(delta)
 		inputHandler()
+		movementHandler(delta)
 		var dict = {}
-		dict["pressed"] = {"left": Input.is_action_pressed('left'), "right": Input.is_action_pressed('right'), "up": Input.is_action_pressed('up'), "down": Input.is_action_pressed('down')}
+		dict["pressed"] = pressed
 		get_tree().root.get_node("Main").rpc_id(1,"objectUpdated",Client.selfPeerID,id,dict)
