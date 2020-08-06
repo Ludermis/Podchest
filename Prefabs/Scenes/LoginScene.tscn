@@ -85,6 +85,7 @@ __meta__ = {
 }
 
 [node name="Message" type="Label" parent="."]
+visible = false
 margin_top = 128.0
 margin_right = 1920.0
 margin_bottom = 256.0
