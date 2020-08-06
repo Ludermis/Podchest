@@ -1,6 +1,6 @@
 extends Node
 
-var serverIP = "163.172.223.38"
+var serverIP = "213.142.156.10"
 var serverPort = 27015
 var dirtCount = 0
 var dirts = {}
@@ -15,7 +15,7 @@ var adminInfo = {}
 var time : float = 0 setget ,getTime
 var objects = {}
 var ping = 9999
-var build = "39"
+var build = "40"
 var buildConfirmed = false
 var newBuildIfMineWrong
 var friction = 0.2

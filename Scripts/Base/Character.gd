@@ -17,11 +17,7 @@ var maxSpeed = 384
 
 func set_pos(value):
 	pos = value
-	if Client.selfPeerID != id:
-		position = pos
-	else:
-		if position.distance_to(pos) > 64.0:
-			position = pos
+	position = pos
 
 func setSkin (newSkin):
 	skin = newSkin
