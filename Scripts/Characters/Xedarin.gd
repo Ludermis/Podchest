@@ -1,17 +1,5 @@
 extends "res://Scripts/Base/Character.gd"
 
-func inputHandler():
-	if Input.is_action_just_pressed('skill1'):
-		skills[1].use()
-	if Input.is_action_just_pressed('skill2'):
-		skills[2].use()
-	if Input.is_action_just_pressed('skill3'):
-		skills[3].use()
-	if Input.is_action_just_released('wheeldown'):
-		$Camera2D.zoomLevel = min($Camera2D.zoomLevel + 1,4)
-	if Input.is_action_just_released('wheelup'):
-		$Camera2D.zoomLevel = max($Camera2D.zoomLevel - 1,1)
-
 func _init():
 	characterName = "Xedarin"
 

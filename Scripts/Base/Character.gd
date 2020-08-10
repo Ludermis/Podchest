@@ -11,17 +11,23 @@ var animationsNeedRotation = ["rooted", "rootedEnd"]
 var pressed = {"right": false, "left": false, "up": false, "down": false}
 
 func setSkin (newSkin):
+	if skin == newSkin:
+		return
 	skin = newSkin
-	if skin != "":
-		var atlas = load("res://Sprites/Characters/" + skin.to_lower() + ".png")
-		$Skin/Body.texture.atlas = atlas
-		$Skin/Head.texture.atlas = atlas
-		$Skin/Leg1.texture.atlas = atlas
-		$Skin/Leg2.texture.atlas = atlas
-		$Skin/Hand1.texture.atlas = atlas
-		$Skin/Hand2.texture.atlas = atlas
+	var toLoad = skin
+	if toLoad == "":
+		toLoad = characterName
+	var atlas = load("res://Sprites/Characters/" + toLoad.to_lower() + ".png")
+	$Skin/Body.texture.atlas = atlas
+	$Skin/Head.texture.atlas = atlas
+	$Skin/Leg1.texture.atlas = atlas
+	$Skin/Leg2.texture.atlas = atlas
+	$Skin/Hand1.texture.atlas = atlas
+	$Skin/Hand2.texture.atlas = atlas
 
 func setAnimation (anim):
+	if animation == anim:
+		return
 	animation = anim
 	if !animationsNeedRotation.has(animation):
 		$Skin.rotation = 0
@@ -29,11 +35,25 @@ func setAnimation (anim):
 		$Skin/AnimationPlayer.play(animation)
 
 func setPlayerName (pName):
+	if playerName == pName:
+		return
 	playerName = pName
 	$NameLabel.text = playerName
 
 func readyCustom():
 	pass
+
+func inputHandler():
+	if Input.is_action_just_pressed('skill1'):
+		skills[1].use()
+	if Input.is_action_just_pressed('skill2'):
+		skills[2].use()
+	if Input.is_action_just_pressed('skill3'):
+		skills[3].use()
+	if Input.is_action_just_released('wheeldown'):
+		$Camera2D.zoomLevel = min($Camera2D.zoomLevel + 1,4)
+	if Input.is_action_just_released('wheelup'):
+		$Camera2D.zoomLevel = max($Camera2D.zoomLevel - 1,1)
 
 func skillSystem (delta):
 	for i in skills:

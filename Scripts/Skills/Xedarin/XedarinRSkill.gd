@@ -7,7 +7,6 @@ var cooldown
 var cooldownRemaining
 var characterNode : int
 var gotInfo = false
-var area
 
 func _ready():
 	pass
