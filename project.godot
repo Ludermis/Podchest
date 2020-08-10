@@ -97,13 +97,6 @@ skill3={
  ]
 }
 
-[network]
-
-limits/websocket_client/max_in_buffer_kb=128
-limits/websocket_client/max_in_packets=2048
-limits/websocket_client/max_out_buffer_kb=128
-limits/websocket_client/max_out_packets=2048
-
 [rendering]
 
 quality/driver/fallback_to_gles2=true
