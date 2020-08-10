@@ -15,7 +15,7 @@ var adminInfo = {}
 var time : float = 0 setget ,getTime
 var objects = {}
 var ping = 9999
-var build = "44"
+var build = "45"
 var buildConfirmed = false
 var newBuildIfMineWrong
 

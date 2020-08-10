@@ -111,8 +111,9 @@ remote func gameEnded (d):
 	$EndTimer.start()
 	get_tree().paused = true
 
-remote func gotGameTime (time, ping):
+remote func gotGameTime (time, ping, serverFPS):
 	Vars.ping = (OS.get_ticks_msec() - ping) / 2
+	$"CanvasLayer/ServerFPS".text = str(serverFPS)
 	$"CanvasLayer/Ping".text = str(Vars.ping) + " ms"
 	$"CanvasLayer/Time".text = Vars.timeToString(time)
 
