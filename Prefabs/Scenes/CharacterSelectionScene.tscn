@@ -89,7 +89,7 @@ script = ExtResource( 2 )
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color( 0, 0.117, 0.13, 1 )
 margin_right = 1920.0
-margin_bottom = 936.0
+margin_bottom = 1080.0
 texture = ExtResource( 3 )
 expand = true
 __meta__ = {
@@ -157,5 +157,6 @@ __meta__ = {
 [node name="FPSTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
 [connection signal="pressed" from="SelectButton" to="SelectButton" method="_on_SelectButton_pressed"]
 [connection signal="timeout" from="FPSTimer" to="." method="_on_FPSTimer_timeout"]

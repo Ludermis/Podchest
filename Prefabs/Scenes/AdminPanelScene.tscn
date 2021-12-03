@@ -29,18 +29,17 @@ script = ExtResource( 2 )
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color( 0, 0.117, 0.13, 1 )
 margin_right = 1920.0
-margin_bottom = 936.0
+margin_bottom = 1080.0
 texture = ExtResource( 3 )
 expand = true
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="CancelButton" type="Button" parent="."]
-margin_top = 856.0
+margin_top = 1000.0
 margin_right = 285.0
-margin_bottom = 936.0
+margin_bottom = 1080.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.407843, 0, 1, 1 )
 text = "Main Menu"
@@ -76,5 +75,6 @@ custom_fonts/font = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="CancelButton" to="." method="_on_CancelButton_pressed"]
 [connection signal="item_selected" from="LogsList" to="." method="_on_LogsList_item_selected"]

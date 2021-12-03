@@ -411,7 +411,7 @@ __meta__ = {
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color( 0, 0.117647, 0.129412, 1 )
 margin_right = 1920.0
-margin_bottom = 936.0
+margin_bottom = 1080.0
 texture = ExtResource( 6 )
 expand = true
 __meta__ = {
@@ -481,7 +481,7 @@ __meta__ = {
 position = Vector2( 411.432, 42.1931 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 13 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="APSprite" type="AnimatedSprite" parent="AccountPanel"]
@@ -1047,9 +1047,9 @@ __meta__ = {
 
 [node name="LabelLudermis" type="Label" parent="."]
 margin_left = 1704.0
-margin_top = 816.0
+margin_top = 960.0
 margin_right = 1921.0
-margin_bottom = 935.0
+margin_bottom = 1079.0
 custom_fonts/font = SubResource( 57 )
 text = "Ludermis
 Studios"
@@ -1060,9 +1060,9 @@ __meta__ = {
 }
 
 [node name="LabelRooms" type="Label" parent="."]
-margin_top = 856.0
+margin_top = 1000.0
 margin_right = 256.0
-margin_bottom = 936.0
+margin_bottom = 1080.0
 custom_fonts/font = SubResource( 57 )
 text = "Rooms : 0"
 align = 1
@@ -1072,9 +1072,9 @@ __meta__ = {
 }
 
 [node name="LabelOnline" type="Label" parent="."]
-margin_top = 784.0
+margin_top = 928.0
 margin_right = 256.0
-margin_bottom = 864.0
+margin_bottom = 1008.0
 custom_fonts/font = SubResource( 57 )
 text = "Online : 0"
 align = 1
@@ -1096,6 +1096,11 @@ __meta__ = {
 
 [node name="DemandOnlineTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
 [connection signal="pressed" from="AdminButton" to="AdminButton" method="_on_AdminButton_pressed"]
 [connection signal="mouse_entered" from="MiscPanel/CollectionButton" to="MiscPanel/CollectionButton" method="_on_CollectionButton_mouse_entered"]
 [connection signal="mouse_exited" from="MiscPanel/CollectionButton" to="MiscPanel/CollectionButton" method="_on_CollectionButton_mouse_exited"]

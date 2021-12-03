@@ -34,6 +34,10 @@ remote func playerDisconnected (who):
 		return
 	print(str("A user disconnected ", who))
 
+func _input(ev):
+	if ev.is_action_pressed('fullscreen'):
+		OS.window_fullscreen = !OS.window_fullscreen
+
 remote func dirtCreated (d):
 	if Vars.dirts.has(d["position"]):
 		print("We got dirtCreated a dirt already exists there ?")

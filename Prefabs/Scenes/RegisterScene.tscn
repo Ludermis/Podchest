@@ -70,7 +70,7 @@ script = ExtResource( 3 )
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color( 0, 0.117, 0.13, 1 )
 margin_right = 1920.0
-margin_bottom = 936.0
+margin_bottom = 1080.0
 texture = ExtResource( 5 )
 expand = true
 __meta__ = {
@@ -119,9 +119,9 @@ __meta__ = {
 }
 
 [node name="CancelButton" type="Button" parent="."]
-margin_top = 856.0
+margin_top = 1000.0
 margin_right = 285.0
-margin_bottom = 936.0
+margin_bottom = 1080.0
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.407843, 0, 1, 1 )
 text = "Main Menu"
@@ -133,9 +133,9 @@ __meta__ = {
 
 [node name="Disclaimer" type="Label" parent="."]
 margin_left = 968.0
-margin_top = 872.0
+margin_top = 1016.0
 margin_right = 1922.0
-margin_bottom = 936.0
+margin_bottom = 1080.0
 custom_fonts/font = SubResource( 9 )
 text = "Disclaimer! The servers this game is currently being hosted on are really vulnerable.
 It is advised to use a password you do not use anywhere else."
@@ -174,5 +174,6 @@ placeholder_text = "Password"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="RegisterButton" to="RegisterButton" method="_on_RegisterButton_pressed"]
 [connection signal="pressed" from="CancelButton" to="CancelButton" method="_on_CancelButton_pressed"]

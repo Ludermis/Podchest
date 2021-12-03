@@ -54,7 +54,7 @@ size = 36
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=17]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0, 0.22, 0.24, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -62,7 +62,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.945098, 0.713726, 0, 1 )
 
-[sub_resource type="StyleBoxFlat" id=18]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.35, 0.2625, 0, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -70,7 +70,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.945098, 0.713726, 0, 1 )
 
-[sub_resource type="StyleBoxFlat" id=19]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.388235, 0.388235, 0.388235, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -78,7 +78,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.945098, 0.713726, 0, 1 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0, 0.117647, 0.129412, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -86,52 +86,52 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.945098, 0.713726, 0, 1 )
 
-[sub_resource type="DynamicFont" id=20]
+[sub_resource type="DynamicFont" id=10]
 size = 32
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 6 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 6 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 6 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 6 )
 region = Rect2( 128, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=26]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 6 )
 region = Rect2( 160, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=27]
+[sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 6 )
 region = Rect2( 192, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=28]
+[sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 6 )
 region = Rect2( 224, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=29]
+[sub_resource type="SpriteFrames" id=19]
 animations = [ {
-"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
 } ]
 
-[sub_resource type="DynamicFont" id=30]
+[sub_resource type="DynamicFont" id=20]
 size = 20
 use_filter = true
 font_data = ExtResource( 2 )
@@ -142,11 +142,10 @@ script = ExtResource( 4 )
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color( 0, 0, 0, 0.313726 )
 margin_right = 1920.0
-margin_bottom = 936.0
+margin_bottom = 1080.0
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -219,10 +218,10 @@ margin_left = 408.0
 margin_top = 320.0
 margin_right = 616.0
 margin_bottom = 376.0
-custom_styles/hover = SubResource( 17 )
-custom_styles/pressed = SubResource( 18 )
-custom_styles/disabled = SubResource( 19 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
@@ -250,7 +249,7 @@ margin_left = 93.0
 margin_top = 9.0
 margin_right = 166.0
 margin_bottom = 45.0
-custom_fonts/font = SubResource( 20 )
+custom_fonts/font = SubResource( 10 )
 text = "6300"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -261,10 +260,10 @@ margin_left = 664.0
 margin_top = 320.0
 margin_right = 872.0
 margin_bottom = 376.0
-custom_styles/hover = SubResource( 17 )
-custom_styles/pressed = SubResource( 18 )
-custom_styles/disabled = SubResource( 19 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
@@ -288,8 +287,8 @@ mouse_filter = 1
 [node name="CoinSprite" type="AnimatedSprite" parent="Panel/GoldButton/HBoxContainer/Control"]
 position = Vector2( 23, 37 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 29 )
-frame = 2
+frames = SubResource( 19 )
+frame = 3
 playing = true
 
 [node name="Label" type="Label" parent="Panel/GoldButton/HBoxContainer"]
@@ -297,7 +296,7 @@ margin_left = 93.0
 margin_top = 9.0
 margin_right = 166.0
 margin_bottom = 45.0
-custom_fonts/font = SubResource( 20 )
+custom_fonts/font = SubResource( 10 )
 text = "6300"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -308,7 +307,7 @@ margin_left = 408.0
 margin_top = 384.0
 margin_right = 616.0
 margin_bottom = 416.0
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 20 )
 text = "New AP : 200"
 align = 1
 valign = 1
@@ -319,7 +318,7 @@ margin_left = 664.0
 margin_top = 384.0
 margin_right = 872.0
 margin_bottom = 416.0
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 20 )
 text = "New Gold : 200"
 align = 1
 valign = 1
@@ -327,6 +326,7 @@ clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="Panel/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="Panel/APButton" to="." method="_on_APButton_pressed"]
 [connection signal="pressed" from="Panel/GoldButton" to="." method="_on_GoldButton_pressed"]

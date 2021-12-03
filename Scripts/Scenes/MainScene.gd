@@ -39,6 +39,10 @@ remote func loginCompleted (info):
 	Vars.accountInfo = info
 	logged()
 
+func _input(ev):
+	if ev.is_action_pressed('fullscreen'):
+		OS.window_fullscreen = !OS.window_fullscreen
+
 remote func loginFailed ():
 	pass
 

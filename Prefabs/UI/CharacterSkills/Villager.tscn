@@ -7,39 +7,39 @@
 [ext_resource path="res://Fonts/arial.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Shaders/circular-progress.shader" type="Shader" id=6]
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=1]
 use_filter = true
 font_data = ExtResource( 5 )
 
-[sub_resource type="Theme" id=8]
-TooltipLabel/fonts/font = SubResource( 7 )
+[sub_resource type="Theme" id=2]
+TooltipLabel/fonts/font = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=3]
 size = 47
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 4 )
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 6 )
 shader_param/value = 100.0
 shader_param/thickness = 30.0
 shader_param/offset = null
 shader_param/smoothing = 5.0
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
 region = Rect2( 3.61868, -4.01448, 25.2979, 27.6696 )
 
-[sub_resource type="ShaderMaterial" id=12]
+[sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 6 )
 shader_param/value = 100.0
 shader_param/thickness = 30.0
 shader_param/offset = null
 shader_param/smoothing = 5.0
 
-[sub_resource type="ShaderMaterial" id=13]
+[sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 6 )
 shader_param/value = 100.0
 shader_param/thickness = 30.0
@@ -61,7 +61,7 @@ margin_bottom = 896.0
 hint_tooltip = "(5 seconds cooldown)
 Cast to throw a blooming flower.
 Blooms after 5 seconds."
-theme = SubResource( 8 )
+theme = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -81,7 +81,7 @@ __meta__ = {
 margin_left = 32.0
 margin_right = 96.0
 margin_bottom = 64.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 3 )
 text = "Q"
 align = 1
 valign = 1
@@ -91,7 +91,7 @@ __meta__ = {
 
 [node name="Progress" type="Panel" parent="Skill1"]
 modulate = Color( 0, 1, 0, 1 )
-material = SubResource( 10 )
+material = SubResource( 4 )
 margin_left = 32.0
 margin_top = -3.28436
 margin_right = 96.0
@@ -108,7 +108,7 @@ margin_bottom = 896.0
 hint_tooltip = "(7 seconds cooldown)
 Cast to throw a bear trap.
 Roots for 2 seconds"
-theme = SubResource( 8 )
+theme = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -118,7 +118,7 @@ margin_left = 26.9128
 margin_top = 60.1229
 margin_right = 100.913
 margin_bottom = 138.123
-texture = SubResource( 11 )
+texture = SubResource( 5 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -128,7 +128,7 @@ __meta__ = {
 margin_left = 32.0
 margin_right = 96.0
 margin_bottom = 64.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 3 )
 text = "E"
 align = 1
 valign = 1
@@ -138,7 +138,7 @@ __meta__ = {
 
 [node name="Progress" type="Panel" parent="Skill2"]
 modulate = Color( 0, 1, 0, 1 )
-material = SubResource( 12 )
+material = SubResource( 6 )
 margin_left = 32.0
 margin_top = -3.28436
 margin_right = 96.0
@@ -155,7 +155,7 @@ margin_bottom = 896.0
 hint_tooltip = "(25 seconds cooldown)
 Cast to summon a scythe for 10 seconds.
 Scythe paints the surface."
-theme = SubResource( 8 )
+theme = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -175,7 +175,7 @@ __meta__ = {
 margin_left = 32.0
 margin_right = 96.0
 margin_bottom = 64.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 3 )
 text = "R"
 align = 1
 valign = 1
@@ -185,7 +185,7 @@ __meta__ = {
 
 [node name="Progress" type="Panel" parent="Skill3"]
 modulate = Color( 0, 1, 0, 1 )
-material = SubResource( 13 )
+material = SubResource( 7 )
 margin_left = 32.0
 margin_top = -3.28436
 margin_right = 96.0

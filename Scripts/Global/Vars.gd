@@ -1,6 +1,6 @@
 extends Node
 
-var serverIP = "2.56.62.37"
+var serverIP = "localhost"
 var serverPort = 27015
 var dirtCount = 0
 var dirts = {}

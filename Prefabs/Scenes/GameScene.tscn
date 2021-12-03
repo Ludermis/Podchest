@@ -160,5 +160,6 @@ autostart = true
 pause_mode = 2
 wait_time = 1.5
 one_shot = true
+
 [connection signal="timeout" from="FPSTimer" to="." method="_on_FPSTimer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
