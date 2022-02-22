@@ -1,6 +1,6 @@
 extends Node
 
-var serverIP = "localhost"
+var serverIP = "lynext.net"
 var serverPort = 27015
 var dirtCount = 0
 var dirts = {}
