@@ -86,8 +86,8 @@ func connection_failed ():
 	get_tree().change_scene_to(preload("res://Prefabs/Scenes/ConnectionFailedScene.tscn"))
 
 remote func updateStats (d):
-	$LabelRooms.text = "Rooms : " + str(d["rooms"])
-	$LabelOnline.text = "Online : " + str(d["playerCount"])
+	$OnlinePanel/LabelRooms.text = "Rooms : " + str(d["rooms"])
+	$OnlinePanel/LabelOnline.text = "Online : " + str(d["playerCount"])
 
 func _on_DemandStatsTimer_timeout():
 	rpc_id(1,"demandOnline",Client.selfPeerID)

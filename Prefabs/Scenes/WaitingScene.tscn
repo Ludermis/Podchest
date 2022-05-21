@@ -22,16 +22,16 @@ script = ExtResource( 2 )
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color( 0, 0.117, 0.13, 1 )
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_right = 2560.0
+margin_bottom = 1440.0
 texture = ExtResource( 3 )
 expand = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="Label" type="Label" parent="."]
-margin_right = 1920.0
+margin_right = 2560.0
 margin_bottom = 192.0
 custom_fonts/font = SubResource( 1 )
 text = "Waiting for other players.."
@@ -43,7 +43,7 @@ __meta__ = {
 
 [node name="Label2" type="Label" parent="."]
 margin_top = 192.0
-margin_right = 1920.0
+margin_right = 2560.0
 margin_bottom = 384.0
 custom_fonts/font = SubResource( 2 )
 text = "PLS Wait :)"
@@ -55,7 +55,7 @@ __meta__ = {
 
 [node name="Players" type="Label" parent="."]
 margin_top = 320.0
-margin_right = 1920.0
+margin_right = 2560.0
 margin_bottom = 512.0
 custom_fonts/font = SubResource( 2 )
 text = "0 / 99"
@@ -67,7 +67,7 @@ __meta__ = {
 
 [node name="Time" type="Label" parent="."]
 margin_top = 512.0
-margin_right = 1920.0
+margin_right = 2560.0
 margin_bottom = 704.0
 custom_fonts/font = SubResource( 2 )
 text = "00:00"
@@ -78,11 +78,11 @@ __meta__ = {
 }
 
 [node name="CancelButton" type="Button" parent="."]
-margin_top = 1000.0
+margin_top = 1360.0
 margin_right = 285.0
-margin_bottom = 1080.0
-custom_fonts/font = SubResource( 3 )
+margin_bottom = 1440.0
 custom_colors/font_color = Color( 0.407843, 0, 1, 1 )
+custom_fonts/font = SubResource( 3 )
 text = "Main Menu"
 flat = true
 __meta__ = {

@@ -8,7 +8,6 @@
 [ext_resource path="res://Shaders/circular-progress.shader" type="Shader" id=6]
 [ext_resource path="res://Shaders/sprite_outline.shader" type="Shader" id=7]
 
-
 [sub_resource type="DynamicFont" id=1]
 use_filter = true
 font_data = ExtResource( 5 )
@@ -52,9 +51,6 @@ shader_param/smoothing = 5.0
 [node name="Skills" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Skill1" type="Control" parent="."]
 visible = false
@@ -154,10 +150,10 @@ __meta__ = {
 }
 
 [node name="Skill3" type="Control" parent="."]
-margin_left = 1088.0
-margin_top = 768.0
-margin_right = 1216.0
-margin_bottom = 896.0
+margin_left = 1408.0
+margin_top = 1160.0
+margin_right = 1536.0
+margin_bottom = 1288.0
 hint_tooltip = "(30 seconds cooldown)
 Cast to shapeshift into a random enemy.
 You also summon 10 clones of that enemy.

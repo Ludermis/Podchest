@@ -69,9 +69,10 @@ region_rect = Rect2( -1, -1, 3202, 3202 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Score1" type="Label" parent="CanvasLayer"]
-margin_left = 384.0
-margin_right = 960.0
-margin_bottom = 68.0
+margin_left = 704.0
+margin_top = 32.0
+margin_right = 1280.0
+margin_bottom = 107.0
 custom_fonts/font = SubResource( 2 )
 text = "0"
 align = 1
@@ -87,9 +88,6 @@ custom_fonts/font = SubResource( 3 )
 text = "-100"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Ping" type="Label" parent="CanvasLayer"]
 margin_left = 128.0
@@ -117,7 +115,7 @@ __meta__ = {
 
 [node name="Time" type="Label" parent="CanvasLayer"]
 margin_top = 64.0
-margin_right = 1920.0
+margin_right = 2560.0
 margin_bottom = 128.0
 custom_fonts/font = SubResource( 3 )
 text = "Time"
@@ -128,9 +126,10 @@ __meta__ = {
 }
 
 [node name="Score2" type="Label" parent="CanvasLayer"]
-margin_left = 960.0
-margin_right = 1536.0
-margin_bottom = 68.0
+margin_left = 1280.0
+margin_top = 32.0
+margin_right = 1856.0
+margin_bottom = 107.0
 custom_fonts/font = SubResource( 2 )
 text = "0"
 align = 1
@@ -141,16 +140,17 @@ __meta__ = {
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
 visible = false
-margin_left = 704.0
-margin_top = 472.0
-margin_right = 1216.0
-margin_bottom = 504.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -256.0
+margin_top = -16.0
+margin_right = 256.0
+margin_bottom = 16.0
 custom_styles/fg = SubResource( 6 )
 custom_styles/bg = SubResource( 7 )
 percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="FPSTimer" type="Timer" parent="."]
 wait_time = 0.5

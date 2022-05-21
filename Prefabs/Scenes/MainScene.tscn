@@ -252,6 +252,11 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="DynamicFont" id=96]
+size = 50
+use_filter = true
+font_data = ExtResource( 15 )
+
 [sub_resource type="StyleBoxFlat" id=93]
 bg_color = Color( 0, 0.18, 0.2, 1 )
 border_width_left = 8
@@ -283,11 +288,6 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-
-[sub_resource type="DynamicFont" id=96]
-size = 50
-use_filter = true
-font_data = ExtResource( 15 )
 
 [sub_resource type="ButtonGroup" id=97]
 
@@ -410,12 +410,12 @@ __meta__ = {
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color( 0, 0.117647, 0.129412, 1 )
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_right = 2560.0
+margin_bottom = 1440.0
 texture = ExtResource( 6 )
 expand = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="AdminButton" type="TextureButton" parent="."]
@@ -431,14 +431,14 @@ __meta__ = {
 }
 
 [node name="AccountPanel" type="Panel" parent="."]
-margin_left = 184.0
-margin_top = 128.0
-margin_right = 632.0
-margin_bottom = 392.0
+margin_left = 472.0
+margin_top = 256.0
+margin_right = 920.0
+margin_bottom = 520.0
 theme = SubResource( 55 )
 custom_styles/panel = ExtResource( 4 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="Picture" type="TextureRect" parent="AccountPanel"]
@@ -448,9 +448,6 @@ margin_right = 104.092
 margin_bottom = 85.5411
 texture = ExtResource( 3 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PictureFrame" type="TextureRect" parent="AccountPanel"]
 margin_left = 32.0923
@@ -459,29 +456,23 @@ margin_right = 112.092
 margin_bottom = 93.5411
 texture = ExtResource( 1 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AccountName" type="Label" parent="AccountPanel"]
-margin_left = 22.0
+margin_left = 32.0
 margin_top = 101.0
 margin_right = 320.0
 margin_bottom = 151.0
-custom_fonts/font = SubResource( 56 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 56 )
 text = "Guest"
 valign = 1
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CoinSprite" type="AnimatedSprite" parent="AccountPanel"]
 position = Vector2( 411.432, 42.1931 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 65 )
-frame = 4
+frame = 7
 playing = true
 
 [node name="APSprite" type="AnimatedSprite" parent="AccountPanel"]
@@ -494,88 +485,76 @@ margin_left = 160.0
 margin_top = 13.0
 margin_right = 376.0
 margin_bottom = 61.0
-custom_fonts/font = SubResource( 67 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 67 )
 text = "0"
 align = 2
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="APLabel" type="Label" parent="AccountPanel"]
 margin_left = 160.0
 margin_top = 93.0
 margin_right = 376.0
 margin_bottom = 141.0
-custom_fonts/font = SubResource( 67 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 67 )
 text = "0"
 align = 2
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="OffersPanel" type="Panel" parent="."]
-margin_left = 184.0
-margin_top = 400.0
-margin_right = 632.0
-margin_bottom = 544.0
+margin_left = 472.0
+margin_top = 528.0
+margin_right = 920.0
+margin_bottom = 672.0
 theme = SubResource( 55 )
 custom_styles/panel = ExtResource( 4 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="Title" type="Label" parent="OffersPanel"]
 margin_left = 24.0
 margin_right = 440.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 56 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 56 )
 text = "Offers"
 align = 1
 valign = 1
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="OffersPanel"]
 margin_left = 24.0
 margin_top = 48.0
 margin_right = 441.0
 margin_bottom = 134.0
-custom_fonts/font = SubResource( 68 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 68 )
 text = "No offers available."
 autowrap = true
 
 [node name="MiscPanel" type="Panel" parent="."]
-margin_left = 184.0
-margin_top = 552.0
-margin_right = 632.0
-margin_bottom = 776.0
+margin_left = 472.0
+margin_top = 680.0
+margin_right = 920.0
+margin_bottom = 904.0
 theme = SubResource( 55 )
 custom_styles/panel = ExtResource( 4 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="Title" type="Label" parent="MiscPanel"]
 margin_left = 24.0
 margin_right = 440.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 56 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 56 )
 text = "Collection / Store"
 align = 1
 valign = 1
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CollectionButton" type="Button" parent="MiscPanel"]
 margin_left = 21.0
@@ -585,9 +564,6 @@ margin_bottom = 181.0
 disabled = true
 flat = true
 script = SubResource( 69 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="MiscPanel/CollectionButton"]
 position = Vector2( 56, 40 )
@@ -603,9 +579,6 @@ margin_bottom = 181.0
 disabled = true
 flat = true
 script = SubResource( 90 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="MiscPanel/StoreButton"]
 position = Vector2( 40, 56 )
@@ -614,63 +587,57 @@ frames = SubResource( 92 )
 playing = true
 
 [node name="AdPanel1" type="Panel" parent="."]
-margin_left = 640.0
-margin_top = 552.0
-margin_right = 1224.0
-margin_bottom = 776.0
+margin_left = 928.0
+margin_top = 680.0
+margin_right = 1512.0
+margin_bottom = 904.0
 theme = SubResource( 55 )
 custom_styles/panel = ExtResource( 4 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="Title" type="Label" parent="AdPanel1"]
 margin_left = 16.0
 margin_right = 584.0
 margin_bottom = 224.0
-custom_fonts/font = SubResource( 56 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 56 )
 text = "Reklam"
 align = 1
 valign = 1
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AdPanel2" type="Panel" parent="."]
-margin_left = 1232.0
-margin_top = 552.0
-margin_right = 1816.0
-margin_bottom = 776.0
+margin_left = 1520.0
+margin_top = 680.0
+margin_right = 2104.0
+margin_bottom = 904.0
 theme = SubResource( 55 )
 custom_styles/panel = ExtResource( 4 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="Title" type="Label" parent="AdPanel2"]
 margin_left = 16.0
 margin_right = 584.0
 margin_bottom = 224.0
-custom_fonts/font = SubResource( 56 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 56 )
 text = "Reklam"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GamemodePanel" type="Panel" parent="."]
-margin_left = 1232.0
-margin_top = 128.0
-margin_right = 1816.0
-margin_bottom = 360.0
+margin_left = 1520.0
+margin_top = 256.0
+margin_right = 2104.0
+margin_bottom = 488.0
 theme = SubResource( 55 )
 custom_styles/panel = ExtResource( 4 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="Title" type="Label" parent="GamemodePanel"]
@@ -678,14 +645,11 @@ margin_left = 88.0
 margin_top = -16.0
 margin_right = 504.0
 margin_bottom = 48.0
-custom_fonts/font = SubResource( 56 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 56 )
 text = "Select Game Mode"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GamemodePanel"]
 margin_left = 24.0
@@ -694,22 +658,19 @@ margin_right = 584.0
 margin_bottom = 216.0
 custom_constants/separation = 64
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="1v1Toggle" type="ToolButton" parent="GamemodePanel/HBoxContainer"]
 margin_left = 72.0
 margin_right = 168.0
 margin_bottom = 176.0
 rect_min_size = Vector2( 96, 176 )
-custom_styles/hover = SubResource( 93 )
-custom_styles/pressed = SubResource( 94 )
-custom_styles/normal = SubResource( 95 )
-custom_fonts/font = SubResource( 96 )
 custom_colors/font_color = Color( 0.517647, 0.388235, 0, 1 )
 custom_colors/font_color_hover = Color( 0.517647, 0.388235, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.945098, 0.713726, 0, 1 )
+custom_fonts/font = SubResource( 96 )
+custom_styles/hover = SubResource( 93 )
+custom_styles/pressed = SubResource( 94 )
+custom_styles/normal = SubResource( 95 )
 toggle_mode = true
 group = SubResource( 97 )
 text = "1v1"
@@ -725,9 +686,6 @@ margin_right = 24.0
 margin_bottom = 40.0
 texture = ExtResource( 11 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect2" type="TextureRect" parent="GamemodePanel/HBoxContainer/1v1Toggle"]
 modulate = Color( 0.898039, 0, 1, 1 )
@@ -737,23 +695,20 @@ margin_bottom = 40.0
 texture = ExtResource( 11 )
 expand = true
 flip_h = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="2v2Toggle" type="ToolButton" parent="GamemodePanel/HBoxContainer"]
 margin_left = 232.0
 margin_right = 328.0
 margin_bottom = 176.0
 rect_min_size = Vector2( 96, 176 )
-custom_styles/hover = SubResource( 93 )
-custom_styles/pressed = SubResource( 94 )
-custom_styles/normal = SubResource( 95 )
-custom_fonts/font = SubResource( 96 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.517647, 0.388235, 0, 1 )
 custom_colors/font_color_hover = Color( 0.517647, 0.388235, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.945098, 0.713726, 0, 1 )
+custom_fonts/font = SubResource( 96 )
+custom_styles/hover = SubResource( 93 )
+custom_styles/pressed = SubResource( 94 )
+custom_styles/normal = SubResource( 95 )
 toggle_mode = true
 group = SubResource( 97 )
 text = "2v2"
@@ -770,9 +725,6 @@ margin_right = 24.0
 margin_bottom = 40.0
 texture = ExtResource( 11 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect4" type="TextureRect" parent="GamemodePanel/HBoxContainer/2v2Toggle"]
 modulate = Color( 0, 0.0156863, 1, 1 )
@@ -782,9 +734,6 @@ margin_right = 16.0
 margin_bottom = 48.0
 texture = ExtResource( 11 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect5" type="TextureRect" parent="GamemodePanel/HBoxContainer/2v2Toggle"]
 modulate = Color( 1, 0, 0, 1 )
@@ -794,9 +743,6 @@ margin_bottom = 40.0
 texture = ExtResource( 11 )
 expand = true
 flip_h = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect6" type="TextureRect" parent="GamemodePanel/HBoxContainer/2v2Toggle"]
 modulate = Color( 1, 0, 0, 1 )
@@ -807,23 +753,20 @@ margin_bottom = 48.0
 texture = ExtResource( 11 )
 expand = true
 flip_h = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="3v3Toggle" type="ToolButton" parent="GamemodePanel/HBoxContainer"]
 margin_left = 392.0
 margin_right = 488.0
 margin_bottom = 176.0
 rect_min_size = Vector2( 96, 176 )
-custom_styles/hover = SubResource( 93 )
-custom_styles/pressed = SubResource( 94 )
-custom_styles/normal = SubResource( 95 )
-custom_fonts/font = SubResource( 96 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.517647, 0.388235, 0, 1 )
 custom_colors/font_color_hover = Color( 0.517647, 0.388235, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.945098, 0.713726, 0, 1 )
+custom_fonts/font = SubResource( 96 )
+custom_styles/hover = SubResource( 93 )
+custom_styles/pressed = SubResource( 94 )
+custom_styles/normal = SubResource( 95 )
 toggle_mode = true
 group = SubResource( 97 )
 text = "3v3"
@@ -840,9 +783,6 @@ margin_right = 24.0
 margin_bottom = 40.0
 texture = ExtResource( 11 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect9" type="TextureRect" parent="GamemodePanel/HBoxContainer/3v3Toggle"]
 modulate = Color( 0, 0.576471, 1, 1 )
@@ -852,9 +792,6 @@ margin_right = 16.0
 margin_bottom = 48.0
 texture = ExtResource( 11 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect11" type="TextureRect" parent="GamemodePanel/HBoxContainer/3v3Toggle"]
 modulate = Color( 0, 0.576471, 1, 1 )
@@ -864,9 +801,6 @@ margin_right = 24.0
 margin_bottom = 56.0
 texture = ExtResource( 11 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect8" type="TextureRect" parent="GamemodePanel/HBoxContainer/3v3Toggle"]
 modulate = Color( 1, 0.168627, 0.168627, 1 )
@@ -876,9 +810,6 @@ margin_bottom = 40.0
 texture = ExtResource( 11 )
 expand = true
 flip_h = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect7" type="TextureRect" parent="GamemodePanel/HBoxContainer/3v3Toggle"]
 modulate = Color( 1, 0.168627, 0.168627, 1 )
@@ -889,9 +820,6 @@ margin_bottom = 48.0
 texture = ExtResource( 11 )
 expand = true
 flip_h = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect12" type="TextureRect" parent="GamemodePanel/HBoxContainer/3v3Toggle"]
 modulate = Color( 1, 0.168627, 0.168627, 1 )
@@ -902,57 +830,48 @@ margin_bottom = 56.0
 texture = ExtResource( 11 )
 expand = true
 flip_h = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PartyPanel" type="Panel" parent="."]
-margin_left = 1232.0
-margin_top = 368.0
-margin_right = 1816.0
-margin_bottom = 544.0
+margin_left = 1520.0
+margin_top = 496.0
+margin_right = 2104.0
+margin_bottom = 672.0
 theme = SubResource( 55 )
 custom_styles/panel = ExtResource( 4 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="Title" type="Label" parent="PartyPanel"]
 margin_left = 88.0
 margin_right = 504.0
 margin_bottom = 64.0
-custom_fonts/font = SubResource( 56 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 56 )
 text = "Your Party"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Status" type="Label" parent="PartyPanel"]
 margin_left = 88.0
 margin_top = 72.0
 margin_right = 504.0
 margin_bottom = 136.0
-custom_fonts/font = SubResource( 56 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 56 )
 text = "Empty"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlayPanel" type="Panel" parent="."]
-margin_left = 640.0
-margin_top = 128.0
-margin_right = 1224.0
-margin_bottom = 544.0
+margin_left = 928.0
+margin_top = 256.0
+margin_right = 1512.0
+margin_bottom = 672.0
 theme = SubResource( 55 )
 custom_styles/panel = ExtResource( 4 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="Title" type="Label" parent="PlayPanel"]
@@ -960,14 +879,11 @@ margin_left = 17.0
 margin_top = -1.0
 margin_right = 589.0
 margin_bottom = 78.0
-custom_fonts/font = SubResource( 101 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 101 )
 text = "PODCHEST!"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="gear" type="TextureRect" parent="PlayPanel"]
 margin_left = 22.0
@@ -976,57 +892,45 @@ margin_right = 78.0
 margin_bottom = 59.0
 texture = ExtResource( 7 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlayButton" type="Button" parent="PlayPanel"]
 margin_left = 136.0
 margin_top = 104.0
 margin_right = 464.0
 margin_bottom = 216.0
-custom_fonts/font = SubResource( 51 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
+custom_fonts/font = SubResource( 51 )
 text = "Play"
 flat = true
 script = SubResource( 52 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RegisterButton" type="Button" parent="PlayPanel"]
 margin_left = 144.0
 margin_top = 256.0
 margin_right = 296.0
 margin_bottom = 344.0
-custom_fonts/font = SubResource( 102 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.568627, 0, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0.913725, 1 )
+custom_fonts/font = SubResource( 102 )
 text = "Register"
 flat = true
 script = SubResource( 103 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LoginButton" type="Button" parent="PlayPanel"]
 margin_left = 304.0
 margin_top = 256.0
 margin_right = 456.0
 margin_bottom = 344.0
-custom_fonts/font = SubResource( 102 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
+custom_fonts/font = SubResource( 102 )
 text = "Login"
 flat = true
 script = SubResource( 104 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LogoutButton" type="Button" parent="PlayPanel"]
 visible = false
@@ -1034,10 +938,10 @@ margin_left = 144.0
 margin_top = 256.0
 margin_right = 456.0
 margin_bottom = 344.0
-custom_fonts/font = SubResource( 102 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.662745, 0, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0.866667, 1 )
+custom_fonts/font = SubResource( 102 )
 text = "Logout"
 flat = true
 script = SubResource( 105 )
@@ -1045,42 +949,44 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="OnlinePanel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 128, 1360 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LabelRooms" type="Label" parent="OnlinePanel"]
+margin_top = 1360.0
+margin_right = 256.0
+margin_bottom = 1440.0
+custom_fonts/font = SubResource( 106 )
+text = "Rooms : 0"
+align = 1
+valign = 1
+
+[node name="LabelOnline" type="Label" parent="OnlinePanel"]
+margin_top = 1288.0
+margin_right = 256.0
+margin_bottom = 1368.0
+custom_fonts/font = SubResource( 106 )
+text = "Online : 0"
+align = 1
+valign = 1
+
 [node name="LabelLudermis" type="Label" parent="."]
-margin_left = 1704.0
-margin_top = 960.0
-margin_right = 1921.0
-margin_bottom = 1079.0
+margin_left = 2344.0
+margin_top = 1320.0
+margin_right = 2561.0
+margin_bottom = 1439.0
 custom_fonts/font = SubResource( 106 )
 text = "Ludermis
 Studios"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LabelRooms" type="Label" parent="."]
-margin_top = 1000.0
-margin_right = 256.0
-margin_bottom = 1080.0
-custom_fonts/font = SubResource( 106 )
-text = "Rooms : 0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LabelOnline" type="Label" parent="."]
-margin_top = 928.0
-margin_right = 256.0
-margin_bottom = 1008.0
-custom_fonts/font = SubResource( 106 )
-text = "Online : 0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="LabelBuild" type="Label" parent="."]
@@ -1091,7 +997,7 @@ text = "Build X"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="DemandOnlineTimer" type="Timer" parent="."]

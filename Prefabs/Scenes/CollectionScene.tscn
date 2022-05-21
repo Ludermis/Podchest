@@ -58,19 +58,16 @@ font_data = ExtResource( 2 )
 script = ExtResource( 5 )
 
 [node name="Background" type="TextureRect" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_right = 2560.0
+margin_bottom = 1440.0
 texture = ExtResource( 1 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 496.0
-margin_top = 88.0
-margin_right = 1920.0
-margin_bottom = 936.0
+margin_left = 664.0
+margin_top = 144.0
+margin_right = 2552.0
+margin_bottom = 1432.0
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -91,11 +88,11 @@ __meta__ = {
 custom_constants/separation = 128
 
 [node name="CancelButton" type="Button" parent="."]
-margin_top = 1000.0
+margin_top = 1360.0
 margin_right = 285.0
-margin_bottom = 1080.0
-custom_fonts/font = SubResource( 2 )
+margin_bottom = 1440.0
 custom_colors/font_color = Color( 0.407843, 0, 1, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Main Menu"
 flat = true
 script = SubResource( 3 )
@@ -104,10 +101,10 @@ __meta__ = {
 }
 
 [node name="CharactersButton" type="Button" parent="."]
-margin_left = 496.0
-margin_top = 16.0
-margin_right = 824.0
-margin_bottom = 80.0
+margin_left = 680.0
+margin_top = 32.0
+margin_right = 1080.0
+margin_bottom = 112.0
 flat = true
 script = SubResource( 4 )
 __meta__ = {
@@ -115,10 +112,10 @@ __meta__ = {
 }
 
 [node name="SkinsButton" type="Button" parent="."]
-margin_left = 856.0
-margin_top = 16.0
-margin_right = 1184.0
-margin_bottom = 80.0
+margin_left = 1152.0
+margin_top = 32.0
+margin_right = 1568.0
+margin_bottom = 112.0
 flat = true
 script = SubResource( 5 )
 __meta__ = {
@@ -126,10 +123,10 @@ __meta__ = {
 }
 
 [node name="AllLabel" type="Label" parent="."]
-margin_left = 48.0
-margin_top = 48.0
-margin_right = 464.0
-margin_bottom = 145.0
+margin_left = 128.0
+margin_top = 72.0
+margin_right = 544.0
+margin_bottom = 169.0
 custom_fonts/font = SubResource( 6 )
 text = "All Characters
 0"
@@ -141,10 +138,10 @@ __meta__ = {
 }
 
 [node name="YourLabel" type="Label" parent="."]
-margin_left = 48.0
-margin_top = 168.0
-margin_right = 464.0
-margin_bottom = 215.0
+margin_left = 128.0
+margin_top = 192.0
+margin_right = 544.0
+margin_bottom = 289.0
 custom_fonts/font = SubResource( 6 )
 text = "Your Characters
 0"

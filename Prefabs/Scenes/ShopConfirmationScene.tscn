@@ -141,19 +141,17 @@ script = ExtResource( 4 )
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color( 0, 0, 0, 0.313726 )
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_right = 2560.0
+margin_bottom = 1440.0
 texture = ExtResource( 1 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 320.0
-margin_top = 192.0
-margin_right = 1600.0
-margin_bottom = 768.0
+margin_left = 640.0
+margin_top = 320.0
+margin_right = 1920.0
+margin_bottom = 896.0
+rect_pivot_offset = Vector2( 705, 280 )
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

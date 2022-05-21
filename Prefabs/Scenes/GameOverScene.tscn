@@ -89,16 +89,14 @@ script = ExtResource( 7 )
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color( 0, 0.117647, 0.129412, 1 )
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_right = 2560.0
+margin_bottom = 1440.0
+rect_pivot_offset = Vector2( 288, -136 )
 texture = ExtResource( 2 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Title" type="Label" parent="."]
-margin_right = 1920.0
+margin_right = 2560.0
 margin_bottom = 192.0
 custom_fonts/font = SubResource( 1 )
 text = "TITLE"
@@ -111,10 +109,9 @@ __meta__ = {
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_top = 184.0
-margin_right = 1920.0
+margin_right = 2560.0
 margin_bottom = 192.0
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -127,9 +124,6 @@ custom_fonts/font = SubResource( 2 )
 text = "Score1"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Score2" type="Label" parent="."]
 margin_left = 192.0
@@ -146,17 +140,14 @@ __meta__ = {
 
 [node name="MainMenuButton" type="Button" parent="."]
 modulate = Color( 0.921569, 0, 1, 1 )
-margin_left = 728.0
-margin_top = 768.0
-margin_right = 1240.0
-margin_bottom = 896.0
+margin_left = 1024.0
+margin_top = 704.0
+margin_right = 1536.0
+margin_bottom = 832.0
 custom_fonts/font = SubResource( 3 )
 text = "Main Menu"
 flat = true
 script = SubResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Team1Label" type="Label" parent="."]
 margin_top = 256.0
@@ -237,9 +228,9 @@ __meta__ = {
 
 [node name="PlayerRect" type="TextureRect" parent="."]
 material = SubResource( 6 )
-margin_left = 1600.0
+margin_left = 2112.0
 margin_top = 256.0
-margin_right = 1856.0
+margin_right = 2368.0
 margin_bottom = 512.0
 texture = ExtResource( 3 )
 expand = true
@@ -248,19 +239,19 @@ __meta__ = {
 }
 
 [node name="CoinSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 1770, 568 )
+position = Vector2( 2282, 568 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 15 )
-frame = 5
+frame = 3
 playing = true
 
 [node name="CoinLabel" type="Label" parent="."]
-margin_left = 960.0
+margin_left = 1472.0
 margin_top = 528.0
-margin_right = 1728.0
+margin_right = 2240.0
 margin_bottom = 584.0
-custom_fonts/font = SubResource( 16 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 16 )
 text = "+Money"
 align = 2
 valign = 1

@@ -8,7 +8,6 @@
 [ext_resource path="res://Shaders/circular-progress.shader" type="Shader" id=6]
 [ext_resource path="res://Shaders/sprite_outline.shader" type="Shader" id=7]
 
-
 [sub_resource type="DynamicFont" id=1]
 use_filter = true
 font_data = ExtResource( 5 )
@@ -57,10 +56,10 @@ __meta__ = {
 }
 
 [node name="Skill1" type="Control" parent="."]
-margin_left = 704.0
-margin_top = 768.0
-margin_right = 832.0
-margin_bottom = 896.0
+margin_left = 1024.0
+margin_top = 1216.0
+margin_right = 1152.0
+margin_bottom = 1344.0
 hint_tooltip = "(15 seconds cooldown)
 Cast to spawn 3 clocks.
 Clocks roam the map to paint the surface.
@@ -104,10 +103,10 @@ __meta__ = {
 }
 
 [node name="Skill2" type="Control" parent="."]
-margin_left = 896.0
-margin_top = 768.0
-margin_right = 1024.0
-margin_bottom = 896.0
+margin_left = 1216.0
+margin_top = 1216.0
+margin_right = 1344.0
+margin_bottom = 1344.0
 hint_tooltip = "(5 seconds cooldown)
 Call your clocks back, each clock returned reduces Q's cooldown 4 seconds."
 theme = SubResource( 2 )
@@ -150,10 +149,10 @@ __meta__ = {
 }
 
 [node name="Skill3" type="Control" parent="."]
-margin_left = 1088.0
-margin_top = 768.0
-margin_right = 1216.0
-margin_bottom = 896.0
+margin_left = 1408.0
+margin_top = 1216.0
+margin_right = 1536.0
+margin_bottom = 1344.0
 hint_tooltip = "(20 seconds cooldown)
 Inverse all colors of grids in an area."
 theme = SubResource( 2 )
