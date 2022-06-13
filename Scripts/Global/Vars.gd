@@ -32,6 +32,10 @@ func clearVars():
 	myTeam = -1
 	scores = {1: 0, 2: 0}
 
+func _input(ev):
+	if ev.is_action_pressed('ui_fullscreen'):
+		OS.window_fullscreen = !OS.window_fullscreen
+
 func getTime() -> float:
 	return OS.get_ticks_msec() / 1000.0
 

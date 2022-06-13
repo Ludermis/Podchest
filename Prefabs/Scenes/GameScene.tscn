@@ -117,6 +117,7 @@ __meta__ = {
 margin_top = 64.0
 margin_right = 2560.0
 margin_bottom = 128.0
+rect_pivot_offset = Vector2( 984, 48 )
 custom_fonts/font = SubResource( 3 )
 text = "Time"
 align = 1
